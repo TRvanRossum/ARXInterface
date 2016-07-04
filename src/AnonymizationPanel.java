@@ -1,7 +1,9 @@
 import java.awt.CardLayout;
+import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -20,6 +22,7 @@ public class AnonymizationPanel extends JPanel implements ItemListener{
 	private JPanel cards; //a panel that uses CardLayout
 	
 	public AnonymizationPanel(){
+		setLayout(new GridLayout(3, 1));
 		String comboBoxItems[] = { K_ANON, L_DIVERSE, T_CLOSE, DIFFERENTIAL };
         JComboBox<String> cb = new JComboBox<String>(comboBoxItems);
         cb.setEditable(false);
@@ -33,6 +36,10 @@ public class AnonymizationPanel extends JPanel implements ItemListener{
         cards.add(new TClosenessPanel(), T_CLOSE);
         cards.add(new DifferentialPanel(), DIFFERENTIAL);
         add(cards);
+        
+        // Create apply button
+        JButton apply = new JButton("Apply");
+        add(apply);
 	}
 
 	@Override

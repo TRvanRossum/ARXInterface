@@ -1,5 +1,7 @@
 import java.awt.CardLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -7,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-public class AnonymizationPanel extends JPanel implements ItemListener{
+public class AnonymizationPanel extends JPanel implements ItemListener, ActionListener{
 
 	/**
 	 * 
@@ -20,6 +22,8 @@ public class AnonymizationPanel extends JPanel implements ItemListener{
 	private static final String DIFFERENTIAL = "differential privacy";
 	
 	private JPanel cards; //a panel that uses CardLayout
+	private JButton apply;
+	private JPanel currentlyActive;
 	
 	public AnonymizationPanel(){
 		setLayout(new GridLayout(3, 1));
@@ -38,7 +42,7 @@ public class AnonymizationPanel extends JPanel implements ItemListener{
         add(cards);
         
         // Create apply button
-        JButton apply = new JButton("Apply");
+        apply = new JButton("Apply");
         add(apply);
 	}
 
@@ -46,5 +50,11 @@ public class AnonymizationPanel extends JPanel implements ItemListener{
 	public void itemStateChanged(ItemEvent arg0) {
 		CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, (String) arg0.getItem());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

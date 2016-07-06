@@ -57,7 +57,7 @@ public class Interface implements ItemListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo();
+        Interface demo = new Interface();
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.

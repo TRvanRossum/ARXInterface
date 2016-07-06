@@ -5,7 +5,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class KAnonymityPanel extends JPanel {
+import data.DataObject;
+import data.KAnonDataObject;
+
+public class KAnonymityPanel extends JPanel implements AnonPanel{
 
 	/**
 	 * 
@@ -20,18 +23,30 @@ public class KAnonymityPanel extends JPanel {
 	private static final String MONDRIAN = "Mondrian";
 	private static final String INCOGNITO = "Incognito";
 	
+	private JComboBox<String> cb;
+	private JComboBox<String> cb2;
+	private JTextField field;
+	
 	public KAnonymityPanel() {
 		setLayout(new GridLayout(2, 3));
 		add(new JLabel("Operation type"));
 		add(new JLabel("Algorithm used"));
 		add(new JLabel("Value for k"));
-		JComboBox<String> cb = new JComboBox<String>(new String[]{ GENERALIZATION, SUPPRESSION });
+		cb = new JComboBox<String>(new String[]{ GENERALIZATION, SUPPRESSION });
         cb.setEditable(false);
         add(cb);
-        JComboBox<String> cb2 = new JComboBox<String>(new String[]{ MINGEN, DATAFLY, MONDRIAN, INCOGNITO });
+        cb2 = new JComboBox<String>(new String[]{ MINGEN, DATAFLY, MONDRIAN, INCOGNITO });
         cb2.setEditable(false);
         add(cb2);
-        JTextField field = new JTextField();
+        field = new JTextField();
         add(field);
+	}
+
+	@Override
+	public DataObject getData() {
+		int k = Integer.parseInt(field.getText());
+		String algorithm = (String) cb2.getSelectedItem();
+		String method = (String) cb.getSelectedItem();
+		return new KAnonDataObject(k, algorithm, method);
 	}
 }

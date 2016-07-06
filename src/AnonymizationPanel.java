@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import data.DataObject;
+
 public class AnonymizationPanel extends JPanel implements ItemListener, ActionListener{
 
 	/**
@@ -25,6 +27,8 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 	private JButton apply;
 	private JPanel currentlyActive;
 	
+	private JPanel KAnonPanel = new KAnonymityPanel();
+	
 	public AnonymizationPanel(){
 		setLayout(new GridLayout(3, 1));
 		String comboBoxItems[] = { K_ANON, L_DIVERSE, T_CLOSE, DIFFERENTIAL };
@@ -35,10 +39,11 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
         
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(new KAnonymityPanel(), K_ANON);
+        cards.add(KAnonPanel, K_ANON);
         cards.add(new LDiversityPanel(), L_DIVERSE);
         cards.add(new TClosenessPanel(), T_CLOSE);
         cards.add(new DifferentialPanel(), DIFFERENTIAL);
+        currentlyActive = KAnonPanel;
         add(cards);
         
         // Create apply button
@@ -54,7 +59,9 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		AnonPanel activePanel = (AnonPanel) currentlyActive;
+		@SuppressWarnings("unused")
+		// TODO need to find a way to send it to the main panel.
+		DataObject data = activePanel.getData();
 	}
 }

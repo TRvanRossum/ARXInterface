@@ -4,7 +4,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class LDiversityPanel extends JPanel {
+import data.DataObject;
+
+public class LDiversityPanel extends JPanel implements AnonPanel {
 	/**
 	 * 
 	 */
@@ -15,5 +17,11 @@ public class LDiversityPanel extends JPanel {
 		add(new JLabel("Value for l"));
 		JTextField field = new JTextField();
 		add(field);
+	}
+
+	@Override
+	public DataObject getData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

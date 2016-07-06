@@ -4,7 +4,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class TClosenessPanel extends JPanel {
+import data.DataObject;
+
+public class TClosenessPanel extends JPanel implements AnonPanel{
 	/**
 	 * 
 	 */
@@ -16,5 +18,11 @@ public class TClosenessPanel extends JPanel {
 		add(l);
 		JButton b = new JButton("Compute t");
 		add(b);
+	}
+
+	@Override
+	public DataObject getData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

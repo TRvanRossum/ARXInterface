@@ -58,8 +58,7 @@ public class CardLayoutDemo implements ItemListener {
     public static void main(String[] args) {
         /* Use an appropriate Look and Feel */
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {
@@ -70,7 +69,7 @@ public class CardLayoutDemo implements ItemListener {
             ex.printStackTrace();
         }
         /* Turn off metal's use of bold fonts */
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
+        UIManager.put("swing.boldMetal", false);
          
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.

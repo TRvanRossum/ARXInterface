@@ -27,11 +27,13 @@ public class DataTable extends JPanel {
 	private String selectedFile = "No file selected.";
 	private JLabel selectedFileLabel = new JLabel(selectedFile);
 	private JTable dataTable;
+	private String[][] data;
+	private String[] atts;
 	
 	public DataTable(Data d) {
 		setLayout(new GridLayout(2, 1));
-		String[] atts = d.getAttributes();
-		String[][] data = d.getData();
+		atts = d.getAttributes();
+		data = d.getData();
 		
 		dataTable = new JTable(data, atts){
             /**
@@ -93,7 +95,7 @@ public class DataTable extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		        DataReader dr = DataReader.getReader();
 		        String delimiter = delimField.getText();
-		        Data d;
+		        Data d = null;
 		        try {
 					d = dr.readData(selectedFile, delimiter);
 				} catch (IOException e1) {
@@ -108,7 +110,9 @@ public class DataTable extends JPanel {
 			        WindowUtils.centreWindow(frame);
 				}
 		        finally {
-		        	System.out.println("Soon^TM....");
+		        	data = d.getData();
+		        	atts = d.getAttributes();
+		        	dataTable.repaint();
 		        }
 		    }
 		});

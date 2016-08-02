@@ -47,4 +47,8 @@ public class MainDataTable extends JPanel{
 		JScrollPane pane = new JScrollPane(dataTable);
 		return pane;
 	}
+	
+	public void update(Data d) {
+		// TODO implement a way of refreshing the table in the interface.
+	}
 }

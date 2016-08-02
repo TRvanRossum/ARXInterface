@@ -10,7 +10,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import io.Data;
@@ -27,15 +26,18 @@ public class DataTable extends JPanel {
 	
 	private String selectedFile = "No file selected.";
 	private JLabel selectedFileLabel = new JLabel(selectedFile);
-	private JTable dataTable;
+	private MainDataTable mdt;
 	
 	public DataTable(Data d) {
 		setLayout(new GridLayout(2, 1));
 		
-		add((new MainDataTable(d)).returnScrollableVersion());
+		mdt = new MainDataTable(d);
+		
+		add(mdt.returnScrollableVersion());
 		add(createDataReaderTable());
 	}
 	
+	// TODO needs adaptation to the new way of handling data changes.
 	private JPanel createDataReaderTable(){
 		JPanel res = new JPanel();
 		
@@ -90,9 +92,7 @@ public class DataTable extends JPanel {
 		        	if (d == null) {
 		        		return;
 		        	}
-		        	//data = d.getData();
-		        	//atts = d.getAttributes();
-		        	dataTable.repaint();
+		        	mdt.update(d);
 		        }
 		    }
 		});

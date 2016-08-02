@@ -65,8 +65,8 @@ public class Interface implements ItemListener {
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
-        //centreWindow(frame);
-        setFullScreen(frame);
+        centreWindow(frame);
+        //setFullScreen(frame);
     }
      
     public static void main(String[] args) {

@@ -17,10 +17,17 @@ public class DataTable extends JPanel {
 		String[] atts = d.getAttributes();
 		String[][] data = d.getData();
 		
-		JTable table = new JTable(data, atts);
-		
-		// TODO does not work to resize the frame, think about this a bit more.
-		table.setSize(960, 1080);
+		JTable table = new JTable(data, atts){
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3803735335044275361L;
+
+			public boolean getScrollableTracksViewportWidth()
+            {
+                return getPreferredSize().width < getParent().getWidth();
+            }
+        };
 		
 		table.setRowSelectionAllowed( true );
 		table.setColumnSelectionAllowed( true );

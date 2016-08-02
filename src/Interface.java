@@ -15,26 +15,26 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Interface implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
-    private final String ATTRIBUTE_PANEL = "Attributes";
+    private final String DATA_PANEL = "Data";
 	private final String ANONYMIZATION_PANEL = "Anonymization";
      
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
-        String comboBoxItems[] = { ATTRIBUTE_PANEL, ANONYMIZATION_PANEL };
+        String comboBoxItems[] = { DATA_PANEL, ANONYMIZATION_PANEL };
         JComboBox<String> cb = new JComboBox<String>(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
         comboBoxPane.add(cb);
          
         //Create the "cards".
-        JPanel card1 = new AttributePanel(new String[]{"att1", "att2", "att3"});
+        JPanel card1 = new DataPanel(new String[]{"att1", "att2", "att3"});
          
         JPanel card2 = new AnonymizationPanel();
          
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(card1, ATTRIBUTE_PANEL);
+        cards.add(card1, DATA_PANEL);
         cards.add(card2, ANONYMIZATION_PANEL);
          
         pane.add(comboBoxPane, BorderLayout.PAGE_START);

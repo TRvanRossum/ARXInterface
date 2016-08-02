@@ -108,6 +108,7 @@ public class DataTable extends JPanel {
 			        frame.setResizable(false);
 			        frame.setVisible(true);
 			        WindowUtils.centreWindow(frame);
+			        return;
 				}
 		        finally {
 		        	data = d.getData();

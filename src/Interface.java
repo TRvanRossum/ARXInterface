@@ -28,7 +28,7 @@ public class Interface implements ItemListener {
         comboBoxPane.add(cb);
          
         //Create the "cards".
-        JPanel card1 = new AttributePanel();
+        JPanel card1 = new AttributePanel(new String[]{"att1", "att2", "att3"});
          
         JPanel card2 = new AnonymizationPanel();
          

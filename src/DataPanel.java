@@ -2,6 +2,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import io.Data;
+
 public class DataPanel extends JPanel {
 	
 	/**
@@ -11,7 +13,7 @@ public class DataPanel extends JPanel {
 
 	public DataPanel(String[] attributes) {
 		setLayout(new GridLayout(1, 2));
-		add(new AttributePanel(attributes));
+		add(new DataTable(new Data(attributes, 100)));
 		add(new AttributePanel(attributes));
 	}
 }

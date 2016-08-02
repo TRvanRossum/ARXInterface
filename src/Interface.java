@@ -28,7 +28,8 @@ public class Interface implements ItemListener {
         comboBoxPane.add(cb);
          
         //Create the "cards".
-        JPanel card1 = new DataPanel(new String[]{"att1", "att2", "att3"});
+        JPanel card1 = new DataPanel(new String[]{"att1", "att2", "att3", "att1", "att2", "att3", "att1", "att2", "att3",
+        		"att1", "att2", "att3", "att1", "att2", "att3", "att1", "att2", "att3"});
          
         JPanel card2 = new AnonymizationPanel();
          
@@ -64,7 +65,8 @@ public class Interface implements ItemListener {
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
-        centreWindow(frame);
+        //centreWindow(frame);
+        setFullScreen(frame);
     }
      
     public static void main(String[] args) {
@@ -97,5 +99,13 @@ public class Interface implements ItemListener {
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
         frame.setLocation(x, y);
+    }
+    
+    public static void setFullScreen(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) dimension.getWidth();
+        int y = (int) dimension.getHeight();
+        frame.setLocation(0, 0);
+        frame.setSize(x, y);
     }
 }

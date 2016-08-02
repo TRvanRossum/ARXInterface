@@ -1,5 +1,7 @@
 import java.awt.Color;
+import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +16,7 @@ public class DataTable extends JPanel {
 	private static final long serialVersionUID = -1302255224765149924L;
 	
 	public DataTable(Data d) {
+		setLayout(new GridLayout(2, 1));
 		String[] atts = d.getAttributes();
 		String[][] data = d.getData();
 		
@@ -39,5 +42,6 @@ public class DataTable extends JPanel {
 		
 		JScrollPane pane = new JScrollPane(table);
 		add(pane);
+		add(new JLabel("Data reading coming soon..."));
 	}
 }

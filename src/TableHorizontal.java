@@ -7,7 +7,7 @@ public class TableHorizontal extends JFrame
 {
     public TableHorizontal()
     {
-        final JTable table = new JTable(10, 5)
+        final JTable table = new JTable(10000, 5)
         {
             public boolean getScrollableTracksViewportWidth()
             {

@@ -13,7 +13,7 @@ public class DataPanel extends JPanel {
 
 	public DataPanel(String[] attributes) {
 		setLayout(new GridLayout(1, 2));
-		add(new DataTable(new Data(attributes, 100)));
+		add(new DataTable(new Data(attributes, 1000)));
 		add(new AttributePanel(attributes));
 	}
 }

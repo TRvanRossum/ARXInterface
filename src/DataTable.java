@@ -111,6 +111,9 @@ public class DataTable extends JPanel {
 			        return;
 				}
 		        finally {
+		        	if (d == null) {
+		        		return;
+		        	}
 		        	data = d.getData();
 		        	atts = d.getAttributes();
 		        	dataTable.repaint();

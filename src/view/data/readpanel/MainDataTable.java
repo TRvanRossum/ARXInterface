@@ -10,6 +10,10 @@ import io.Data;
 
 public class MainDataTable extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3400348086557950856L;
 	private String[] atts;
 	private String[][] data;
 	private JTable dataTable;
@@ -37,7 +41,10 @@ public class MainDataTable extends JPanel{
 		dataTable.setSelectionBackground( Color.red );
 		
 		dataTable.setEnabled(false);
-		
-		new JScrollPane(dataTable);
+	}
+	
+	public JScrollPane returnScrollableVersion(){
+		JScrollPane pane = new JScrollPane(dataTable);
+		return pane;
 	}
 }

@@ -1,5 +1,4 @@
 package view.data;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +10,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import io.Data;
 import io.DataReader;
 import utils.WindowUtils;
+import view.data.readpanel.MainDataTable;
 
 public class DataTable extends JPanel {
 
@@ -29,36 +28,11 @@ public class DataTable extends JPanel {
 	private String selectedFile = "No file selected.";
 	private JLabel selectedFileLabel = new JLabel(selectedFile);
 	private JTable dataTable;
-	private String[][] data;
-	private String[] atts;
 	
 	public DataTable(Data d) {
 		setLayout(new GridLayout(2, 1));
-		atts = d.getAttributes();
-		data = d.getData();
 		
-		dataTable = new JTable(data, atts){
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = -3803735335044275361L;
-
-			public boolean getScrollableTracksViewportWidth()
-            {
-                return getPreferredSize().width < getParent().getWidth();
-            }
-        };
-		
-		dataTable.setRowSelectionAllowed( true );
-		dataTable.setColumnSelectionAllowed( true );
-
-		dataTable.setSelectionForeground( Color.white );
-		dataTable.setSelectionBackground( Color.red );
-		
-		dataTable.setEnabled(false);
-		
-		JScrollPane pane = new JScrollPane(dataTable);
-		add(pane);
+		add((new MainDataTable(d)).returnScrollableVersion());
 		add(createDataReaderTable());
 	}
 	
@@ -116,8 +90,8 @@ public class DataTable extends JPanel {
 		        	if (d == null) {
 		        		return;
 		        	}
-		        	data = d.getData();
-		        	atts = d.getAttributes();
+		        	//data = d.getData();
+		        	//atts = d.getAttributes();
 		        	dataTable.repaint();
 		        }
 		    }

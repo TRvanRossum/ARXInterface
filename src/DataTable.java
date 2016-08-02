@@ -3,15 +3,19 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import io.Data;
+import io.DataReader;
 
 public class DataTable extends JPanel {
 
@@ -22,13 +26,14 @@ public class DataTable extends JPanel {
 	
 	private String selectedFile = "No file selected.";
 	private JLabel selectedFileLabel = new JLabel(selectedFile);
+	private JTable dataTable;
 	
 	public DataTable(Data d) {
 		setLayout(new GridLayout(2, 1));
 		String[] atts = d.getAttributes();
 		String[][] data = d.getData();
 		
-		JTable table = new JTable(data, atts){
+		dataTable = new JTable(data, atts){
             /**
 			 * 
 			 */
@@ -40,15 +45,15 @@ public class DataTable extends JPanel {
             }
         };
 		
-		table.setRowSelectionAllowed( true );
-		table.setColumnSelectionAllowed( true );
+		dataTable.setRowSelectionAllowed( true );
+		dataTable.setColumnSelectionAllowed( true );
 
-		table.setSelectionForeground( Color.white );
-		table.setSelectionBackground( Color.red );
+		dataTable.setSelectionForeground( Color.white );
+		dataTable.setSelectionBackground( Color.red );
 		
-		table.setEnabled(false);
+		dataTable.setEnabled(false);
 		
-		JScrollPane pane = new JScrollPane(table);
+		JScrollPane pane = new JScrollPane(dataTable);
 		add(pane);
 		add(createDataReaderTable());
 	}
@@ -56,7 +61,13 @@ public class DataTable extends JPanel {
 	private JPanel createDataReaderTable(){
 		JPanel res = new JPanel();
 		
-		res.setLayout(new GridLayout(2, 2));
+		res.setLayout(new GridLayout(3, 2));
+		
+		res.add(new JLabel("Selected file path:"));
+		res.add(selectedFileLabel);
+		res.add(new JLabel("Please type in a delimiter..."));
+		JTextField delimField = new JTextField();
+		res.add(delimField);
 		
 		JButton fileChooseButton = new JButton("Choose a file...");
 		res.add(fileChooseButton);
@@ -75,9 +86,32 @@ public class DataTable extends JPanel {
 		});
 		
 		JButton applyButton = new JButton("Read all data");
-		res.add(new JLabel("Data panel, by Tim van Rossum"));
-		res.add(new JLabel("Selected file path:"));
-		res.add(selectedFileLabel);
+		res.add(applyButton);
+		
+		applyButton.addActionListener(new ActionListener() {
+			//Handle open button action.
+		    public void actionPerformed(ActionEvent e) {
+		        DataReader dr = DataReader.getReader();
+		        String delimiter = delimField.getText();
+		        Data d;
+		        try {
+					d = dr.readData(selectedFile, delimiter);
+				} catch (IOException e1) {
+					JFrame frame = new JFrame("Error");
+					JPanel panel = new JPanel();
+					JLabel label = new JLabel("Error message: "+e1.getMessage());
+					panel.add(label);
+					frame.add(panel);
+					frame.pack();
+			        frame.setResizable(false);
+			        frame.setVisible(true);
+			        WindowUtils.centreWindow(frame);
+				}
+		        finally {
+		        	System.out.println("Soon^TM....");
+		        }
+		    }
+		});
 		
 		return res;
 	}

@@ -1,8 +1,11 @@
+package view;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
 import io.Data;
+import view.data.AttributePanel;
+import view.data.DataTable;
 
 public class DataPanel extends JPanel {
 	

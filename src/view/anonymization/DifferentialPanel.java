@@ -1,3 +1,4 @@
+package view.anonymization;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

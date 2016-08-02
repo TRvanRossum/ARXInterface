@@ -1,3 +1,4 @@
+package view.anonymization;
 import java.awt.GridLayout;
 
 import javax.swing.JComboBox;

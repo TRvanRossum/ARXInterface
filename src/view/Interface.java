@@ -1,3 +1,4 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
@@ -9,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import utils.WindowUtils;
 
 public class Interface implements ItemListener {
     JPanel cards; //a panel that uses CardLayout

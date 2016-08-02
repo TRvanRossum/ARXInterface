@@ -1,3 +1,4 @@
+package view.data;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JTextField;
 
 import io.Data;
 import io.DataReader;
+import utils.WindowUtils;
 
 public class DataTable extends JPanel {
 

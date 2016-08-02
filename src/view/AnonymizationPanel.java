@@ -1,3 +1,4 @@
+package view;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,11 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import data.DataObject;
+import view.anonymization.AnonPanel;
+import view.anonymization.DifferentialPanel;
+import view.anonymization.KAnonymityPanel;
+import view.anonymization.LDiversityPanel;
+import view.anonymization.TClosenessPanel;
 
 public class AnonymizationPanel extends JPanel implements ItemListener, ActionListener{
 

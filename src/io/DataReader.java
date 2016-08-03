@@ -35,7 +35,7 @@ public class DataReader {
 		LineNumberReader lnr = new LineNumberReader(new FileReader(new File(filepath)));
 		BufferedReader br = new BufferedReader(new FileReader(new File(filepath)));
 		lnr.skip(Long.MAX_VALUE);
-		int rows = lnr.getLineNumber();
+		int rows = lnr.getLineNumber() - 1;
 		lnr.close();
 		
 		String column = br.readLine();
@@ -54,7 +54,6 @@ public class DataReader {
 			}
 			allData[i] = row.split(delimiter);
 		}
-		
 		br.close();
 		
 		Data res = new Data(columnData, allData);

@@ -40,7 +40,6 @@ public class DataTable extends JPanel {
 		add(createDataReaderTable());
 	}
 	
-	// TODO needs adaptation to the new way of handling data changes.
 	private JPanel createDataReaderTable(){
 		JPanel res = new JPanel();
 		
@@ -97,7 +96,6 @@ public class DataTable extends JPanel {
 		        	}
 		        	mdt.update(d);
 		        	currentTable = mdt.returnScrollableVersion();
-		        	repaint();
 		        }
 		    }
 		});

@@ -19,6 +19,15 @@ public class MainDataTable extends JPanel{
 	private JTable dataTable;
 	
 	public MainDataTable(Data d) {
+		update(d);
+	}
+	
+	public JScrollPane returnScrollableVersion(){
+		JScrollPane pane = new JScrollPane(dataTable);
+		return pane;
+	}
+	
+	public void update(Data d) {
 		atts = d.getAttributes();
 		data = d.getData();
 		
@@ -41,14 +50,5 @@ public class MainDataTable extends JPanel{
 		dataTable.setSelectionBackground( Color.red );
 		
 		dataTable.setEnabled(false);
-	}
-	
-	public JScrollPane returnScrollableVersion(){
-		JScrollPane pane = new JScrollPane(dataTable);
-		return pane;
-	}
-	
-	public void update(Data d) {
-		// TODO implement a way of refreshing the table in the interface.
 	}
 }

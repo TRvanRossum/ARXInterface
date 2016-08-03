@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import io.Data;
 import view.data.attributes.AttributePerColumnPanel;
 
 public class AttributePanel extends JPanel {
@@ -22,5 +23,9 @@ public class AttributePanel extends JPanel {
 		
 		add(attPanel);
 		add(new JButton("Apply"));
+	}
+	
+	public void update(Data d) {
+		attPanel.update(d.getAttributes());
 	}
 }

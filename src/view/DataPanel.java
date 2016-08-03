@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import io.Data;
 import view.data.AttributePanel;
 import view.data.DataTable;
+import view.data.controller.DataController;
 
 public class DataPanel extends JPanel {
 	
@@ -14,9 +15,18 @@ public class DataPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -8716864006670971677L;
 
+	private DataController dc;
+	
 	public DataPanel(String[] attributes) {
 		setLayout(new GridLayout(1, 2));
-		add(new DataTable(new Data(attributes, 1000)));
-		add(new AttributePanel(attributes));
+		DataTable t = new DataTable(new Data(attributes, 1000));
+		AttributePanel p = new AttributePanel(attributes);
+		add(t);
+		add(p);
+		dc = new DataController(p);
+	}
+	
+	public void updateData(Data d) {
+		dc.update(d);
 	}
 }

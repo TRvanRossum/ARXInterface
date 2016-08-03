@@ -1,4 +1,4 @@
-package view.anonymization;
+package view.data.attributes;
 
 public enum AttributeType {
 	EXPLICIT,

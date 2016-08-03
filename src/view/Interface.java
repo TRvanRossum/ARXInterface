@@ -54,7 +54,7 @@ public class Interface implements ItemListener {
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Interface - Alpha v0.1");
+        JFrame frame = new JFrame("Interface - Alpha v0.2");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
@@ -66,7 +66,6 @@ public class Interface implements ItemListener {
         frame.setResizable(true);
         frame.setVisible(true);
         WindowUtils.centreWindow(frame);
-        //setFullScreen(frame);
     }
      
     public static void main(String[] args) {

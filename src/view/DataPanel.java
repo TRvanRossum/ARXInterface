@@ -19,7 +19,7 @@ public class DataPanel extends JPanel {
 	
 	public DataPanel(String[] attributes) {
 		setLayout(new GridLayout(1, 2));
-		DataTable t = new DataTable(new Data(attributes, 1000));
+		DataTable t = new DataTable(new Data(attributes, 5));
 		AttributePanel p = new AttributePanel(attributes);
 		add(t);
 		add(p);

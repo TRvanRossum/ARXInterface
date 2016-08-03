@@ -13,16 +13,36 @@ import java.io.LineNumberReader;
  */
 public class DataReader {
 	
+	/**
+	 * This instance serves as the only possible instance of the DataReader class.
+	 */
 	private static DataReader dr = new DataReader();
 	
+	/**
+	 * Private basic constructor.
+	 */
 	private DataReader(){
 		
 	}
 	
+	/**
+	 * Returns the instance of the DataReader class.
+	 * @return The only existing instance.
+	 */
 	public static DataReader getReader(){
 		return dr;
 	}
 	
+	/**
+	 * Reads all the data in a given text file, and returns a 
+	 * Data object representing this collection
+	 * of data.
+	 * @param filepath The path to the file with data.
+	 * @param delimiter The used delimiter.
+	 * @return A Data object representing the collection of data.
+	 * @throws IOException If the filepath is incorrect, the data does not contain
+	 * the specified delimiters, no delimiter has been specified, and more.
+	 */
 	public Data readData(String filepath, String delimiter) throws IOException{
 		if(delimiter.length() > 1) {
 			throw new IOException("The delimiter is more than one character long.");
@@ -60,7 +80,14 @@ public class DataReader {
 		return res;
 	}
 	
-	public boolean delimiterCheck(String input, String delim) {
+	/**
+	 * Checks if this string actually contains 
+	 * the specified delimiter.
+	 * @param input The string to check.
+	 * @param delim The specified delimiter, can be only one character long.
+	 * @return True if the input contains the delimiter, false otherwise.
+	 */
+	private boolean delimiterCheck(String input, String delim) {
 		if(input.indexOf(delim.charAt(0)) == -1) {
 			return false;
 		}

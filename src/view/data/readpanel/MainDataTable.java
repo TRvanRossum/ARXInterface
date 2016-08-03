@@ -2,18 +2,13 @@ package view.data.readpanel;
 
 import java.awt.Color;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import io.Data;
 
-public class MainDataTable extends JPanel{
+public class MainDataTable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3400348086557950856L;
 	private String[] atts;
 	private String[][] data;
 	private JTable dataTable;

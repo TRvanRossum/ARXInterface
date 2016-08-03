@@ -16,6 +16,11 @@ public class AttributePerColumnPanel extends JPanel {
 	private static final long serialVersionUID = 3066477756764410002L;
 
 	public AttributePerColumnPanel(String[] attributes) {
+		update(attributes);
+	}
+	
+	public void update(String[] attributes) {
+		removeAll();
 		String[] attTypes = {"Explicit identifier", "Quasi-identifier",
 				"Sensitive attribute", "Insensitive attribute"};
 		List<JComboBox<String>> listOfLists = new ArrayList<JComboBox<String>>();

@@ -1,5 +1,6 @@
 package view.data.attributes;
 
+import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.util.List;
@@ -13,18 +14,20 @@ public class AttributePerColumnPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 3066477756764410002L;
-	private AttributePerColumnTable table;
-	private JPanel mainPanel;
+	private AttributePerColumnTable table = new AttributePerColumnTable();
+	private JPanel cards = new JPanel(new CardLayout());
+	private String key = "KEY";
 
 	public AttributePerColumnPanel(String[] attributes) {
-		table = new AttributePerColumnTable();
-		mainPanel = new JPanel();
+		add(cards);
 		update(attributes);
 	}
 	
 	public void update(String[] attributes) {
-		removeAll();
-		mainPanel = new JPanel();
+		key = key + "KEY";
+		CardLayout layout = (CardLayout) cards.getLayout();
+		cards.removeAll();
+		JPanel mainPanel = new JPanel();
 		List<Component> comps = table.getUpdatedGrid(attributes);
 		
 		mainPanel.setLayout(new GridLayout(attributes.length, 2));
@@ -32,8 +35,7 @@ public class AttributePerColumnPanel extends JPanel {
 			mainPanel.add(comps.get(i));
 		}
 		JScrollPane pane = new JScrollPane(mainPanel);
-		add(pane);
-		repaint();
-		System.out.println("Test");
+		cards.add(pane, key);
+		layout.show(cards, key);
 	}
 }

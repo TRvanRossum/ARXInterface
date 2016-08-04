@@ -24,6 +24,7 @@ public class DataPanel extends JPanel {
 		add(t);
 		add(p);
 		dc = new DataController(p);
+		t.setDataController(dc);
 	}
 	
 	public void updateData(Data d) {

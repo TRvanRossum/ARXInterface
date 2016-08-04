@@ -36,5 +36,6 @@ public class AttributePerColumnPanel extends JPanel {
 			add(new JLabel(attributes[i]));
 			add(listOfLists.get(i));
 		}
+		repaint();
 	}
 }

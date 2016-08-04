@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import io.Data;
 import io.DataReader;
 import utils.WindowUtils;
+import view.data.controller.DataController;
 import view.data.readpanel.MainDataPanel;
 
 public class DataTable extends JPanel {
@@ -27,6 +28,7 @@ public class DataTable extends JPanel {
 	private String selectedFile = "No file selected.";
 	private JLabel selectedFileLabel = new JLabel(selectedFile);
 	private MainDataPanel mdp;
+	private DataController dc = new DataController(null);
 	
 	public DataTable(Data d) {
 		setLayout(new GridLayout(2, 1));
@@ -92,10 +94,15 @@ public class DataTable extends JPanel {
 		        		return;
 		        	}
 		        	mdp.update(d);
+		        	dc.update(d);
 		        }
 		    }
 		});
 		
 		return res;
+	}
+
+	public void setDataController(DataController _dc) {
+		dc = _dc;
 	}
 }

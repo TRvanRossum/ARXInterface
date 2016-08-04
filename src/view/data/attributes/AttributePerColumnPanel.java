@@ -24,6 +24,7 @@ public class AttributePerColumnPanel extends JPanel {
 	}
 	
 	public void update(String[] attributes) {
+		//TODO This is really hacky, should be changed.
 		key = key + "KEY";
 		CardLayout layout = (CardLayout) cards.getLayout();
 		JPanel mainPanel = new JPanel();

@@ -26,7 +26,6 @@ public class AttributePerColumnPanel extends JPanel {
 	public void update(String[] attributes) {
 		key = key + "KEY";
 		CardLayout layout = (CardLayout) cards.getLayout();
-		cards.removeAll();
 		JPanel mainPanel = new JPanel();
 		List<Component> comps = table.getUpdatedGrid(attributes);
 		

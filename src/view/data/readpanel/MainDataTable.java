@@ -51,4 +51,8 @@ public class MainDataTable {
 	public JTable getDataTable() {
 		return dataTable;
 	}
+	
+	public Data getUsedData() {
+		return new Data(atts, data);
+	}
 }

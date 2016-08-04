@@ -18,7 +18,7 @@ public class MainDataTable {
 		atts = d.getAttributes();
 		data = d.getData();
 		
-		dataTable = new JTable(data, atts){
+		dataTable = new JTable(){
             /**
 			 * 
 			 */

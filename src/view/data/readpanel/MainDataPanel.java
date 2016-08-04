@@ -22,9 +22,6 @@ public class MainDataPanel extends JPanel {
 	}
 	
 	public void update(Data d) {
-		remove(scroll);
-		mdt = new MainDataTable(d);
-		scroll = new JScrollPane(mdt.getDataTable());
-		add(scroll);
+		mdt.update(d);
 	}
 }

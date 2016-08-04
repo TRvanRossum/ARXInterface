@@ -45,6 +45,7 @@ public class MainDataTable {
 	public void update(Data d) {
 		tableModel.setDataVector(d.getData(), d.getAttributes());
 		tableModel.fireTableDataChanged();
+		dataTable.repaint();
 	}
 	
 	public JTable getDataTable() {

@@ -2,7 +2,6 @@ package view.data.readpanel;
 
 import java.awt.Color;
 
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import io.Data;
@@ -15,11 +14,6 @@ public class MainDataTable {
 	
 	public MainDataTable(Data d) {
 		update(d);
-	}
-	
-	public JScrollPane returnScrollableVersion(){
-		JScrollPane pane = new JScrollPane(dataTable);
-		return pane;
 	}
 	
 	public void update(Data d) {
@@ -45,5 +39,9 @@ public class MainDataTable {
 		dataTable.setSelectionBackground( Color.red );
 		
 		dataTable.setEnabled(false);
+	}
+	
+	public JTable getDataTable() {
+		return dataTable;
 	}
 }

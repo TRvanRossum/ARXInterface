@@ -10,13 +10,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import io.Data;
 import io.DataReader;
 import utils.WindowUtils;
-import view.data.readpanel.MainDataTable;
+import view.data.readpanel.MainDataPanel;
 
 public class DataTable extends JPanel {
 
@@ -27,16 +26,14 @@ public class DataTable extends JPanel {
 	
 	private String selectedFile = "No file selected.";
 	private JLabel selectedFileLabel = new JLabel(selectedFile);
-	private MainDataTable mdt;
-	private JScrollPane currentTable;
+	private MainDataPanel mdp;
 	
 	public DataTable(Data d) {
 		setLayout(new GridLayout(2, 1));
 		
-		mdt = new MainDataTable(d);
-		currentTable = mdt.returnScrollableVersion();
+		mdp = new MainDataPanel(d);
 		
-		add(currentTable);
+		add(mdp);
 		add(createDataReaderTable());
 	}
 	
@@ -94,8 +91,8 @@ public class DataTable extends JPanel {
 		        	if (d == null) {
 		        		return;
 		        	}
-		        	mdt.update(d);
-		        	currentTable = mdt.returnScrollableVersion();
+		        	mdp.update(d);
+		        	repaint();
 		        }
 		    }
 		});

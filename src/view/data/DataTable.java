@@ -92,7 +92,6 @@ public class DataTable extends JPanel {
 		        		return;
 		        	}
 		        	mdp.update(d);
-		        	repaint();
 		        }
 		    }
 		});

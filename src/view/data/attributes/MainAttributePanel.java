@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import view.data.config.AttributeClass;
+import view.data.config.AttributeType;
 
 public class MainAttributePanel extends JPanel {
 
@@ -34,7 +35,7 @@ public class MainAttributePanel extends JPanel {
 		return apcp.getPartConfig();
 	}
 	
-	public Map<String, String> getTypes() {
+	public Map<String, AttributeType> getTypes() {
 		return atpcp.getPartConfig();
 	}
 	

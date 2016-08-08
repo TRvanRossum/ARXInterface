@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import view.data.config.AttributeType;
+
 public class AttributeTypePerColumnPanel extends JPanel {
 	
 	/**
@@ -45,17 +47,17 @@ public class AttributeTypePerColumnPanel extends JPanel {
 		layout.show(cards, key);
 	}
 	
-	public Map<String, String> getPartConfig() {
+	public Map<String, AttributeType> getPartConfig() {
 		// TODO implementation.
-		HashMap<String, String> res = new HashMap<String, String>();
+		HashMap<String, AttributeType> res = new HashMap<String, AttributeType>();
 		int amtComps = comps.size()/2;
 		for(int i = 0; i < amtComps; i++) {
 			int firstIndex = i*2;
 			int secondIndex = i*2 + 1;
 			String attribute = ((JLabel) comps.get(firstIndex)).getText();
 			@SuppressWarnings("unchecked")
-			String type = (String) ((JComboBox<String>) comps.get(secondIndex)).getSelectedItem();
-			res.put(attribute, type);
+			int type = ((JComboBox<String>) comps.get(secondIndex)).getSelectedIndex();
+			res.put(attribute, AttributeType.values()[type]);
 		}
 		return res;
 	}

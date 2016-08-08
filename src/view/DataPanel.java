@@ -4,9 +4,10 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import io.Data;
-import view.data.AttributePanel;
-import view.data.DataTable;
-import view.data.controller.DataController;
+
+import view.data.attributes.AttributePerColumnPanel;
+import view.data.readpanel.DataReadPanel;
+import view.data.readpanel.MainDataPanel;
 
 public class DataPanel extends JPanel {
 	
@@ -15,19 +16,21 @@ public class DataPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -8716864006670971677L;
 
-	private DataController dc;
+	private MainDataPanel mdp;
+	private AttributePerColumnPanel attPan;
 	
 	public DataPanel(String[] attributes) {
-		setLayout(new GridLayout(1, 2));
-		DataTable t = new DataTable(new Data(attributes, 5));
-		AttributePanel p = new AttributePanel(attributes);
-		add(t);
-		add(p);
-		dc = new DataController(p);
-		t.setDataController(dc);
+		setLayout(new GridLayout(2, 2));
+		mdp = new MainDataPanel(new Data(attributes, 5));
+		attPan = new AttributePerColumnPanel(attributes);
+		DataReadPanel dataRead = new DataReadPanel(this);
+		add(mdp);
+		add(attPan);
+		add(dataRead);
 	}
 	
 	public void updateData(Data d) {
-		dc.update(d);
+		mdp.update(d);
+		attPan.update(d.getAttributes());
 	}
 }

@@ -16,7 +16,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import utils.WindowUtils;
-import view.attributes.AttributeRangePanel;
 import view.data.config.Configuration;
 
 public class Interface implements ItemListener {

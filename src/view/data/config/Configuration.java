@@ -8,9 +8,9 @@ public class Configuration {
 	
 	private Data data;
 	private Map<String, AttributeClass> classification;
-	private Map<String, String> type;
+	private Map<String, AttributeType> type;
 	
-	public Configuration(Data d, Map<String, AttributeClass> c, Map<String, String> t) {
+	public Configuration(Data d, Map<String, AttributeClass> c, Map<String, AttributeType> t) {
 		data = d;
 		classification = c;
 		type = t;
@@ -24,7 +24,7 @@ public class Configuration {
 		return classification;
 	}
 	
-	public Map<String, String> getTypes() {
+	public Map<String, AttributeType> getTypes() {
 		return type;
 	}
 }

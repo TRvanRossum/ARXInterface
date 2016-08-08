@@ -37,7 +37,6 @@ public class Interface implements ItemListener {
         applyButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		config = card1.createConfig();
-        		System.out.println("Test");
         		cb.setSelectedIndex(1);
         	}
         });

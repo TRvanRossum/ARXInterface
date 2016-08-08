@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 import io.Data;
 
-import view.data.attributes.AttributePerColumnPanel;
+import view.data.attributes.MainAttributePanel;
 import view.data.config.Configuration;
 import view.data.readpanel.DataReadPanel;
 import view.data.readpanel.MainDataPanel;
@@ -18,12 +18,12 @@ public class DataPanel extends JPanel {
 	private static final long serialVersionUID = -8716864006670971677L;
 
 	private MainDataPanel mdp;
-	private AttributePerColumnPanel attPan;
+	private MainAttributePanel attPan;
 	
 	public DataPanel(String[] attributes) {
 		setLayout(new GridLayout(2, 2));
 		mdp = new MainDataPanel(new Data(attributes, 5));
-		attPan = new AttributePerColumnPanel(attributes);
+		attPan = new MainAttributePanel(attributes);
 		DataReadPanel dataRead = new DataReadPanel(this);
 		add(mdp);
 		add(attPan);
@@ -36,6 +36,6 @@ public class DataPanel extends JPanel {
 	}
 	
 	public Configuration createConfig() {
-		return new Configuration(mdp.getData(), attPan.getPartConfig());
+		return new Configuration(mdp.getData(), attPan.getClassification(), attPan.getTypes());
 	}
 }

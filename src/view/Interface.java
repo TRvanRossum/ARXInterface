@@ -10,6 +10,7 @@ import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -36,8 +37,12 @@ public class Interface implements ItemListener {
         JButton applyButton = new JButton("Apply");
         applyButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		config = card1.createConfig();
-        		cb.setSelectedIndex(1);
+        		int option = JOptionPane.showConfirmDialog(card1, "Are you sure you want to use the currently selected data\n" 
+        				+ "and configuration per attribute for the algorithm?");
+        		if(option == JOptionPane.YES_OPTION) {
+        			config = card1.createConfig();
+            		cb.setSelectedIndex(1);
+        		}
         	}
         });
         card1.add(applyButton);

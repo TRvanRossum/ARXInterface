@@ -38,6 +38,6 @@ public class DataPanel extends JPanel {
 	}
 	
 	public Configuration createConfig() {
-		return null;
+		return new Configuration(mdp.getData(), attPan.getPartConfig());
 	}
 }

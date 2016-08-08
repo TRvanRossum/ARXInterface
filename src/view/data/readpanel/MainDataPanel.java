@@ -14,14 +14,21 @@ public class MainDataPanel extends JPanel {
 	
 	private MainDataTable mdt;
 	private JScrollPane scroll;
+	private Data recentData;
 	
 	public MainDataPanel(Data d) {
+		recentData = d;
 		mdt = new MainDataTable(d);
 		scroll = new JScrollPane(mdt.getDataTable());
 		add(scroll);
 	}
 	
 	public void update(Data d) {
+		recentData = d;
 		mdt.update(d);
+	}
+	
+	public Data getData() {
+		return recentData;
 	}
 }

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import io.Data;
 
 import view.data.attributes.AttributePerColumnPanel;
+import view.data.config.Configuration;
 import view.data.readpanel.DataReadPanel;
 import view.data.readpanel.MainDataPanel;
 
@@ -34,5 +35,9 @@ public class DataPanel extends JPanel {
 	public void updateData(Data d) {
 		mdp.update(d);
 		attPan.update(d.getAttributes());
+	}
+	
+	public Configuration createConfig() {
+		return null;
 	}
 }

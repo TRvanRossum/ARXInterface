@@ -1,7 +1,6 @@
 package view;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import io.Data;
@@ -29,7 +28,6 @@ public class DataPanel extends JPanel {
 		add(mdp);
 		add(attPan);
 		add(dataRead);
-		add(new JButton("Apply"));
 	}
 	
 	public void updateData(Data d) {

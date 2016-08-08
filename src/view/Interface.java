@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import utils.WindowUtils;
+import view.attributes.AttributeRangePanel;
 import view.data.config.Configuration;
 
 public class Interface implements ItemListener {
@@ -47,12 +48,12 @@ public class Interface implements ItemListener {
         });
         card1.add(applyButton);
         
-        AnonymizationPanel card2 = new AnonymizationPanel();
+        AnonymizationPanel card3 = new AnonymizationPanel();
          
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card1, DATA_PANEL);
-        cards.add(card2, ANONYMIZATION_PANEL);
+        cards.add(card3, ANONYMIZATION_PANEL);
          
         pane.add(cards, BorderLayout.CENTER);
     }

@@ -14,6 +14,11 @@ public class AttributeRangePanel extends JPanel {
 	
 	public AttributeRangePanel(Configuration config) {
 		cfg = config;
+		create(cfg);
+	}
+	
+	private void create(Configuration c) {
+		
 	}
 	
 }

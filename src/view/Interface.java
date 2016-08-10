@@ -49,7 +49,7 @@ public class Interface implements ItemListener {
         		if(option == JOptionPane.YES_OPTION) {
         			config = card1.createConfig();
             		cb.setSelectedIndex(1);
-            		card2.updateInterface(config);
+            		card2.updateTable(config);
         		}
         	}
         });

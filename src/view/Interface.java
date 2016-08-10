@@ -35,10 +35,20 @@ public class Interface implements ItemListener {
         cb = new JComboBox<String>(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
-         
+        
+        JButton mappingApplyButton = new JButton("Apply");
+        mappingApplyButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+        	
+        });
+        
         //Create the "cards".
         DataPanel card1 = new DataPanel(dummyData.getAttributes());
-        TextualMappingPanel card2 = new TextualMappingPanel(config);
+        TextualMappingPanel card2 = new TextualMappingPanel(config, mappingApplyButton);
         AnonymizationPanel card3 = new AnonymizationPanel();
         
         JButton applyButton = new JButton("Apply");

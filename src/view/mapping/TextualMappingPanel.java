@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import view.data.config.Configuration;
 
@@ -24,13 +25,12 @@ public class TextualMappingPanel extends JPanel {
 	private Configuration config;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JButton applyButton = new JButton("Apply this mapping");
 	
-	public TextualMappingPanel(Configuration cfg) {
+	public TextualMappingPanel(Configuration cfg, JButton apply) {
 		super(new GridLayout(2, 1));
 		config = cfg;
 		createTable(config);
-		addHandlers();
+		addHandlers(apply);
 	}
 	
 	private void createTable(Configuration c) {
@@ -61,8 +61,8 @@ public class TextualMappingPanel extends JPanel {
 		createTable(c);
 	}
 	
-	private void addHandlers() {
-		JPanel panel = new JPanel(new GridLayout(2, 2));
+	private void addHandlers(JButton applyButton) {
+		JPanel panel = new JPanel(new GridLayout(2, 1));
 		JButton addRowButton = new JButton("Add a row");
 		addRowButton.addActionListener(new ActionListener() {
 
@@ -74,13 +74,14 @@ public class TextualMappingPanel extends JPanel {
 			
 		});
 		panel.add(addRowButton);
+		panel.add(applyButton);
 		add(panel);
 	}
 	
 	private void printDebugData(JTable table) {
         int numRows = table.getRowCount();
         int numCols = table.getColumnCount();
-        javax.swing.table.TableModel model = table.getModel();
+        TableModel model = table.getModel();
  
         System.out.println("Value of data: ");
         for (int i=0; i < numRows; i++) {

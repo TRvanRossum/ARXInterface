@@ -25,7 +25,7 @@ public class Interface implements ItemListener {
     private final String DATA_PANEL = "Data";
 	private final String ANONYMIZATION_PANEL = "Anonymization";
 	private final String MAPPING_PANEL = "Mapping";
-	private Data dummyData = new Data(new String[]{"att1", "att2", "att3", "att1", "att2", "att3", "att1", "att2", "att3"}, new String[5][9]);
+	private Data dummyData = new Data(new String[]{"att1", "att2", "att3", "att4", "att5", "att6", "att7", "att8", "att9"}, new String[5][9]);
 	private Configuration config = new Configuration(dummyData, null, null);
 	private JComboBox<String> cb;
      

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import view.data.config.AttributeType;
 import view.data.config.Configuration;
 
 public class TextualMappingPanel extends JPanel {
@@ -38,6 +39,14 @@ public class TextualMappingPanel extends JPanel {
 	
 	private void createTable(Configuration c) {
 		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"});
+		if(c.getTypes() != null){
+			for(String s : c.getTypes().keySet()) {
+				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL)) {
+					model.addRow(new String[]{s, "", ""});
+				}
+			}
+		}
+		
 		table = new JTable(model);
 		 
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));

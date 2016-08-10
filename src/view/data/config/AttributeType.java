@@ -1,8 +1,8 @@
 package view.data.config;
 
 public enum AttributeType {
-	TEXT,
-	NUMBER,
+	TEXTUAL,
+	NUMERICAL,
 	POSTCODE,
 	DATE
 }

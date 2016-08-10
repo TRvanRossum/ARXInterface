@@ -8,9 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -25,6 +27,7 @@ public class TextualMappingPanel extends JPanel {
 	private Configuration config;
 	private JTable table;
 	private JScrollPane scrollPane;
+	private JTextField textField = new JTextField(",");
 	
 	public TextualMappingPanel(Configuration cfg, JButton apply) {
 		super(new GridLayout(2, 1));
@@ -34,7 +37,7 @@ public class TextualMappingPanel extends JPanel {
 	}
 	
 	private void createTable(Configuration c) {
-		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by comma)", "Maps to value"});
+		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"});
 		table = new JTable(model);
 		 
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -62,7 +65,7 @@ public class TextualMappingPanel extends JPanel {
 	}
 	
 	private void addHandlers(JButton applyButton) {
-		JPanel panel = new JPanel(new GridLayout(2, 1));
+		JPanel panel = new JPanel(new GridLayout(2, 2));
 		JButton addRowButton = new JButton("Add a row");
 		addRowButton.addActionListener(new ActionListener() {
 
@@ -73,7 +76,25 @@ public class TextualMappingPanel extends JPanel {
 			}
 			
 		});
+		JButton removeRowButton = new JButton("Remove the most recently added row");
+		removeRowButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int amtRows = tableModel.getRowCount();
+				if(amtRows > 0) {
+					tableModel.removeRow(amtRows - 1);
+				}
+			}
+			
+		});
 		panel.add(addRowButton);
+		panel.add(removeRowButton);
+		JPanel subPanel = new JPanel(new GridLayout(2, 1));
+		subPanel.add(new JLabel("Please specify a delimiter in the textbox..."));
+		subPanel.add(textField);
+		panel.add(subPanel);
 		panel.add(applyButton);
 		add(panel);
 	}

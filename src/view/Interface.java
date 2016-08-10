@@ -15,25 +15,32 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import io.Data;
 import utils.WindowUtils;
 import view.data.config.Configuration;
+import view.mapping.TextualMappingPanel;
 
 public class Interface implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
     private final String DATA_PANEL = "Data";
 	private final String ANONYMIZATION_PANEL = "Anonymization";
-	private Configuration config = null;
+	private final String MAPPING_PANEL = "Mapping";
+	private Data dummyData = new Data(new String[]{"att1", "att2", "att3", "att1", "att2", "att3", "att1", "att2", "att3"}, new String[5][9]);
+	private Configuration config = new Configuration(dummyData, null, null);
 	private JComboBox<String> cb;
      
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
-        String comboBoxItems[] = { DATA_PANEL, ANONYMIZATION_PANEL };
+        String comboBoxItems[] = { DATA_PANEL, MAPPING_PANEL, ANONYMIZATION_PANEL };
         cb = new JComboBox<String>(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
          
         //Create the "cards".
-        DataPanel card1 = new DataPanel(new String[]{"att1", "att2", "att3", "att1", "att2", "att3", "att1", "att2", "att3"});
+        DataPanel card1 = new DataPanel(dummyData.getAttributes());
+        TextualMappingPanel card2 = new TextualMappingPanel(config);
+        AnonymizationPanel card3 = new AnonymizationPanel();
+        
         JButton applyButton = new JButton("Apply");
         applyButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -42,16 +49,16 @@ public class Interface implements ItemListener {
         		if(option == JOptionPane.YES_OPTION) {
         			config = card1.createConfig();
             		cb.setSelectedIndex(1);
+            		card2.updateInterface(config);
         		}
         	}
         });
         card1.add(applyButton);
-        
-        AnonymizationPanel card3 = new AnonymizationPanel();
          
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card1, DATA_PANEL);
+        cards.add(card2, MAPPING_PANEL);
         cards.add(card3, ANONYMIZATION_PANEL);
          
         pane.add(cards, BorderLayout.CENTER);

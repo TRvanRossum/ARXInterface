@@ -50,11 +50,15 @@ public class Interface implements ItemListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					List<TextualMapping> mapping = card2.createAllTextualMappings();
-				} catch (MapBuildException e1) {
-					e1.printStackTrace();
-					return;
+				int option = JOptionPane.showConfirmDialog(card2, "Are you sure that you want to continue"
+						+ "with these mappings?");
+				if(option == JOptionPane.YES_OPTION) {
+					try {
+						List<TextualMapping> mapping = card2.createAllTextualMappings();
+					} catch (MapBuildException e1) {
+						JOptionPane.showMessageDialog(card2, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 				}
 			}
         	

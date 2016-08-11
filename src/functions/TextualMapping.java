@@ -14,7 +14,7 @@ public class TextualMapping implements Mapping {
 	}
 	
 	public String map(String attNam, String input) throws MappingException {
-		if(attNam.equals(attributeName) && Arrays.asList(applicableValues).contains(input)) {
+		if(attNam.equals(attributeName) && stringContains(input)) {
 			return resultValue;
 		}
 		else {

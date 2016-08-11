@@ -21,4 +21,22 @@ public class TextualMapping implements Mapping {
 			throw new MappingException("Input is not applicable for this map.");
 		}
 	}
+
+	@Override
+	public boolean contains(Object o) throws Exception {
+		if(o instanceof String) {
+			return stringContains((String) o);
+		}
+		throw new Exception("You tried to check if a non-string was an applicable"
+				+ " value for a string-to-string mapping.");
+	}
+
+	private boolean stringContains(String s) {
+		for(int i = 0; i < applicableValues.length; i++) {
+			if(s.equals(applicableValues[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

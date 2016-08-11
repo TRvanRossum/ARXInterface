@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import dgh.DGHInput;
 import functions.MapBuildException;
 import functions.TextualMapping;
 import io.Data;
@@ -30,6 +31,7 @@ public class Interface implements ItemListener {
 	private final String MAPPING_PANEL = "Mapping";
 	private Data dummyData = new Data(new String[]{"att1", "att2", "att3", "att4", "att5", "att6", "att7", "att8", "att9"}, new String[5][9]);
 	private Configuration config = new Configuration(dummyData, null, null);
+	private DGHInput input;
 	private JComboBox<String> cb;
      
     public void addComponentToPane(Container pane) {
@@ -51,10 +53,11 @@ public class Interface implements ItemListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(card2, "Are you sure that you want to continue"
-						+ "with these mappings?");
+						+ " with these mappings?");
 				if(option == JOptionPane.YES_OPTION) {
 					try {
 						List<TextualMapping> mapping = card2.createAllTextualMappings();
+						input = new DGHInput(config, mapping);
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card2, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;

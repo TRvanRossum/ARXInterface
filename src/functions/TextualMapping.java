@@ -1,7 +1,5 @@
 package functions;
 
-import java.util.Arrays;
-
 public class TextualMapping implements Mapping {
 	private String attributeName;
 	private String resultValue;

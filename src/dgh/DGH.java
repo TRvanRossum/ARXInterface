@@ -3,7 +3,11 @@ package dgh;
 public class DGH {
 	private DGHNode startNode;
 	
-	public DGH(DGHInput input) {
-		// TODO Build the DGH.
+	public DGH(DGHNode start) {
+		startNode = start;
+	}
+	
+	public DGHNode getStart() {
+		return startNode;
 	}
 }

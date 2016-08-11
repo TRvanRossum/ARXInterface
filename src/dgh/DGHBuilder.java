@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import functions.TextualMapping;
 
@@ -21,6 +22,7 @@ public class DGHBuilder {
 	public DGH build(DGHInput input) {
 		orderTextMapsByAttribute(input);
 		return null;
+		//return new DGH(attToMaps);
 	}
 	
 	private void orderTextMapsByAttribute(DGHInput input) {

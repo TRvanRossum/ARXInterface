@@ -16,11 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import functions.MapBuildException;
 import functions.TextualMapping;
 import io.Data;
 import utils.WindowUtils;
 import view.data.config.Configuration;
-import view.mapping.MapBuildException;
 import view.mapping.TextualMappingPanel;
 
 public class Interface implements ItemListener {

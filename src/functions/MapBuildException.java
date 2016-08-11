@@ -1,4 +1,4 @@
-package view.mapping;
+package functions;
 
 public class MapBuildException extends Exception {
 	

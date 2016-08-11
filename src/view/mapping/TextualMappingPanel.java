@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import functions.MapBuildException;
 import functions.TextualMapping;
 import functions.TextualMappingBuilder;
 import view.data.config.AttributeType;

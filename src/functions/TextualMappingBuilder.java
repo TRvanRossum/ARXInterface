@@ -1,7 +1,5 @@
 package functions;
 
-import view.mapping.MapBuildException;
-
 public class TextualMappingBuilder {
 	
 	public TextualMappingBuilder() {

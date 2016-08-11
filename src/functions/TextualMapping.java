@@ -37,4 +37,17 @@ public class TextualMapping implements Mapping {
 		}
 		return false;
 	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
+	public String getResultValue() {
+		return resultValue;
+	}
+
+	public String[] getApplicableValues() {
+		return applicableValues;
+	}
+	
 }

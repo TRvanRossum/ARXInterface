@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import functions.TextualMapping;
 import view.data.config.AttributeType;
 import view.data.config.Configuration;
 
@@ -29,6 +32,7 @@ public class TextualMappingPanel extends JPanel {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JTextField textField = new JTextField(",");
+	private TextualMappingBuilder mappingBuilder = new TextualMappingBuilder();
 	
 	public TextualMappingPanel(Configuration cfg, JButton apply) {
 		super(new GridLayout(2, 1));
@@ -55,7 +59,7 @@ public class TextualMappingPanel extends JPanel {
 		if (true) {
 		    table.addMouseListener(new MouseAdapter() {
 		        public void mouseClicked(MouseEvent e) {
-		            printDebugData(table);
+		            printDebugData();
 		        }
 		    });
 		}
@@ -108,7 +112,7 @@ public class TextualMappingPanel extends JPanel {
 		add(panel);
 	}
 	
-	private void printDebugData(JTable table) {
+	private void printDebugData() {
         int numRows = table.getRowCount();
         int numCols = table.getColumnCount();
         TableModel model = table.getModel();
@@ -123,4 +127,17 @@ public class TextualMappingPanel extends JPanel {
         }
         System.out.println("--------------------------");
     }
+	
+	public List<TextualMapping> createAllTextualMappings(String delim) throws MapBuildException {
+		TableModel model = table.getModel();
+		List<TextualMapping> res = new ArrayList<TextualMapping>();
+		for(int i = 0; i < table.getRowCount(); i++) {
+			String attribute = (String) model.getValueAt(i, 0);
+			String values = (String) model.getValueAt(i, 1);
+			String output = (String) model.getValueAt(i, 2);
+			res.add(mappingBuilder.build(attribute, values, output, delim));
+		}
+		
+		return res;
+	}
 }

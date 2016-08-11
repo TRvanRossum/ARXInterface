@@ -140,4 +140,8 @@ public class TextualMappingPanel extends JPanel {
 		
 		return res;
 	}
+
+	public List<TextualMapping> createAllTextualMappings() throws MapBuildException {
+		return createAllTextualMappings(textField.getText());
+	}
 }

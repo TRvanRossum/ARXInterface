@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,9 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import functions.TextualMapping;
 import io.Data;
 import utils.WindowUtils;
 import view.data.config.Configuration;
+import view.mapping.MapBuildException;
 import view.mapping.TextualMappingPanel;
 
 public class Interface implements ItemListener {
@@ -37,19 +40,25 @@ public class Interface implements ItemListener {
         cb.addItemListener(this);
         
         JButton mappingApplyButton = new JButton("Apply");
-        mappingApplyButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-        	
-        });
         
         //Create the "cards".
         DataPanel card1 = new DataPanel(dummyData.getAttributes());
         TextualMappingPanel card2 = new TextualMappingPanel(config, mappingApplyButton);
         AnonymizationPanel card3 = new AnonymizationPanel();
+        
+        mappingApplyButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					List<TextualMapping> mapping = card2.createAllTextualMappings();
+				} catch (MapBuildException e1) {
+					e1.printStackTrace();
+					return;
+				}
+			}
+        	
+        });
         
         JButton applyButton = new JButton("Apply");
         applyButton.addActionListener(new ActionListener() {

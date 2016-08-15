@@ -22,13 +22,15 @@ import functions.TextualMapping;
 import io.Data;
 import utils.WindowUtils;
 import view.data.config.Configuration;
+import view.mapping.NumericalMappingPanel;
 import view.mapping.TextualMappingPanel;
 
 public class Interface implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
     private final String DATA_PANEL = "Data";
 	private final String ANONYMIZATION_PANEL = "Anonymization";
-	private final String MAPPING_PANEL = "Mapping";
+	private final String TEXT_MAPPING_PANEL = "Textual mapping";
+	private final String NUMBER_MAPPING_PANEL = "Numerical mapping";
 	private Data dummyData = new Data(new String[]{"att1", "att2", "att3", "att4", "att5", "att6", "att7", "att8", "att9"}, new String[5][9]);
 	private Configuration config = new Configuration(dummyData, null, null);
 	private DGHInput input;
@@ -36,7 +38,7 @@ public class Interface implements ItemListener {
      
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
-        String comboBoxItems[] = { DATA_PANEL, MAPPING_PANEL, ANONYMIZATION_PANEL };
+        String comboBoxItems[] = { DATA_PANEL, TEXT_MAPPING_PANEL, NUMBER_MAPPING_PANEL, ANONYMIZATION_PANEL };
         cb = new JComboBox<String>(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
@@ -46,7 +48,8 @@ public class Interface implements ItemListener {
         //Create the "cards".
         DataPanel card1 = new DataPanel(dummyData.getAttributes());
         TextualMappingPanel card2 = new TextualMappingPanel(config, mappingApplyButton);
-        AnonymizationPanel card3 = new AnonymizationPanel();
+        NumericalMappingPanel card3 = new NumericalMappingPanel(config, new JButton("Test."));
+        AnonymizationPanel card4 = new AnonymizationPanel();
         
         mappingApplyButton.addActionListener(new ActionListener() {
 
@@ -58,6 +61,7 @@ public class Interface implements ItemListener {
 					try {
 						List<TextualMapping> mapping = card2.createAllTextualMappings();
 						input = new DGHInput(config, mapping);
+						cb.setSelectedIndex(2);
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card2, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;
@@ -84,8 +88,9 @@ public class Interface implements ItemListener {
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card1, DATA_PANEL);
-        cards.add(card2, MAPPING_PANEL);
-        cards.add(card3, ANONYMIZATION_PANEL);
+        cards.add(card2, TEXT_MAPPING_PANEL);
+        cards.add(card3, NUMBER_MAPPING_PANEL);
+        cards.add(card4, ANONYMIZATION_PANEL);
          
         pane.add(cards, BorderLayout.CENTER);
     }

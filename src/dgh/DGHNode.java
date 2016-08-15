@@ -1,11 +1,7 @@
 package dgh;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DGHNode {
 	
-	private List<DGHNode> next = new ArrayList<DGHNode>();
 	private AttributeAnonymityLevel anonLevels;
 	private DGHInput input;
 	
@@ -19,12 +15,7 @@ public class DGHNode {
 		anonLevels = level;
 	}
 	
-	public DGHNode(List<DGHNode> nextOnes) {
-		next = nextOnes;
+	public boolean equals(DGHNode other) {
+		return anonLevels.equals(other.anonLevels);
 	}
-	
-	public List<DGHNode> getNext() {
-		return next;
-	}
-
 }

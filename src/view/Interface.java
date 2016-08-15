@@ -65,6 +65,7 @@ public class Interface implements ItemListener {
 					try {
 						textMaps = card2.createAllTextualMappings();
 						cb.setSelectedIndex(2);
+						card3.updateTable(config);
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card2, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;

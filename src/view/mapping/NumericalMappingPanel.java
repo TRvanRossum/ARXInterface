@@ -48,6 +48,8 @@ public class NumericalMappingPanel extends JPanel {
 		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Ranges (separate by - and chosen delimiter)"});
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
+				System.out.println(s);
+				System.out.println(c.getTypes().get(s));
 				if(c.getTypes().get(s).equals(AttributeType.NUMERICAL)) {
 					model.addRow(new String[]{s, ""});
 				}

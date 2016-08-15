@@ -28,10 +28,9 @@ public class DGH {
 		if(attributeType.equals(AttributeType.TEXTUAL) || attributeType.equals(AttributeType.NUMERICAL)) {
 			return 1;
 		}
-		if(attributeType.equals(AttributeType.DATE)) {
-			return 2;
+		else {
+			return 3;
 		}
-		return 6;
 	}
 
 	public DGHNode getStart() {

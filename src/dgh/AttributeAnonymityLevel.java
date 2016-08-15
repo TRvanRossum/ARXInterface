@@ -32,4 +32,11 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return false;
 	}
 	
+	public int getLevel() {
+		int level = 0;
+		for(String s : keySet()) {
+			level += get(s);
+		}
+		return level;
+	}
 }

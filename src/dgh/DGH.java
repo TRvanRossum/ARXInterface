@@ -1,9 +1,5 @@
 package dgh;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class DGH {
 	private DGHNode startNode;
 	private DGHInput input;

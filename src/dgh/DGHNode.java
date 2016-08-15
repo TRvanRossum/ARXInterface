@@ -1,21 +1,26 @@
 package dgh;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DGHNode {
 	
 	private AttributeAnonymityLevel anonLevels;
-	private DGHInput input;
+	private List<DGHNode> next = new ArrayList<DGHNode>();
 	
-	public DGHNode(DGHInput _input) {
-		input = _input;
+	public DGHNode() {
 		anonLevels = new AttributeAnonymityLevel();
 	}
 	
-	public DGHNode(DGHInput _input, AttributeAnonymityLevel level) {
-		input = _input;
+	public DGHNode(AttributeAnonymityLevel level) {
 		anonLevels = level;
 	}
 	
 	public boolean equals(DGHNode other) {
 		return anonLevels.equals(other.anonLevels);
+	}
+
+	public void generateNeighbours() {
+		
 	}
 }

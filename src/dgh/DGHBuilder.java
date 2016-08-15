@@ -30,13 +30,9 @@ public class DGHBuilder {
 			List<TextualMapping> existing = attToMaps.get(map.getAttributeName());
 			if(existing == null) {
 				existing = new ArrayList<TextualMapping>();
-				existing.add(map);
-				attToMaps.put(map.getAttributeName(), existing);
 			}
-			else {
-				existing.add(map);
-				attToMaps.put(map.getAttributeName(), existing);
-			}
+			existing.add(map);
+			attToMaps.put(map.getAttributeName(), existing);
 		}
 	}
 }

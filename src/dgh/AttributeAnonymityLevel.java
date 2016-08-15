@@ -21,7 +21,7 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	}
 	
 	public boolean equals(AttributeAnonymityLevel other) {
-		if(this.keySet().containsAll(other.keySet())) {
+		if(this.keySet().containsAll(other.keySet()) && other.keySet().containsAll(this.keySet())) {
 			for(String s : this.keySet()) {
 				if(this.get(s) != other.get(s)){
 					return false;

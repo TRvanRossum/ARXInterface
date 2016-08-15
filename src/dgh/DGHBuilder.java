@@ -33,6 +33,10 @@ public class DGHBuilder {
 				existing.add(map);
 				attToMaps.put(map.getAttributeName(), existing);
 			}
+			else {
+				existing.add(map);
+				attToMaps.put(map.getAttributeName(), existing);
+			}
 		}
 	}
 }

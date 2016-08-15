@@ -3,34 +3,14 @@ package dgh;
 import java.util.HashMap;
 import java.util.Map;
 
-import view.data.config.AttributeType;
 
 public class DGH {
 	private DGHNode startNode;
 	private DGHInput input;
-	private Map<String, Integer> maxLevelPerAttribute = new HashMap<String, Integer>();
 	
 	public DGH(DGHInput _input) {
-		startNode = new DGHNode();
+		startNode = new DGHNode(_input.getConfig().getTypes());
 		input = _input;
-		determineMaxLevelPerAttribute();
-	}
-	
-	private void determineMaxLevelPerAttribute() {
-		Map<String, AttributeType> attTypeMap = input.getConfig().getTypes();
-		for(String s : attTypeMap.keySet()) {
-			int maxLevel = determineMaxLevel(attTypeMap.get(s));
-			maxLevelPerAttribute.put(s, maxLevel);
-		}
-	}
-
-	private int determineMaxLevel(AttributeType attributeType) {
-		if(attributeType.equals(AttributeType.TEXTUAL) || attributeType.equals(AttributeType.NUMERICAL)) {
-			return 1;
-		}
-		else {
-			return 3;
-		}
 	}
 
 	public DGHNode getStart() {

@@ -18,6 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import dgh.DGHInput;
 import functions.MapBuildException;
+import functions.NumericalMapping;
 import functions.TextualMapping;
 import io.Data;
 import utils.WindowUtils;
@@ -33,6 +34,8 @@ public class Interface implements ItemListener {
 	private final String NUMBER_MAPPING_PANEL = "Numerical mapping";
 	private Data dummyData = new Data(new String[]{"att1", "att2", "att3", "att4", "att5", "att6", "att7", "att8", "att9"}, new String[5][9]);
 	private Configuration config = new Configuration(dummyData, null, null);
+	private List<TextualMapping> textMaps;
+	private List<NumericalMapping> numberMaps;
 	private DGHInput input;
 	private JComboBox<String> cb;
      
@@ -43,15 +46,16 @@ public class Interface implements ItemListener {
         cb.setEditable(false);
         cb.addItemListener(this);
         
-        JButton mappingApplyButton = new JButton("Apply");
+        JButton textMappingApplyButton = new JButton("Apply");
+        JButton numberMappingApplyButton = new JButton("Apply");
         
         //Create the "cards".
         DataPanel card1 = new DataPanel(dummyData.getAttributes());
-        TextualMappingPanel card2 = new TextualMappingPanel(config, mappingApplyButton);
-        NumericalMappingPanel card3 = new NumericalMappingPanel(config, new JButton("Test."));
+        TextualMappingPanel card2 = new TextualMappingPanel(config, textMappingApplyButton);
+        NumericalMappingPanel card3 = new NumericalMappingPanel(config, numberMappingApplyButton);
         AnonymizationPanel card4 = new AnonymizationPanel();
         
-        mappingApplyButton.addActionListener(new ActionListener() {
+        textMappingApplyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,11 +63,30 @@ public class Interface implements ItemListener {
 						+ " with these mappings?");
 				if(option == JOptionPane.YES_OPTION) {
 					try {
-						List<TextualMapping> mapping = card2.createAllTextualMappings();
-						input = new DGHInput(config, mapping);
+						textMaps = card2.createAllTextualMappings();
 						cb.setSelectedIndex(2);
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card2, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
+			}
+        	
+        });
+        
+        numberMappingApplyButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int option = JOptionPane.showConfirmDialog(card3, "Are you sure that you want to continue"
+						+ " with these mappings?");
+				if(option == JOptionPane.YES_OPTION) {
+					try {
+						numberMaps = card3.createAllNumericalMappings();
+						input = new DGHInput(config, textMaps, numberMaps);
+						cb.setSelectedIndex(3);
+					} catch (MapBuildException e1) {
+						JOptionPane.showMessageDialog(card3, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 				}

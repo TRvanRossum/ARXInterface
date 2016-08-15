@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import functions.NumericalMapping;
 import functions.TextualMapping;
 
 public class DGHBuilder {
 	
 	private static DGHBuilder builder = new DGHBuilder();
-	private Map<String, List<TextualMapping>> attToMaps = new HashMap<String, List<TextualMapping>>();
+	private Map<String, List<TextualMapping>> attToTextMaps = new HashMap<String, List<TextualMapping>>();
+	private Map<String, List<NumericalMapping>> attToNumberMaps = new HashMap<String, List<NumericalMapping>>();
 	
 	private DGHBuilder(){}
 	
@@ -20,19 +22,31 @@ public class DGHBuilder {
 	
 	public DGH build(DGHInput input) {
 		orderTextMapsByAttribute(input);
+		orderNumericalMapsByAttribute(input);
 		return null;
-		//return new DGH(attToMaps);
 	}
 	
 	private void orderTextMapsByAttribute(DGHInput input) {
 		List<TextualMapping> mapList = input.getTextualMapping();
 		for(TextualMapping map : mapList) {
-			List<TextualMapping> existing = attToMaps.get(map.getAttributeName());
+			List<TextualMapping> existing = attToTextMaps.get(map.getAttributeName());
 			if(existing == null) {
 				existing = new ArrayList<TextualMapping>();
 			}
 			existing.add(map);
-			attToMaps.put(map.getAttributeName(), existing);
+			attToTextMaps.put(map.getAttributeName(), existing);
+		}
+	}
+	
+	private void orderNumericalMapsByAttribute(DGHInput input) {
+		List<NumericalMapping> mapList = input.getNumberMapping();
+		for(NumericalMapping map : mapList) {
+			List<NumericalMapping> existing = attToNumberMaps.get(map.getAttributeName());
+			if(existing == null) {
+				existing = new ArrayList<NumericalMapping>();
+			}
+			existing.add(map);
+			attToNumberMaps.put(map.getAttributeName(), existing);
 		}
 	}
 }

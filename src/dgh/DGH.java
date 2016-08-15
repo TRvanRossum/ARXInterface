@@ -2,9 +2,10 @@ package dgh;
 
 public class DGH {
 	private DGHNode startNode;
+	private DGHInput input;
 	
-	public DGH(DGHNode start) {
-		startNode = start;
+	public DGH(DGHInput input) {
+		startNode = new DGHNode(input);
 	}
 	
 	public DGHNode getStart() {

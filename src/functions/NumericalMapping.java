@@ -18,7 +18,7 @@ public class NumericalMapping implements Mapping{
 		return range.isInRange(i);
 	}
 
-	public String getAttribute() {
+	public String getAttributeName() {
 		return attribute;
 	}
 

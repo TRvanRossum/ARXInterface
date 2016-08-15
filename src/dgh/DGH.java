@@ -1,8 +1,10 @@
 package dgh;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DGH {
 	private DGHNode startNode;
-	private DGHInput input;
 	
 	public DGH(DGHInput input) {
 		startNode = new DGHNode(input);
@@ -10,5 +12,15 @@ public class DGH {
 	
 	public DGHNode getStart() {
 		return startNode;
+	}
+	
+	public void startAnonymization(int k) {
+		List<DGHNode> firstLevel = new ArrayList<DGHNode>();
+		firstLevel.add(startNode);
+		startAnonymization(k, firstLevel);
+	}
+	
+	public void startAnonymization(int k, List<DGHNode> level) {
+		
 	}
 }

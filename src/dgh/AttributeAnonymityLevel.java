@@ -25,13 +25,21 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return super.get(key);
 	}
 	
-	public void increaseLevel(String attribute) throws DGHException {
+	public boolean isAtMaxLevel(String attribute) {
+		int anonLevel = this.get(attribute);
 		AttributeType type = types.get(attribute);
-		int anonLevel = get(attribute);
 		if(anonLevel < 1 && (type.equals(AttributeType.NUMERICAL) || type.equals(AttributeType.TEXTUAL))) {
-			put(attribute, anonLevel + 1);
+			return false;
 		}
 		else if(anonLevel < 3) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void increaseLevel(String attribute) throws DGHException {
+		int anonLevel = this.get(attribute);
+		if(!this.isAtMaxLevel(attribute)) {
 			put(attribute, anonLevel + 1);
 		}
 		else {
@@ -54,7 +62,7 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	public int getLevel() {
 		int level = 0;
 		for(String s : keySet()) {
-			level += get(s);
+			level += this.get(s);
 		}
 		return level;
 	}

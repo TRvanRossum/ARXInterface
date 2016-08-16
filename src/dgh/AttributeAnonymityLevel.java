@@ -2,6 +2,7 @@ package dgh;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import view.data.config.AttributeType;
 
@@ -11,6 +12,10 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	
 	public AttributeAnonymityLevel(Map<String, AttributeType> _types) {
 		types = _types;
+	}
+	
+	public Set<String> keySet() {
+		return types.keySet();
 	}
 
 	/**

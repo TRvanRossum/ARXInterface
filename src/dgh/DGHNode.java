@@ -26,4 +26,9 @@ public class DGHNode {
 	public void generateNeighbours() {
 		int level = anonLevels.getLevel();	
 	}
+	
+	public boolean isValidTransition(DGHNode other) {
+		boolean oneLevelDifferenceCheck = false;
+		return true;
+	}
 }

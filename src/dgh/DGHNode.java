@@ -24,11 +24,28 @@ public class DGHNode {
 	}
 
 	public void generateNeighbours() {
-		int level = anonLevels.getLevel();	
+		// TODO
+	}
+	
+	public int getLevel() {
+		return anonLevels.getLevel();
 	}
 	
 	public boolean isValidTransition(DGHNode other) {
-		boolean oneLevelDifferenceCheck = false;
-		return true;
+		int difference = 0;
+		if(this.getLevel() + 1 != other.getLevel()) {
+			return false;
+		}
+		
+		for(String s : this.anonLevels.keySet()) {
+			if(this.anonLevels.get(s) > other.anonLevels.get(s)) {
+				return false;
+			}
+			difference += other.anonLevels.get(s) - this.anonLevels.get(s);
+		}
+		if(difference == 1) {
+			return true;
+		}
+		return false;
 	}
 }

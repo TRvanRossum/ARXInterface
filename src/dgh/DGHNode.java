@@ -25,7 +25,18 @@ public class DGHNode {
 
 	public List<DGHNode> generateNeighbours() {
 		List<DGHNode> nextNodes = new ArrayList<DGHNode>();
-		return null;
+		for(String s : anonLevels.keySet()) {
+			if(!anonLevels.isAtMaxLevel(s)) {
+				AttributeAnonymityLevel clone = anonLevels.clone();
+				try {
+					clone.increaseLevel(s);
+					nextNodes.add(new DGHNode(clone));
+				} catch (DGHException e) {
+					// Does not happen.
+				}
+			}
+		}
+		return nextNodes;
 	}
 	
 	public int getLevel() {
@@ -56,5 +67,9 @@ public class DGHNode {
 
 	public void setNext(List<DGHNode> next) {
 		this.next = next;
+	}
+	
+	public void addNext(DGHNode node) {
+		this.next.add(node);
 	}
 }

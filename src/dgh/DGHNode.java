@@ -48,4 +48,12 @@ public class DGHNode {
 		}
 		return false;
 	}
+
+	public List<DGHNode> getNext() {
+		return next;
+	}
+
+	public void setNext(List<DGHNode> next) {
+		this.next = next;
+	}
 }

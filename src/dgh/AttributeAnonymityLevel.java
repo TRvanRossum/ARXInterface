@@ -71,4 +71,12 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		}
 		return level;
 	}
+	
+	public AttributeAnonymityLevel clone() {
+		AttributeAnonymityLevel res = new AttributeAnonymityLevel(types);
+		for(String s : this.keySet()) {
+			res.put(s, this.get(s));
+		}
+		return res;
+	}
 }

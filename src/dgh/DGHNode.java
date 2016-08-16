@@ -23,8 +23,9 @@ public class DGHNode {
 		return anonLevels.equals(other.anonLevels);
 	}
 
-	public void generateNeighbours() {
-		// TODO
+	public List<DGHNode> generateNeighbours() {
+		List<DGHNode> nextNodes = new ArrayList<DGHNode>();
+		return null;
 	}
 	
 	public int getLevel() {

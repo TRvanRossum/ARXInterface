@@ -24,7 +24,6 @@ public class DGHNode {
 	}
 
 	public void generateNeighbours() {
-		int level = anonLevels.getLevel();
-		
+		int level = anonLevels.getLevel();	
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import dgh.DGH;
 import dgh.DGHInput;
 import functions.MapBuildException;
 import functions.NumericalMapping;
@@ -37,6 +38,7 @@ public class Interface implements ItemListener {
 	private List<TextualMapping> textMaps;
 	private List<NumericalMapping> numberMaps;
 	private DGHInput input;
+	private DGH dgh;
 	private JComboBox<String> cb;
      
     public void addComponentToPane(Container pane) {
@@ -86,6 +88,8 @@ public class Interface implements ItemListener {
 						numberMaps = card3.createAllNumericalMappings();
 						input = new DGHInput(config, textMaps, numberMaps);
 						cb.setSelectedIndex(3);
+						dgh = new DGH(input);
+						dgh.generate();
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card3, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;

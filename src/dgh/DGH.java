@@ -43,4 +43,8 @@ public class DGH {
 		nextLevelNodes.addAll(set);
 		generate(nextLevelNodes);
 	}
+
+	public DGHInput getInput() {
+		return input;
+	}
 }

@@ -75,4 +75,8 @@ public class DGHNode {
 	public String toString() {
 		return "[DGHNode["+anonLevels.toString()+"]]";
 	}
+	
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 }

@@ -31,7 +31,9 @@ public class DGH {
 		}
 		Set<DGHNode> set = new HashSet<DGHNode>();
 		for(DGHNode node : curLevel) {
-			set.addAll(node.generateNeighbours());
+			Set<DGHNode> subset = new HashSet<DGHNode>();
+			subset.addAll(node.generateNeighbours());
+			set.addAll(subset);
 		}
 		System.out.println(checkDuplicates(set));
 		for(DGHNode node : curLevel) {

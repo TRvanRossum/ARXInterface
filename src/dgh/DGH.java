@@ -25,6 +25,7 @@ public class DGH {
 	}
 	
 	public void generate(List<DGHNode> curLevel) {
+		System.out.println(curLevel);
 		if(curLevel.size() == 0) {
 			return;
 		}
@@ -32,6 +33,7 @@ public class DGH {
 		for(DGHNode node : curLevel) {
 			set.addAll(node.generateNeighbours());
 		}
+		System.out.println(checkDuplicates(set));
 		for(DGHNode node : curLevel) {
 			for(DGHNode nextNode : set) {
 				if(node.isValidTransition(nextNode)){
@@ -46,5 +48,21 @@ public class DGH {
 
 	public DGHInput getInput() {
 		return input;
+	}
+	
+	private boolean checkDuplicates(Set<DGHNode> s) {
+		for(DGHNode n : s) {
+			int i = 0;
+			for(DGHNode n2 : s) {
+				if(n.equals(n2)) {
+					i++;
+				}
+			}
+			System.out.println(i);
+			if(i > 1){
+				return true;
+			}
+		}
+		return false;
 	}
 }

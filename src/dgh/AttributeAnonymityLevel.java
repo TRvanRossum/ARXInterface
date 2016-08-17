@@ -36,7 +36,7 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		if(anonLevel < 1 && (type.equals(AttributeType.NUMERICAL) || type.equals(AttributeType.TEXTUAL))) {
 			return false;
 		}
-		else if(anonLevel < 3) {
+		else if(anonLevel < 3 && (type.equals(AttributeType.DATE) || type.equals(AttributeType.POSTCODE))) {
 			return false;
 		}
 		return true;

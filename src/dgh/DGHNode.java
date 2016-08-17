@@ -20,7 +20,7 @@ public class DGHNode {
 	}
 	
 	public boolean equals(DGHNode other) {
-		return anonLevels.equals(other.anonLevels);
+		return this.toString().equals(other.toString());
 	}
 
 	public List<DGHNode> generateNeighbours() {
@@ -71,5 +71,8 @@ public class DGHNode {
 	
 	public void addNext(DGHNode node) {
 		this.next.add(node);
+	}
+	public String toString() {
+		return "[DGHNode["+anonLevels.toString()+"]]";
 	}
 }

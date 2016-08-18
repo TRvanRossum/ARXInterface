@@ -12,6 +12,12 @@ public class Postcode {
 		firstLetter = letters.charAt(0);
 		secondLetter = letters.charAt(1);
 	}
+	
+	private Postcode(Range _numbers, char first, char second) {
+		numbers = _numbers;
+		firstLetter = first;
+		secondLetter = second;
+	}
 
 	public Range getNumbers() {
 		return numbers;
@@ -42,5 +48,9 @@ public class Postcode {
 			return numbers.toString() + firstLetter + secondLetter;
 		}
 		return numbers.toString();
+	}
+	
+	public Postcode clone(){
+		return new Postcode(new Range(numbers.getLowest(), numbers.getHighest()), firstLetter, secondLetter);
 	}
 }

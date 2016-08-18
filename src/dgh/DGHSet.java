@@ -15,7 +15,7 @@ public class DGHSet extends HashSet<DGHNode>{
 	
 	@Override
 	public boolean add(DGHNode n) {
-		if(!this.contains(n)){
+		if(!super.contains(n)){
 			super.add(n);
 			return true;
 		}

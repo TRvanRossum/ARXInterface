@@ -29,12 +29,13 @@ public class DGH {
 		if(curLevel.size() == 0) {
 			return;
 		}
-		Set<DGHNode> set = new HashSet<DGHNode>();
+		DGHSet set = new DGHSet();
 		for(DGHNode node : curLevel) {
 			Set<DGHNode> subset = new HashSet<DGHNode>();
 			subset.addAll(node.generateNeighbours());
 			set.addAll(subset);
 		}
+		System.out.println(set);
 		System.out.println(checkDuplicates(set));
 		for(DGHNode node : curLevel) {
 			for(DGHNode nextNode : set) {

@@ -22,4 +22,14 @@ public class Range {
 		return lowest <= val && highest >= val;
 	}
 	
+	public String toString() {
+		if(isASingleNumber()) {
+			return lowest+"";
+		}
+		return "["+lowest+" - "+highest+"]";
+	}
+	
+	private boolean isASingleNumber() {
+		return lowest == highest;
+	}
 }

@@ -22,4 +22,11 @@ public class NumericalMapping implements Mapping{
 		return attribute;
 	}
 
+	public Range map(String attribute2, Range data) throws MappingException {
+		if(attribute.equals(attribute2) && range.includes(data)) {
+			return range;
+		}
+		throw new MappingException("You either tried using a map for a different attribute or a map which does not include the specified range.");
+	}
+
 }

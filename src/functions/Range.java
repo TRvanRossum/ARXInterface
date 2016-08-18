@@ -32,4 +32,8 @@ public class Range {
 	private boolean isASingleNumber() {
 		return lowest == highest;
 	}
+	
+	public boolean includes(Range other) {
+		return this.lowest <= other.lowest && this.highest >= other.highest;
+	}
 }

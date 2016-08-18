@@ -79,4 +79,8 @@ public class DGHNode {
 	public int hashCode() {
 		return this.toString().hashCode();
 	}
+
+	public AttributeAnonymityLevel getAnonLevels() {
+		return anonLevels;
+	}
 }

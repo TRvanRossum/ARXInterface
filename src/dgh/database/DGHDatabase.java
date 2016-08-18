@@ -1,8 +1,11 @@
 package dgh.database;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import dgh.AttributeAnonymityLevel;
 import dgh.DGHInput;
 import functions.NumericalMapping;
 import functions.TextualMapping;
@@ -34,6 +37,10 @@ public class DGHDatabase {
 	
 	private int amountOfRows;
 	
+	private AttributeAnonymityLevel levelOfAnonymization;
+	
+	private Map<String, LinkedList<? extends DGHDataElement>> database;
+	
 	public DGHDatabase(DGHInput input) {
 		types = input.getConfig().getTypes();
 		classes = input.getConfig().getClassification();
@@ -42,6 +49,9 @@ public class DGHDatabase {
 		postMaps = PostCodeMapBuilder.getInstance().createAllPostCodeMaps();
 		dateMaps = DateMapBuilder.getInstance().createAllDateMaps();
 		amountOfRows = input.getConfig().getData().getData().length;
+		levelOfAnonymization = new AttributeAnonymityLevel(types);
+		DGHDatabaseBuilder builder = new DGHDatabaseBuilder(input.getConfig().getData().getData(), input.getConfig().getData().getAttributes(), types);
+		database = builder.createDatabase();
 	}
 
 	public Map<String, AttributeType> getTypes() {

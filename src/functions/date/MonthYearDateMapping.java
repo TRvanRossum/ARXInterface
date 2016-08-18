@@ -4,11 +4,7 @@ import java.time.LocalDate;
 
 public class MonthYearDateMapping implements DateMapping {
 	
-	private String attribute;
-	
-	public MonthYearDateMapping(String _attribute) {
-		attribute = _attribute;
-	}
+	public MonthYearDateMapping() {}
 	
 	@Override
 	public boolean contains(Object o) throws Exception {
@@ -17,7 +13,7 @@ public class MonthYearDateMapping implements DateMapping {
 
 	@Override
 	public String getAttributeName() {
-		return attribute;
+		return "Generic";
 	}
 
 	@Override

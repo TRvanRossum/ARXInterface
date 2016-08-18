@@ -3,12 +3,8 @@ package functions.date;
 import java.time.LocalDate;
 
 public class HalfYearDateMapping implements DateMapping {
-
-	private String attribute;
 	
-	public HalfYearDateMapping(String _att) {
-		attribute = _att;
-	}
+	public HalfYearDateMapping() {}
 	
 	@Override
 	public boolean contains(Object o) throws Exception {
@@ -17,7 +13,7 @@ public class HalfYearDateMapping implements DateMapping {
 
 	@Override
 	public String getAttributeName() {
-		return attribute;
+		return "Generic";
 	}
 
 	@Override

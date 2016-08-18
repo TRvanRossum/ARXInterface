@@ -1,4 +1,4 @@
-package dgh;
+package dgh.database;
 
 import java.util.List;
 

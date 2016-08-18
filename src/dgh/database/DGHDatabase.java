@@ -108,4 +108,20 @@ public class DGHDatabase {
 	public void setAmountOfRows(int amountOfRows) {
 		this.amountOfRows = amountOfRows;
 	}
+
+	public AttributeAnonymityLevel getLevelOfAnonymization() {
+		return levelOfAnonymization;
+	}
+
+	public void setLevelOfAnonymization(AttributeAnonymityLevel levelOfAnonymization) {
+		this.levelOfAnonymization = levelOfAnonymization;
+	}
+
+	public Map<String, LinkedList<? extends DGHDataElement>> getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(Map<String, LinkedList<? extends DGHDataElement>> database) {
+		this.database = database;
+	}
 }

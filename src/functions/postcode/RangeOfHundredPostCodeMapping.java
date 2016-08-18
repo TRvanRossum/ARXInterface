@@ -16,7 +16,7 @@ public class RangeOfHundredPostCodeMapping implements PostCodeMapping {
 
 	@Override
 	public PostCodeMapType getTypeOfMapping() {
-		return PostCodeMapType.BOTHLETTERS;
+		return PostCodeMapType.RANGEOFHUNDRED;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package functions.postcode;
 
 public enum PostCodeMapType {
-	FIRSTLETTER,
-	FIRSTTWOLETTERS,
+	SECONDLETTER,
+	BOTHLETTERS,
 	RANGEOFHUNDRED
 }

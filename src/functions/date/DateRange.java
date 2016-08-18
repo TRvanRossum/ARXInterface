@@ -19,4 +19,8 @@ public class DateRange {
 		return to;
 	}
 	
+	public String toString(){
+		return "["+from.toString()+" - "+to.toString()+"]";
+	}
+	
 }

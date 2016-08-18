@@ -32,6 +32,31 @@ public class DGHDatabaseColumnBuilder {
 		return null;
 	}
 	
+	private LinkedList<DGHDataPostcodeElement> buildPostcodeColumn() {
+		LinkedList<DGHDataPostcodeElement> res = new LinkedList<DGHDataPostcodeElement>();
+		for(int i = 0; i < data.length; i++) {
+			res.add(new DGHDataPostcodeElement(attribute, data[i]));
+		}
+		return res;
+	}
+
+	private LinkedList<DGHDataDateElement> buildDateColumn() {
+		LinkedList<DGHDataDateElement> res = new LinkedList<DGHDataDateElement>();
+		for(int i = 0; i < data.length; i++) {
+			res.add(new DGHDataDateElement(attribute, data[i]));
+		}
+		return res;
+	}
+
+	private LinkedList<DGHDataNumberElement> buildNumberColumn() {
+		LinkedList<DGHDataNumberElement> res = new LinkedList<DGHDataNumberElement>();
+		for(int i = 0; i < data.length; i++) {
+			int number = Integer.parseInt(data[i]);
+			res.add(new DGHDataNumberElement(attribute, number));
+		}
+		return res;
+	}
+
 	private LinkedList<DGHDataTextElement> buildTextColumn() {
 		LinkedList<DGHDataTextElement> res = new LinkedList<DGHDataTextElement>();
 		for(int i = 0; i < data.length; i++) {

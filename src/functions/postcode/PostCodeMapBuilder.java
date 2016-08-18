@@ -9,7 +9,7 @@ public class PostCodeMapBuilder {
 	
 	private PostCodeMapBuilder() {}
 	
-	public PostCodeMapBuilder getInstance() {
+	public static PostCodeMapBuilder getInstance() {
 		return INSTANCE;
 	}
 	

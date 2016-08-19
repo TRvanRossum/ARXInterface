@@ -79,4 +79,18 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		}
 		return res;
 	}
+	
+	public static AttributeAnonymityLevel getMaxLevels(Map<String, AttributeType> map) {
+		AttributeAnonymityLevel res = new AttributeAnonymityLevel(map);
+		for(String s : res.keySet()) {
+			while(!res.isAtMaxLevel(s)) {
+				try {
+					res.increaseLevel(s);
+				} catch (DGHException e) {
+					// Does not happen.
+				}
+			}
+		}
+		return res;
+	}
 }

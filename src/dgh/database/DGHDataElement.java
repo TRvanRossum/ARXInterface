@@ -7,5 +7,5 @@ import functions.Mapping;
 public interface DGHDataElement {
 	public String getAttribute();
 	public String getData();
-	public void transform(List<Mapping> maps);
+	public void transform(List<? extends Mapping> maps);
 }

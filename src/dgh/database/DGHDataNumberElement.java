@@ -26,7 +26,7 @@ public class DGHDataNumberElement implements DGHDataElement {
 	}
 
 	@Override
-	public void transform(List<Mapping> maps) {
+	public void transform(List<? extends Mapping> maps) {
 		for(Mapping m : maps) {
 			if(m instanceof NumericalMapping) {
 				NumericalMapping nm = (NumericalMapping) m;

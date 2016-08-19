@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import dgh.AttributeAnonymityLevel;
+import dgh.DGHException;
 import dgh.DGHInput;
 import functions.NumericalMapping;
 import functions.TextualMapping;
@@ -123,5 +124,60 @@ public class DGHDatabase {
 
 	public void setDatabase(Map<String, LinkedList<? extends DGHDataElement>> database) {
 		this.database = database;
+	}
+	
+	public void anonymizeColumn(String attribute) throws DGHException {
+		if(types.get(attribute).equals(AttributeType.TEXTUAL)) {
+			anonymizeTextColumn(attribute);
+		}
+		else if(types.get(attribute).equals(AttributeType.NUMERICAL)) {
+			anonymizeNumberColumn(attribute);
+		}
+		else if(types.get(attribute).equals(AttributeType.DATE)) {
+			anonymizeDateColumn(attribute, levelOfAnonymization.get(attribute));
+		}
+		else if(types.get(attribute).equals(AttributeType.POSTCODE)) {
+			anonymizePostcodeColumn(attribute, levelOfAnonymization.get(attribute));
+		}
+		else {
+			// Placeholder.
+		}
+		levelOfAnonymization.increaseLevel(attribute);
+	}
+	
+	private void anonymizePostcodeColumn(String attribute, int i) {
+		LinkedList<? extends DGHDataElement> column = database.get(attribute);
+		List<PostCodeMapping> map = new LinkedList<PostCodeMapping>();
+		map.add(postMaps.get(i));
+		for(int index = 0; index < column.size(); index++) {
+			column.get(index).transform(map);
+		}
+		database.put(attribute, column);
+	}
+
+	private void anonymizeDateColumn(String attribute, int i) {
+		LinkedList<? extends DGHDataElement> column = database.get(attribute);
+		List<DateMapping> map = new LinkedList<DateMapping>();
+		map.add(dateMaps.get(i));
+		for(int index = 0; index < column.size(); index++) {
+			column.get(index).transform(map);
+		}
+		database.put(attribute, column);
+	}
+
+	private void anonymizeNumberColumn(String attribute) {
+		LinkedList<? extends DGHDataElement> column = database.get(attribute);
+		for(int i = 0; i < column.size(); i++) {
+			column.get(i).transform(numberMaps);
+		}
+		database.put(attribute, column);
+	}
+
+	private void anonymizeTextColumn(String attribute) {
+		LinkedList<? extends DGHDataElement> column = database.get(attribute);
+		for(int i = 0; i < column.size(); i++) {
+			column.get(i).transform(textMaps);
+		}
+		database.put(attribute, column);
 	}
 }

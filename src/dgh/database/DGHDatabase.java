@@ -1,6 +1,5 @@
 package dgh.database;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -194,10 +193,8 @@ public class DGHDatabase {
 		db.dateMaps = this.dateMaps;
 		db.amountOfRows = this.amountOfRows;
 		db.levelOfAnonymization = this.levelOfAnonymization.clone();
-		Map<String, LinkedList<? extends DGHDataElement>> newDatabase = new HashMap<String, LinkedList<? extends DGHDataElement>>();
-		for(String s : database.keySet()) {
-			newDatabase.put(s, new LinkedList<DGHDataElement>(database.get(s)));
-		}
+		DGHDatabaseCloner cloner = new DGHDatabaseCloner(database);
+		db.database = cloner.createCopy();
 		return db;
 	}
 }

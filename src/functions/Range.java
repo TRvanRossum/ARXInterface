@@ -36,4 +36,8 @@ public class Range {
 	public boolean includes(Range other) {
 		return this.lowest <= other.lowest && this.highest >= other.highest;
 	}
+	
+	public Range clone() {
+		return new Range(lowest, highest);
+	}
 }

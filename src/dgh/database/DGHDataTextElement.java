@@ -41,4 +41,8 @@ public class DGHDataTextElement implements DGHDataElement {
 			}
 		}
 	}
+	
+	public DGHDataTextElement clone() {
+		return new DGHDataTextElement(attribute.toString(), data.toString());
+	}
 }

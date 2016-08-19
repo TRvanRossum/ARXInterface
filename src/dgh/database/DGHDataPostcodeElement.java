@@ -16,6 +16,11 @@ public class DGHDataPostcodeElement implements DGHDataElement {
 		int number = Integer.parseInt(postcode.substring(0, 4));
 		data = new Postcode(number, postcode.substring(4));
 	}
+	
+	private DGHDataPostcodeElement(String _att, Postcode _postcode) {
+		attribute = _att;
+		data = _postcode;
+	}
 
 	@Override
 	public String getAttribute() {
@@ -40,6 +45,10 @@ public class DGHDataPostcodeElement implements DGHDataElement {
 				}
 			}
 		}
+	}
+	
+	public DGHDataPostcodeElement clone() {
+		return new DGHDataPostcodeElement(attribute.toString(), data.clone());
 	}
 
 }

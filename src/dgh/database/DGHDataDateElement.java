@@ -18,6 +18,11 @@ public class DGHDataDateElement implements DGHDataElement {
 		data = new DateRange(date, date);
 	}
 	
+	private DGHDataDateElement(String _att, DateRange _range) {
+		attribute = _att;
+		data = _range;
+	}
+	
 	@Override
 	public String getAttribute() {
 		return attribute;
@@ -41,6 +46,10 @@ public class DGHDataDateElement implements DGHDataElement {
 				}
 			}
 		}
+	}
+	
+	public DGHDataDateElement clone() {
+		return new DGHDataDateElement(attribute.toString(), data.clone());
 	}
 
 }

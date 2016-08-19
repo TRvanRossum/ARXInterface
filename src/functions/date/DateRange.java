@@ -23,4 +23,7 @@ public class DateRange {
 		return "["+from.toString()+" - "+to.toString()+"]";
 	}
 	
+	public DateRange clone() {
+		return new DateRange(from.plusDays(0), to.plusDays(0));
+	}
 }

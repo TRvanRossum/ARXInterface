@@ -1,5 +1,6 @@
 package dgh.database;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,8 @@ public class DGHDatabase {
 		DGHDatabaseBuilder builder = new DGHDatabaseBuilder(input.getConfig().getData().getData(), input.getConfig().getData().getAttributes(), types);
 		database = builder.createDatabase();
 	}
+	
+	private DGHDatabase() {}
 
 	public Map<String, AttributeType> getTypes() {
 		return types;
@@ -179,5 +182,22 @@ public class DGHDatabase {
 			column.get(i).transform(textMaps);
 		}
 		database.put(attribute, column);
+	}
+	
+	public DGHDatabase clone() {
+		DGHDatabase db = new DGHDatabase();
+		db.types = this.types;
+		db.classes = this.classes;
+		db.textMaps = this.textMaps;
+		db.numberMaps = this.numberMaps;
+		db.postMaps = this.postMaps;
+		db.dateMaps = this.dateMaps;
+		db.amountOfRows = this.amountOfRows;
+		db.levelOfAnonymization = this.levelOfAnonymization.clone();
+		Map<String, LinkedList<? extends DGHDataElement>> newDatabase = new HashMap<String, LinkedList<? extends DGHDataElement>>();
+		for(String s : database.keySet()) {
+			newDatabase.put(s, new LinkedList<DGHDataElement>(database.get(s)));
+		}
+		return db;
 	}
 }

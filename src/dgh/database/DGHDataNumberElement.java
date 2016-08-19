@@ -42,4 +42,10 @@ public class DGHDataNumberElement implements DGHDataElement {
 			}
 		}
 	}
+	
+	public DGHDataNumberElement clone() {
+		DGHDataNumberElement res = new DGHDataNumberElement(attribute.toString(), 0);
+		res.data = new Range(data.getLowest(), data.getHighest());
+		return res;
+	}
 }

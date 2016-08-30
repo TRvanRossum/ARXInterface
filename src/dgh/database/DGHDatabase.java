@@ -222,4 +222,14 @@ public class DGHDatabase {
 		res = res.substring(0, res.length() - 1);
 		return res;
 	}
+	
+	public double calculatePrecisionOfData() {
+		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types);
+		double sum = 0.0;
+		for(String s : types.keySet()) {
+			sum += ((double) levelOfAnonymization.get(s)/(double) max.get(s));
+		}
+		sum = sum / (double) types.keySet().size();
+		return 1.0 - sum;
+	}
 }

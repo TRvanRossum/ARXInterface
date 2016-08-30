@@ -1,8 +1,8 @@
 package algorithms;
 
-import io.Data;
-import view.data.config.Configuration;
+import dgh.DGH;
+import dgh.database.DGHDatabase;
 
 public interface Algorithm {
-	public Data apply(Configuration in);
+	public DGHDatabase apply(DGHDatabase data, DGH dgh);
 }

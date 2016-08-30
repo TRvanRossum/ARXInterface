@@ -53,7 +53,7 @@ public class DGHNode {
 			if(this.anonLevels.get(s) > other.anonLevels.get(s)) {
 				return false;
 			}
-			difference += other.anonLevels.get(s) - this.anonLevels.get(s);
+			difference += Math.abs(other.anonLevels.get(s) - this.anonLevels.get(s));
 		}
 		if(difference == 1) {
 			return true;

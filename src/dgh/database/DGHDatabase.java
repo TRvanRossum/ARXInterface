@@ -197,4 +197,29 @@ public class DGHDatabase {
 		db.database = cloner.createCopy();
 		return db;
 	}
+	
+	public boolean isKAnonymous(int k) {
+		for(int i = 0; i < this.amountOfRows; i++) {
+			String row = this.getRow(i);
+			int rowsEqual = 0;
+			for(int j = 0; j < this.amountOfRows; j++) {
+				if(row.equals(this.getRow(j))) {
+					rowsEqual++;
+				}
+			}
+			if(rowsEqual < k) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private String getRow(int index) {
+		String res = "";
+		for(String key : this.database.keySet()) {
+			res += this.database.get(key).get(index).toString() + ",";
+		}
+		res = res.substring(0, res.length() - 1);
+		return res;
+	}
 }

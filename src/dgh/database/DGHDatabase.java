@@ -142,7 +142,7 @@ public class DGHDatabase {
 			anonymizePostcodeColumn(attribute, levelOfAnonymization.get(attribute));
 		}
 		else {
-			// Placeholder.
+			throw new DGHException("The given attribute does not appear in this database.");
 		}
 		levelOfAnonymization.increaseLevel(attribute);
 	}

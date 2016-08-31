@@ -53,6 +53,11 @@ public class DGH {
 		return input;
 	}
 	
+	/**
+	 * Checks for duplicates in a set. This is a debug method. Seemingly, at least the HashSet allows for storage of duplicates.
+	 * @param s The set in question.
+	 * @return true if there are duplicates in the set, false otherwise.
+	 */
 	private boolean checkDuplicates(Set<DGHNode> s) {
 		for(DGHNode n : s) {
 			int i = 0;

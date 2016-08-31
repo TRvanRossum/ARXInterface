@@ -2,6 +2,7 @@ package algorithms;
 
 import java.util.List;
 
+import dgh.AttributeAnonymityLevel;
 import dgh.DGH;
 import dgh.DGHInput;
 import dgh.DGHNode;
@@ -51,5 +52,12 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	private boolean isValidTransition(DGHDatabase db, DGHNode n) {
 		DGHNode compare = new DGHNode(db.getLevelOfAnonymization());
 		return compare.isValidTransition(n);
+	}
+	
+	private String determineAttribute(DGHDatabase db, DGHNode n) {
+		if(isValidTransition(db, n)) {
+			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymization(), n.getAnonLevels());
+		}
+		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
 	}
 }

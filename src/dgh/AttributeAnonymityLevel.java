@@ -93,4 +93,13 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		}
 		return res;
 	}
+	
+	public static String determineAttributeToAnonymize(AttributeAnonymityLevel first, AttributeAnonymityLevel second) {
+		for(String s : first.keySet()) {
+			if(first.get(s) + 1 == second.get(s)) {
+				return s;
+			}
+		}
+		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
+	}
 }

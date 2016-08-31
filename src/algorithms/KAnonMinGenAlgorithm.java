@@ -1,9 +1,11 @@
 package algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dgh.AttributeAnonymityLevel;
 import dgh.DGH;
+import dgh.DGHException;
 import dgh.DGHInput;
 import dgh.DGHNode;
 import dgh.database.DGHDatabase;
@@ -27,14 +29,38 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 			dgh.generate();
 		}
 		List<DGHNode> nodes = dgh.getStart().getNext();
-		// TODO FUCKING HELL I HAVE THE MOST AMAZING IDEA BUT NO IDEA HOW TO IMPLEMENT IT.
-		return findBestCandidate(null, null);
+		List<DGHDatabase> list = new ArrayList<DGHDatabase>();
+		list.add(db);
+		return findBestCandidate(list, nodes);
 	}
 	
 	private DGHDatabase findBestCandidate(List<DGHDatabase> db, List<DGHNode> level) {
-		// TODO FUCKING HELL I HAVE THE MOST AMAZING IDEA BUT NO IDEA HOW TO IMPLEMENT IT.
-		// I have no idea what to code and how to code it...................................
-		return null;
+		List<DGHDatabase> nextLevelDB = new ArrayList<DGHDatabase>();
+		List<DGHNode> nextLevelNodes = new ArrayList<DGHNode>();
+		List<DGHDatabase> sufficientDB = new ArrayList<DGHDatabase>();
+		for(DGHDatabase database : db) {
+			for(DGHNode node : level) {
+				if(isValidTransition(database, node)) {
+					DGHDatabase newDatabase = database.clone();
+					String att = determineAttribute(newDatabase, node);
+					try {
+						newDatabase.anonymizeColumn(att);
+					} catch (DGHException e) {
+						// Does not happen.
+						e.printStackTrace();
+					}
+					nextLevelDB.add(newDatabase);
+					nextLevelNodes.addAll(node.getNext());
+					if(newDatabase.isKAnonymous(k)) {
+						sufficientDB.add(newDatabase);
+					}
+				}
+			}
+		}
+		if(sufficientDB.size() > 0) {
+			return selectHighestPrecision(sufficientDB);
+		}
+		return findBestCandidate(nextLevelDB, nextLevelNodes);
 	}
 	
 	private DGHDatabase selectHighestPrecision(List<DGHDatabase> list) {

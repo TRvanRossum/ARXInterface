@@ -24,7 +24,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	
 	@Override
 	public DGHDatabase apply(DGH dgh) {
-		if(dgh.getStart().getNext() == null) {
+		if(dgh.getStart().getNext().size() == 0) {
 			// if the DGH has not been generated yet, generate it.
 			dgh.generate();
 		}

@@ -35,6 +35,9 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	}
 	
 	private DGHDatabase findBestCandidate(List<DGHDatabase> db, List<DGHNode> level) {
+		if(level.size() == 0) {
+			throw new RuntimeException("Sufficient anonymization was not possible.");
+		}
 		List<DGHDatabase> nextLevelDB = new ArrayList<DGHDatabase>();
 		List<DGHNode> nextLevelNodes = new ArrayList<DGHNode>();
 		List<DGHDatabase> sufficientDB = new ArrayList<DGHDatabase>();

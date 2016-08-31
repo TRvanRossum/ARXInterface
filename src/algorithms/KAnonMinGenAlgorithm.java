@@ -37,7 +37,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	}
 	
 	private DGHDatabase selectHighestPrecision(List<DGHDatabase> list) {
-		double prec = Double.MIN_VALUE;
+		double prec = -1.0;
 		DGHDatabase res = null;
 		for(DGHDatabase db : list) {
 			if(db.calculatePrecisionOfData() > prec) {
@@ -46,5 +46,10 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 			}
 		}
 		return res;
+	}
+	
+	private boolean isValidTransition(DGHDatabase db, DGHNode n) {
+		DGHNode compare = new DGHNode(db.getLevelOfAnonymization());
+		return compare.isValidTransition(n);
 	}
 }

@@ -5,24 +5,45 @@ import java.util.Map;
 import java.util.Set;
 
 import view.data.config.AttributeType;
-
+/**
+ * This class is an extension of the HashMap<String, Integer> class, and allows for easy
+ * tracking of anonymity levels per attribute.
+ * @author Tim
+ *
+ */
 public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	
+	/**
+	 * The map that defines the type of every attribute.
+	 */
 	private Map<String, AttributeType> types;
 	
+	/**
+	 * Constructor.
+	 * @param _types The map that defines the type per attribute.
+	 */
 	public AttributeAnonymityLevel(Map<String, AttributeType> _types) {
 		types = _types;
 	}
 	
+	/**
+	 * Returns the key set. In this case, it returns the key set of the types variable.
+	 */
+	@Override
 	public Set<String> keySet() {
 		return types.keySet();
 	}
 
 	/**
-	 * 
+	 * Standard generated serial version UID.
 	 */
 	private static final long serialVersionUID = 2996858174093036209L;
 	
+	/**
+	 * The overridden get method returns 0 if the result would have been null, otherwise it functions as normal.
+	 * @param key The key which is used to return a value.
+	 * @return 0 if the result is null, otherwise the result.
+	 */
 	public int get(String key) {
 		if(super.get(key) == null) {
 			return 0;
@@ -30,6 +51,12 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return super.get(key);
 	}
 	
+	/**
+	 * Checks if a specified attribute is at its maximum possible anonymity level (1 for textual
+	 * and numerical data, 3 otherwise).
+	 * @param attribute The specified attribute.
+	 * @return true if the attribute is at its maximum level, false otherwise.
+	 */
 	public boolean isAtMaxLevel(String attribute) {
 		int anonLevel = this.get(attribute);
 		AttributeType type = types.get(attribute);
@@ -42,6 +69,11 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return true;
 	}
 	
+	/**
+	 * Increases the anonymity level for the specified attribute.
+	 * @param attribute The specified attribute.
+	 * @throws DGHException If the specified attribute is at its maximum level already.
+	 */
 	public void increaseLevel(String attribute) throws DGHException {
 		int anonLevel = this.get(attribute);
 		if(!this.isAtMaxLevel(attribute)) {

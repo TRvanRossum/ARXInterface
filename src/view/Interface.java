@@ -26,6 +26,7 @@ import utils.WindowUtils;
 import view.data.config.Configuration;
 import view.mapping.NumericalMappingPanel;
 import view.mapping.TextualMappingPanel;
+import view.results.ResultsFrame;
 
 public class Interface implements ItemListener {
     JPanel cards; //a panel that uses CardLayout

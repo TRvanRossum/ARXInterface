@@ -1,4 +1,4 @@
-package view;
+package view.results;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;

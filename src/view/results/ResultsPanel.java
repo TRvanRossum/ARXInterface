@@ -1,4 +1,4 @@
-package view;
+package view.results;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

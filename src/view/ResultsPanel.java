@@ -16,5 +16,12 @@ class ResultsPanel extends JPanel {
 	private JScrollPane scroll;
 	
 	ResultsPanel(DGHDatabase db) {
+		rt = new ResultsTable(db.transformToDataObject());
+		scroll = new JScrollPane(rt.getDataTable());
+		add(scroll);
+	}
+	
+	void update(DGHDatabase db) {
+		rt.update(db.transformToDataObject());
 	}
 }

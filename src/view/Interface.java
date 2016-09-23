@@ -16,8 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import algorithms.Algorithm;
+import algorithms.KAnonMinGenAlgorithm;
 import dgh.DGH;
 import dgh.DGHInput;
+import dgh.database.DGHDatabase;
 import functions.MapBuildException;
 import functions.NumericalMapping;
 import functions.TextualMapping;
@@ -51,12 +54,13 @@ public class Interface implements ItemListener {
         
         JButton textMappingApplyButton = new JButton("Apply");
         JButton numberMappingApplyButton = new JButton("Apply");
+        JButton algorithmApplyButton = new JButton("Apply");
         
         //Create the "cards".
         DataPanel card1 = new DataPanel(dummyData.getAttributes());
         TextualMappingPanel card2 = new TextualMappingPanel(config, textMappingApplyButton);
         NumericalMappingPanel card3 = new NumericalMappingPanel(config, numberMappingApplyButton);
-        AnonymizationPanel card4 = new AnonymizationPanel();
+        AnonymizationPanel card4 = new AnonymizationPanel(algorithmApplyButton);
         
         textMappingApplyButton.addActionListener(new ActionListener() {
 
@@ -113,7 +117,15 @@ public class Interface implements ItemListener {
         	}
         });
         card1.add(applyButton);
-         
+        
+        algorithmApplyButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Algorithm alg = new KAnonMinGenAlgorithm(card4.getK(), input);
+        		DGHDatabase res = alg.apply(dgh);
+        		new ResultsFrame(res);
+        	}
+        });
+        
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card1, DATA_PANEL);
@@ -171,7 +183,6 @@ public class Interface implements ItemListener {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
-                new ResultsFrame(null);
             }
         });
     }

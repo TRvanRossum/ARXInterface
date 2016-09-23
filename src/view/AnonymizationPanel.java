@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import data.DataObject;
+import data.KAnonDataObject;
 import view.anonymization.AnonPanel;
 import view.anonymization.DifferentialPanel;
 import view.anonymization.KAnonymityPanel;
@@ -33,9 +34,9 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 	private JButton apply;
 	private JPanel currentlyActive;
 	
-	private JPanel KAnonPanel = new KAnonymityPanel();
+	private KAnonymityPanel KAnonPanel = new KAnonymityPanel();
 	
-	public AnonymizationPanel(){
+	public AnonymizationPanel(JButton _apply){
 		setLayout(new GridLayout(3, 1));
 		String comboBoxItems[] = { K_ANON, L_DIVERSE, T_CLOSE, DIFFERENTIAL };
         JComboBox<String> cb = new JComboBox<String>(comboBoxItems);
@@ -53,7 +54,7 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
         add(cards);
         
         // Create apply button
-        apply = new JButton("Apply");
+        apply = _apply;
         add(apply);
 	}
 
@@ -69,5 +70,9 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 		@SuppressWarnings("unused")
 		// TODO need to find a way to send it to the main panel.
 		DataObject data = activePanel.getData();
+	}
+	
+	public int getK() {
+		return ((KAnonDataObject) KAnonPanel.getData()).getK();
 	}
 }

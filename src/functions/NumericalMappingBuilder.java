@@ -1,7 +1,6 @@
 package functions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NumericalMappingBuilder {
@@ -19,8 +18,6 @@ public class NumericalMappingBuilder {
 		List<NumericalMapping> res = new ArrayList<NumericalMapping>();
 		for(int i = 0; i < inputSplit.length; i++) {
 			String[] rangeVals = inputSplit[i].split("-");
-			// DEBUG
-			System.out.println(Arrays.deepToString(rangeVals));
 			int low = Integer.parseInt(rangeVals[0]);
 			int high = Integer.parseInt(rangeVals[1]);
 			if(low > high) {

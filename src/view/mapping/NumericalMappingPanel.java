@@ -135,11 +135,8 @@ public class NumericalMappingPanel extends JPanel {
 		TableModel model = table.getModel();
 		List<NumericalMapping> res = new ArrayList<NumericalMapping>();
 		for(int i = 0; i < table.getRowCount(); i++) {
-			System.out.println("DEBUG");
 			String attribute = (String) model.getValueAt(i, 0);
 			String values = (String) model.getValueAt(i, 1);
-			System.out.println(attribute);
-			System.out.println(values);
 			res.addAll(mappingBuilder.build(attribute, values, delim));
 		}
 		

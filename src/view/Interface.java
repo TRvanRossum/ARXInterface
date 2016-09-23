@@ -170,6 +170,7 @@ public class Interface implements ItemListener {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
+                new ResultsFrame(null);
             }
         });
     }

@@ -13,6 +13,7 @@ import functions.date.DateMapBuilder;
 import functions.date.DateMapping;
 import functions.postcode.PostCodeMapBuilder;
 import functions.postcode.PostCodeMapping;
+import io.Data;
 import view.data.config.AttributeClass;
 import view.data.config.AttributeType;
 
@@ -22,6 +23,8 @@ import view.data.config.AttributeType;
  *
  */
 public class DGHDatabase {
+	
+	private String[] attribs;
 	
 	private Map<String, AttributeType> types;
 	
@@ -42,6 +45,7 @@ public class DGHDatabase {
 	private Map<String, LinkedList<? extends DGHDataElement>> database;
 	
 	public DGHDatabase(DGHInput input) {
+		attribs = input.getConfig().getData().getAttributes();
 		types = input.getConfig().getTypes();
 		classes = input.getConfig().getClassification();
 		textMaps = input.getTextualMapping();
@@ -231,5 +235,21 @@ public class DGHDatabase {
 		}
 		sum = sum / (double) types.keySet().size();
 		return 1.0 - sum;
+	}
+	
+	public Data transformToDataObject() {
+		String[][] stringData = new String[amountOfRows][attribs.length];
+		for(int i = 0; i < amountOfRows; i++) {
+			for(int j = 0; j < attribs.length; j++) {
+				stringData[i][j] = getDataElementAt(attribs[j], i);
+			}
+		}
+		Data d = new Data(attribs, stringData);
+		return d;
+	}
+	
+	private String getDataElementAt(String attrib, int index) {
+		LinkedList<? extends DGHDataElement> firstRes = database.get(attrib);
+		return firstRes.get(index).getData();
 	}
 }

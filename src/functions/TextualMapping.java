@@ -1,5 +1,7 @@
 package functions;
 
+import java.util.Arrays;
+
 public class TextualMapping implements Mapping {
 	private String attributeName;
 	private String resultValue;
@@ -48,6 +50,10 @@ public class TextualMapping implements Mapping {
 
 	public String[] getApplicableValues() {
 		return applicableValues;
+	}
+	
+	public String toString(){
+		return attributeName + ": " + Arrays.toString(applicableValues) + " -> " + resultValue;
 	}
 	
 }

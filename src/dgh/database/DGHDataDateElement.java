@@ -51,5 +51,9 @@ public class DGHDataDateElement implements DGHDataElement {
 	public DGHDataDateElement clone() {
 		return new DGHDataDateElement(attribute.toString(), data.clone());
 	}
+	
+	public String toString() {
+		return getData();
+	}
 
 }

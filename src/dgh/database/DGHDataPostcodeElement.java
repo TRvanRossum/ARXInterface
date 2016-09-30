@@ -50,5 +50,9 @@ public class DGHDataPostcodeElement implements DGHDataElement {
 	public DGHDataPostcodeElement clone() {
 		return new DGHDataPostcodeElement(attribute.toString(), data.clone());
 	}
+	
+	public String toString() {
+		return getData();
+	}
 
 }

@@ -51,4 +51,8 @@ public class DGHDataNumberElement implements DGHDataElement {
 		res.data = new Range(data.getLowest(), data.getHighest());
 		return res;
 	}
+	
+	public String toString() {
+		return data.toString();
+	}
 }

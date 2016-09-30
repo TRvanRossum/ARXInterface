@@ -205,6 +205,7 @@ public class DGHDatabase {
 	public boolean isKAnonymous(int k) {
 		for(int i = 0; i < this.amountOfRows; i++) {
 			String row = this.getRow(i);
+			System.out.println(row);
 			int rowsEqual = 0;
 			for(int j = 0; j < this.amountOfRows; j++) {
 				if(row.equals(this.getRow(j))) {

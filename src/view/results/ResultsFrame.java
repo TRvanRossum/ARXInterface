@@ -29,6 +29,8 @@ public class ResultsFrame extends JFrame {
 		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
 		
+		this.add(new ResultsPanel(db));
+		
 		this.pack();
 		
 		WindowUtils.centreWindow(this);

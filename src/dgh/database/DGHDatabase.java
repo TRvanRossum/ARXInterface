@@ -190,6 +190,7 @@ public class DGHDatabase {
 	public DGHDatabase clone() {
 		DGHDatabase db = new DGHDatabase();
 		db.types = this.types;
+		db.attribs = this.attribs;
 		db.classes = this.classes;
 		db.textMaps = this.textMaps;
 		db.numberMaps = this.numberMaps;

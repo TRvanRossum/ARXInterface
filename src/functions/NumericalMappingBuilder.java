@@ -8,6 +8,7 @@ public class NumericalMappingBuilder {
 	public NumericalMappingBuilder() {}
 	
 	public List<NumericalMapping> build(String attribute, String input, String delim) throws MapBuildException {
+		System.out.println(attribute);
 		if(delim.length() == 0) {
 			throw new MapBuildException("Please specify a delimiter.");
 		}

@@ -28,5 +28,9 @@ public class NumericalMapping implements Mapping{
 		}
 		throw new MappingException("You either tried using a map for a different attribute or a map which does not include the specified range.");
 	}
+	
+	public String toString() {
+		return attribute + ": " + range.toString();
+	}
 
 }

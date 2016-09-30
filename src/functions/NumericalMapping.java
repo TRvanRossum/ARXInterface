@@ -12,11 +12,11 @@ public class NumericalMapping implements Mapping{
 
 	@Override
 	public boolean contains(Object o) throws Exception {
-		return rangeContains((Integer) o);
+		return rangeContains((Range) o);
 	}
 	
-	private boolean rangeContains(int i) {
-		return range.isInRange(i);
+	private boolean rangeContains(Range r) {
+		return range.isInRange(r.getLowest()) && range.isInRange(r.getHighest());
 	}
 
 	public String getAttributeName() {

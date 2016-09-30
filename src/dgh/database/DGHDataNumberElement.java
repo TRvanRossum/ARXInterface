@@ -34,7 +34,7 @@ public class DGHDataNumberElement implements DGHDataElement {
 				System.out.println(nm);
 				System.out.println(nm.getAttributeName());
 				try {
-					if(nm.getAttributeName().equals(attribute) && nm.contains(attribute)) {
+					if(nm.getAttributeName().equals(attribute) && nm.contains(data)) {
 						data = nm.map(attribute, data);
 					}
 				} catch (Exception e) {

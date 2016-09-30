@@ -6,6 +6,7 @@ public class NumericalMapping implements Mapping{
 	private Range range;
 	
 	public NumericalMapping(String _attribute, int low, int high) {
+		attribute = _attribute;
 		range = new Range(low, high);
 	}
 

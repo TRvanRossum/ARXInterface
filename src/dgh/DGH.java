@@ -10,7 +10,7 @@ public class DGH {
 	private DGHInput input;
 	
 	public DGH(DGHInput _input) {
-		startNode = new DGHNode(_input.getConfig().getTypes());
+		startNode = new DGHNode(_input.getConfig().getTypes(), _input.getConfig().getClassification());
 		input = _input;
 	}
 

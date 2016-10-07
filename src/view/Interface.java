@@ -127,6 +127,7 @@ public class Interface implements ItemListener {
         		} catch(Exception x) {
         			JOptionPane.showMessageDialog(card4, "Sufficient anonymization was not possible. Please check\n"
         					+ "your mappings and try again.", "Sufficient anonymization not possible", JOptionPane.ERROR_MESSAGE);
+        			x.printStackTrace();
         		}
         	}
         });

@@ -1,6 +1,7 @@
 package algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dgh.AttributeAnonymityLevel;
@@ -70,6 +71,8 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	}
 	
 	private DGHDatabase selectHighestPrecision(List<DGHDatabase> list) {
+		// Add some randomness to the outcome.
+		Collections.shuffle(list);
 		double prec = -1.0;
 		DGHDatabase res = null;
 		for(DGHDatabase db : list) {

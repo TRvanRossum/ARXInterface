@@ -1,5 +1,8 @@
 package view.results;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -24,6 +27,14 @@ public class ResultsFrame extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Metrics");
 		JMenuItem metricsItem = new JMenuItem("Display metrics");
+		metricsItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MetricsFrame(db);
+			}
+			
+		});
 		
 		menu.add(metricsItem);
 		menuBar.add(menu);

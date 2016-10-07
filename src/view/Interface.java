@@ -121,8 +121,13 @@ public class Interface implements ItemListener {
         algorithmApplyButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		Algorithm alg = new KAnonMinGenAlgorithm(card4.getK(), input);
-        		DGHDatabase res = alg.apply(dgh);
-        		new ResultsFrame(res);
+        		try{
+        			DGHDatabase res = alg.apply(dgh);
+        			new ResultsFrame(res);
+        		} catch(Exception x) {
+        			JOptionPane.showMessageDialog(card4, "Sufficient anonymization was not possible. Please check\n"
+        					+ "your mappings and try again.", "Sufficient anonymization not possible", JOptionPane.ERROR_MESSAGE);
+        		}
         	}
         });
         

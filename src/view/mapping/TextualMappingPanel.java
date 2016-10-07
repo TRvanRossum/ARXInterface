@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
 import functions.MapBuildException;
 import functions.TextualMapping;
 import functions.TextualMappingBuilder;
+import view.data.config.AttributeClass;
 import view.data.config.AttributeType;
 import view.data.config.Configuration;
 
@@ -47,7 +48,7 @@ public class TextualMappingPanel extends JPanel {
 		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"});
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
-				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL)) {
+				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
 					model.addRow(new String[]{s, "", ""});
 				}
 			}

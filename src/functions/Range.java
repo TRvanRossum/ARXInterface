@@ -19,7 +19,7 @@ public class Range {
 	}
 	
 	public boolean isInRange(int val) {
-		return lowest <= val && highest >= val;
+		return lowest <= val && highest > val;
 	}
 	
 	public String toString() {
@@ -34,7 +34,7 @@ public class Range {
 	}
 	
 	public boolean includes(Range other) {
-		return this.lowest <= other.lowest && this.highest >= other.highest;
+		return this.lowest <= other.lowest && this.highest > other.highest;
 	}
 	
 	public Range clone() {

@@ -41,7 +41,6 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 		List<DGHDatabase> nextLevelDB = new ArrayList<DGHDatabase>();
 		List<DGHNode> nextLevelNodes = new ArrayList<DGHNode>();
 		List<DGHDatabase> sufficientDB = new ArrayList<DGHDatabase>();
-		System.out.println("ALGORITHM DEBUG: level = "+level.toString());
 		for(DGHDatabase database : db) {
 			for(DGHNode node : level) {
 				if(isValidTransition(database, node)) {

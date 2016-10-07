@@ -30,7 +30,7 @@ public class DGHDataTextElement implements DGHDataElement {
 			if(m instanceof TextualMapping) {
 				TextualMapping tm = (TextualMapping) m;
 				try {
-					if(tm.getAttributeName().equals(attribute) && tm.contains(attribute)) {
+					if(tm.getAttributeName().equals(attribute) && tm.contains(data)) {
 						data = tm.map(attribute, data);
 					}
 				} catch (Exception e) {

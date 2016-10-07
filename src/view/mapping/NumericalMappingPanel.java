@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
 import functions.MapBuildException;
 import functions.NumericalMapping;
 import functions.NumericalMappingBuilder;
+import view.data.config.AttributeClass;
 import view.data.config.AttributeType;
 import view.data.config.Configuration;
 
@@ -48,7 +49,7 @@ public class NumericalMappingPanel extends JPanel {
 		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Ranges (separate by - and chosen delimiter)"});
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
-				if(c.getTypes().get(s).equals(AttributeType.NUMERICAL)) {
+				if(c.getTypes().get(s).equals(AttributeType.NUMERICAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
 					model.addRow(new String[]{s, ""});
 				}
 			}

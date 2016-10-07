@@ -53,7 +53,7 @@ public class DGHDatabase {
 		postMaps = PostCodeMapBuilder.getInstance().createAllPostCodeMaps();
 		dateMaps = DateMapBuilder.getInstance().createAllDateMaps();
 		amountOfRows = input.getConfig().getData().getData().length;
-		levelOfAnonymization = new AttributeAnonymityLevel(types);
+		levelOfAnonymization = new AttributeAnonymityLevel(types, classes);
 		DGHDatabaseBuilder builder = new DGHDatabaseBuilder(input.getConfig().getData().getData(), input.getConfig().getData().getAttributes(), types);
 		database = builder.createDatabase();
 	}
@@ -229,12 +229,12 @@ public class DGHDatabase {
 	}
 	
 	public double calculatePrecisionOfData() {
-		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types);
+		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes);
 		double sum = 0.0;
-		for(String s : types.keySet()) {
+		for(String s : levelOfAnonymization.keySet()) {
 			sum += ((double) levelOfAnonymization.get(s)/(double) max.get(s));
 		}
-		sum = sum / (double) types.keySet().size();
+		sum = sum / (double) levelOfAnonymization.keySet().size();
 		return 1.0 - sum;
 	}
 	

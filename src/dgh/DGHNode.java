@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import view.data.config.AttributeClass;
 import view.data.config.AttributeType;
 
 public class DGHNode {
@@ -11,8 +12,8 @@ public class DGHNode {
 	private AttributeAnonymityLevel anonLevels;
 	private List<DGHNode> next = new ArrayList<DGHNode>();
 	
-	public DGHNode(Map<String, AttributeType> types) {
-		anonLevels = new AttributeAnonymityLevel(types);
+	public DGHNode(Map<String, AttributeType> types, Map<String, AttributeClass> classes) {
+		anonLevels = new AttributeAnonymityLevel(types, classes);
 	}
 	
 	public DGHNode(AttributeAnonymityLevel level) {

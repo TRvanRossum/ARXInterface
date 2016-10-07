@@ -1,9 +1,11 @@
 package dgh;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import view.data.config.AttributeClass;
 import view.data.config.AttributeType;
 /**
  * This class is an extension of the HashMap<String, Integer> class, and allows for easy
@@ -19,11 +21,29 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	private Map<String, AttributeType> types;
 	
 	/**
+	 * The map that defines the class of every attribute.
+	 */
+	private Map<String, AttributeClass> classes;
+	
+	/**
+	 * The modified key set. This only contains attributes classed as
+	 * quasi-identifiers.
+	 */
+	private Set<String> keySet;
+	
+	/**
 	 * Constructor.
 	 * @param _types The map that defines the type per attribute.
 	 */
-	public AttributeAnonymityLevel(Map<String, AttributeType> _types) {
+	public AttributeAnonymityLevel(Map<String, AttributeType> _types, Map<String, AttributeClass> _classes) {
 		types = _types;
+		classes = _classes;
+		keySet = new HashSet<String>();
+		for(String s : classes.keySet()) {
+			if(classes.get(s).equals(AttributeClass.QUASI)) {
+				keySet.add(s);
+			}
+		}
 	}
 	
 	/**
@@ -31,7 +51,7 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	 */
 	@Override
 	public Set<String> keySet() {
-		return types.keySet();
+		return keySet;
 	}
 
 	/**
@@ -105,15 +125,15 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	}
 	
 	public AttributeAnonymityLevel clone() {
-		AttributeAnonymityLevel res = new AttributeAnonymityLevel(types);
+		AttributeAnonymityLevel res = new AttributeAnonymityLevel(types, classes);
 		for(String s : this.keySet()) {
 			res.put(s, this.get(s));
 		}
 		return res;
 	}
 	
-	public static AttributeAnonymityLevel getMaxLevels(Map<String, AttributeType> map) {
-		AttributeAnonymityLevel res = new AttributeAnonymityLevel(map);
+	public static AttributeAnonymityLevel getMaxLevels(Map<String, AttributeType> map, Map<String, AttributeClass> _classes) {
+		AttributeAnonymityLevel res = new AttributeAnonymityLevel(map, _classes);
 		for(String s : res.keySet()) {
 			while(!res.isAtMaxLevel(s)) {
 				try {

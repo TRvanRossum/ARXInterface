@@ -72,10 +72,12 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	
 	private DGHDatabase selectHighestPrecision(List<DGHDatabase> list) {
 		// Add some randomness to the outcome.
+		System.out.println("DEBUG: list of sufficient DB's: "+list);
 		Collections.shuffle(list);
 		double prec = -1.0;
 		DGHDatabase res = null;
 		for(DGHDatabase db : list) {
+			System.out.println("DEBUG: precision of "+db+" is "+db.calculatePrecisionOfData());
 			if(db.calculatePrecisionOfData() > prec) {
 				prec = db.calculatePrecisionOfData();
 				res = db;

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import dgh.database.DGHDatabase;
+import utils.WindowUtils;
 
 public class MetricsFrame extends JFrame {
 
@@ -16,6 +17,9 @@ public class MetricsFrame extends JFrame {
 		this.setTitle("Metrics");
 		this.setSize(200,200);
 		this.add(new JLabel("Precision: "+db.calculatePrecisionOfData()));
+		this.setVisible(true);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		WindowUtils.centreWindow(this);
 	}
 
 }

@@ -1,7 +1,7 @@
 package view.results;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -27,11 +27,34 @@ public class ResultsFrame extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Metrics");
 		JMenuItem metricsItem = new JMenuItem("Display metrics");
-		metricsItem.addActionListener(new ActionListener() {
+		metricsItem.addMouseListener(new MouseListener(){
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent arg0) {
 				new MetricsFrame(db);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				new MetricsFrame(db);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 		});

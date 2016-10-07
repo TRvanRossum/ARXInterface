@@ -231,10 +231,10 @@ public class DGHDatabase {
 	public double calculatePrecisionOfData() {
 		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes);
 		double sum = 0.0;
-		for(String s : types.keySet()) {
+		for(String s : levelOfAnonymization.keySet()) {
 			sum += ((double) levelOfAnonymization.get(s)/(double) max.get(s));
 		}
-		sum = sum / (double) types.keySet().size();
+		sum = sum / (double) levelOfAnonymization.keySet().size();
 		return 1.0 - sum;
 	}
 	

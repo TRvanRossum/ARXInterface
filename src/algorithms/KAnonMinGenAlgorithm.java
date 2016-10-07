@@ -28,6 +28,9 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 			// if the DGH has not been generated yet, generate it.
 			dgh.generate();
 		}
+		if(k == 1) {
+			return db;
+		}
 		List<DGHNode> nodes = dgh.getStart().getNext();
 		List<DGHDatabase> list = new ArrayList<DGHDatabase>();
 		list.add(db);

@@ -29,10 +29,7 @@ public class DGHDataNumberElement implements DGHDataElement {
 	public void transform(List<? extends Mapping> maps) {
 		for(Mapping m : maps) {
 			if(m instanceof NumericalMapping) {
-				System.out.println(m);
 				NumericalMapping nm = (NumericalMapping) m;
-				System.out.println(nm);
-				System.out.println(nm.getAttributeName());
 				try {
 					if(nm.getAttributeName().equals(attribute) && nm.contains(data)) {
 						data = nm.map(attribute, data);

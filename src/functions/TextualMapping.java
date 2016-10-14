@@ -6,11 +6,15 @@ public class TextualMapping implements Mapping {
 	private String attributeName;
 	private String resultValue;
 	private String[] applicableValues;
+	private boolean wildCardCheck = false;
 	
 	public TextualMapping(String attNam, String resVal, String...strings) {
 		applicableValues = strings;
 		attributeName = attNam;
 		resultValue = resVal;
+		if(applicableValues.length == 1 && applicableValues[0].equals("*")) {
+			wildCardCheck = true;
+		}
 	}
 	
 	public String map(String attNam, String input) throws MappingException {
@@ -32,6 +36,9 @@ public class TextualMapping implements Mapping {
 	}
 
 	private boolean stringContains(String s) {
+		if(wildCardCheck) {
+			return true;
+		}
 		for(int i = 0; i < applicableValues.length; i++) {
 			if(s.equals(applicableValues[i])) {
 				return true;

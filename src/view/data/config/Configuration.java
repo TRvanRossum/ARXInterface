@@ -27,4 +27,13 @@ public class Configuration {
 	public Map<String, AttributeType> getTypes() {
 		return type;
 	}
+	
+	public int indexOf(String att) {
+		for(int i = 0; i < data.getAttributes().length; i++){
+			if(data.getAttributes()[i].equals(att)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 }

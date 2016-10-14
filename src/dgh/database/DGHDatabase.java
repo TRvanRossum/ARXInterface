@@ -1,6 +1,5 @@
 package dgh.database;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -197,13 +196,7 @@ public class DGHDatabase {
 	}
 	
 	public void suppressColumn(String attribute) throws DGHException {
-		if(database.keySet().contains(attribute)) {
-			database.remove(attribute);
-			attribs = removeElement(attribs, attribute);
-		}
-		else {
-			throw new DGHException("The given attribute does not appear in this database.");
-		}
+		
 	}
 	
 	public DGHDatabase clone() {
@@ -270,17 +263,6 @@ public class DGHDatabase {
 	
 	private String getDataElementAt(String attrib, int index) {
 		LinkedList<? extends DGHDataElement> firstRes = database.get(attrib);
-		System.out.println(attrib);
 		return firstRes.get(index).getData();
-	}
-	
-	private String[] removeElement(String[] input, String deleteMe) {
-		
-	    List<String> result = new LinkedList<String>();
-	    for(String item : input)
-	        if(item != null && !deleteMe.equals(item))
-	            result.add(item);
-	    System.out.println(Arrays.deepToString(result.toArray()));
-	    return result.toArray(input);
 	}
 }

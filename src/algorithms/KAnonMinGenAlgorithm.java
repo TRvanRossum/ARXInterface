@@ -51,13 +51,6 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 		if(k == 1) {
 			return db;
 		}
-		try {
-			db.suppressAllExplicitColumns();
-		} catch (DGHException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("TESTTTTTTTTTTTTTTTT");
 		List<DGHNode> nodes = dgh.getStart().getNext();
 		List<DGHDatabase> list = new ArrayList<DGHDatabase>();
 		list.add(db);

@@ -49,7 +49,20 @@ public class TextualMappingPanel extends JPanel {
 	}
 	
 	private void createTable(Configuration c) {
-		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"});
+		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"}){
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5886967431505391274L;
+			
+			public boolean isCellEditable(int row, int column) {
+				if(column == 0){
+					return false;
+				}
+				return true;
+			}
+		};
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
 				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {

@@ -52,4 +52,9 @@ public class DGHDataNumberElement implements DGHDataElement {
 	public String toString() {
 		return data.toString();
 	}
+
+	@Override
+	public void suppress() {
+		data = new Range(Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
 }

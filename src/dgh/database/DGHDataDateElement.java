@@ -56,4 +56,9 @@ public class DGHDataDateElement implements DGHDataElement {
 		return getData();
 	}
 
+	@Override
+	public void suppress() {
+		data = new DateRange(LocalDate.MIN, LocalDate.MAX);
+	}
+
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,6 +37,7 @@ public class TextualMappingPanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JTextField textField = new JTextField(",");
 	private TextualMappingBuilder mappingBuilder = new TextualMappingBuilder();
+	private final List<String> allTextAtts = new ArrayList<String>();
 	
 	public TextualMappingPanel(Configuration cfg, JButton apply) {
 		super(new GridLayout(2, 1));
@@ -45,11 +47,25 @@ public class TextualMappingPanel extends JPanel {
 	}
 	
 	private void createTable(Configuration c) {
-		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"});
+		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Attribute values (separate by specified delimiter)", "Maps to value"}){
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5886967431505391274L;
+			
+			public boolean isCellEditable(int row, int column) {
+				if(column == 0){
+					return false;
+				}
+				return true;
+			}
+		};
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
 				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
 					model.addRow(new String[]{s, "", ""});
+					allTextAtts.add(s);
 				}
 			}
 		}
@@ -87,20 +103,44 @@ public class TextualMappingPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{"", "", ""});
+				try{
+					final String attributeName = (String) JOptionPane.showInputDialog(
+							getParent(), "Please specify the attribute...",
+							"Attribute chooser",
+							JOptionPane.PLAIN_MESSAGE,
+							null, allTextAtts.toArray(),
+							allTextAtts.toArray()[0]);
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					if(!attributeName.equals("")) {
+						tableModel.addRow(new String[]{attributeName, "", ""});
+					}
+				} catch (Exception e) {
+					
+				}
 			}
 			
 		});
-		JButton removeRowButton = new JButton("Remove the most recently added row");
+		JButton removeRowButton = new JButton("Remove a row");
 		removeRowButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 				int amtRows = tableModel.getRowCount();
-				if(amtRows > 0) {
-					tableModel.removeRow(amtRows - 1);
+				Object[] allRowIndices = new Object[amtRows];
+				for(int i = 0; i < amtRows; i++){
+					allRowIndices[i] = i;
+				}
+				if(amtRows == 0){
+					JOptionPane.showMessageDialog(getParent(), "There are no rows to remove.", "No rows", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					final int row = (int) JOptionPane.showInputDialog(
+						getParent(), "Please specify the row...",
+						"Row chooser",
+						JOptionPane.PLAIN_MESSAGE,
+						null, allRowIndices, 0);
+					tableModel.removeRow(row);
 				}
 			}
 			

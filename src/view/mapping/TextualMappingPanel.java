@@ -1,7 +1,5 @@
 package view.mapping;
 
-import java.awt.Button;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -100,14 +98,13 @@ public class TextualMappingPanel extends JPanel {
 	
 	private void addHandlers(JButton applyButton) {
 		JPanel panel = new JPanel(new GridLayout(2, 2));
-		final Component dummy = new Button();
 		JButton addRowButton = new JButton("Add a row");
 		addRowButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				final String attributeName = (String) JOptionPane.showInputDialog(
-						dummy, "Please specify the attribute...",
+						getParent(), "Please specify the attribute...",
 						"Attribute chooser",
 						JOptionPane.PLAIN_MESSAGE,
 						null, allTextAtts.toArray(),
@@ -129,11 +126,11 @@ public class TextualMappingPanel extends JPanel {
 					allRowIndices[i] = i;
 				}
 				if(amtRows == 0){
-					JOptionPane.showMessageDialog(dummy, "There are no rows to remove.", "No rows", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(getParent(), "There are no rows to remove.", "No rows", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					final int row = (int) JOptionPane.showInputDialog(
-						dummy, "Please specify the row...",
+						getParent(), "Please specify the row...",
 						"Row chooser",
 						JOptionPane.PLAIN_MESSAGE,
 						null, allRowIndices, 0);

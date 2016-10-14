@@ -117,15 +117,27 @@ public class TextualMappingPanel extends JPanel {
 			}
 			
 		});
-		JButton removeRowButton = new JButton("Remove the most recently added row");
+		JButton removeRowButton = new JButton("Remove a row");
 		removeRowButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 				int amtRows = tableModel.getRowCount();
-				if(amtRows > 0) {
-					tableModel.removeRow(amtRows - 1);
+				Object[] allRowIndices = new Object[amtRows];
+				for(int i = 0; i < amtRows; i++){
+					allRowIndices[i] = i;
+				}
+				if(amtRows == 0){
+					JOptionPane.showMessageDialog(dummy, "There are no rows to remove.", "No rows", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					final int row = (int) JOptionPane.showInputDialog(
+						dummy, "Please specify the row...",
+						"Row chooser",
+						JOptionPane.PLAIN_MESSAGE,
+						null, allRowIndices, 0);
+					tableModel.removeRow(row);
 				}
 			}
 			

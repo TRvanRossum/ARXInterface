@@ -103,14 +103,20 @@ public class TextualMappingPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				final String attributeName = (String) JOptionPane.showInputDialog(
-						getParent(), "Please specify the attribute...",
-						"Attribute chooser",
-						JOptionPane.PLAIN_MESSAGE,
-						null, allTextAtts.toArray(),
-						allTextAtts.toArray()[0]);
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{attributeName, "", ""});
+				try{
+					final String attributeName = (String) JOptionPane.showInputDialog(
+							getParent(), "Please specify the attribute...",
+							"Attribute chooser",
+							JOptionPane.PLAIN_MESSAGE,
+							null, allTextAtts.toArray(),
+							allTextAtts.toArray()[0]);
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					if(!attributeName.equals("")) {
+						tableModel.addRow(new String[]{attributeName, "", ""});
+					}
+				} catch (Exception e) {
+					
+				}
 			}
 			
 		});

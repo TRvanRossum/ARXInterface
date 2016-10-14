@@ -38,6 +38,7 @@ public class NumericalMappingPanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JTextField textField = new JTextField(",");
 	private NumericalMappingBuilder mappingBuilder = new NumericalMappingBuilder();
+	private final List<String> allNumAtts = new ArrayList<String>();
 	
 	public NumericalMappingPanel(Configuration cfg, JButton apply) {
 		super(new GridLayout(2, 1));
@@ -47,11 +48,26 @@ public class NumericalMappingPanel extends JPanel {
 	}
 	
 	private void createTable(Configuration c) {
-		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Ranges (separate by - and chosen delimiter)"});
+		DefaultTableModel model = new DefaultTableModel(new String[0][0], new String[]{"Attribute name", "Ranges (separate by - and chosen delimiter)"}){
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5886967431505391274L;
+			
+			public boolean isCellEditable(int row, int column) {
+				if(column == 0){
+					return false;
+				}
+				return true;
+			}
+		};
+		
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
 				if(c.getTypes().get(s).equals(AttributeType.NUMERICAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
 					model.addRow(new String[]{s, ""});
+					allNumAtts.add(s);
 				}
 			}
 		}
@@ -89,8 +105,20 @@ public class NumericalMappingPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{"", ""});
+				try{
+					final String attributeName = (String) JOptionPane.showInputDialog(
+							getParent(), "Please specify the attribute...",
+							"Attribute chooser",
+							JOptionPane.PLAIN_MESSAGE,
+							null, allNumAtts.toArray(),
+							allNumAtts.toArray()[0]);
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					if(!attributeName.equals("")) {
+						tableModel.addRow(new String[]{attributeName, "", ""});
+					}
+				} catch (Exception e) {
+					
+				}
 			}
 			
 		});

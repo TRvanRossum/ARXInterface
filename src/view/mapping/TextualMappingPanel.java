@@ -1,5 +1,7 @@
 package view.mapping;
 
+import java.awt.Button;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,6 +39,7 @@ public class TextualMappingPanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JTextField textField = new JTextField(",");
 	private TextualMappingBuilder mappingBuilder = new TextualMappingBuilder();
+	private final List<String> allTextAtts = new ArrayList<String>();
 	
 	public TextualMappingPanel(Configuration cfg, JButton apply) {
 		super(new GridLayout(2, 1));
@@ -50,6 +54,7 @@ public class TextualMappingPanel extends JPanel {
 			for(String s : c.getTypes().keySet()) {
 				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
 					model.addRow(new String[]{s, "", ""});
+					allTextAtts.add(s);
 				}
 			}
 		}
@@ -82,13 +87,20 @@ public class TextualMappingPanel extends JPanel {
 	
 	private void addHandlers(JButton applyButton) {
 		JPanel panel = new JPanel(new GridLayout(2, 2));
+		final Component dummy = new Button();
 		JButton addRowButton = new JButton("Add a row");
 		addRowButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				final String attributeName = (String) JOptionPane.showInputDialog(
+						dummy, "Please specify the attribute...",
+						"Attribute chooser",
+						JOptionPane.PLAIN_MESSAGE,
+						null, allTextAtts.toArray(),
+						allTextAtts.toArray()[0]);
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{"", "", ""});
+				tableModel.addRow(new String[]{attributeName, "", ""});
 			}
 			
 		});

@@ -196,7 +196,10 @@ public class DGHDatabase {
 	}
 	
 	public void suppressColumn(String attribute) throws DGHException {
-		
+		LinkedList<? extends DGHDataElement> elems = database.get(attribute);
+		for(DGHDataElement e : elems) {
+			e.suppress();
+		}
 	}
 	
 	public DGHDatabase clone() {

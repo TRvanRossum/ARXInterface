@@ -21,7 +21,7 @@ public class DGHNode {
 	}
 	
 	public boolean equals(DGHNode other) {
-		return this.toString().equals(other.toString());
+		return this.anonLevels.equals(other.anonLevels);
 	}
 
 	public List<DGHNode> generateNeighbours() {
@@ -89,7 +89,7 @@ public class DGHNode {
 	}
 	
 	public int hashCode() {
-		return this.toString().hashCode();
+		return anonLevels.hashCode();
 	}
 
 	public AttributeAnonymityLevel getAnonLevels() {

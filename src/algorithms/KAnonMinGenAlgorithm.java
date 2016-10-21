@@ -2,7 +2,9 @@ package algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import dgh.AttributeAnonymityLevel;
 import dgh.DGH;
@@ -106,8 +108,12 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 		if(sufficientDB.size() > 0) {
 			return selectHighestPrecision(sufficientDB);
 		}
+		nextLevelDB = this.removeDuplicateDatabases(nextLevelDB);
+		nextLevelNodes = this.removeDuplicateNodes(nextLevelNodes);
 		System.out.println("DEBUG: next level size: " + nextLevelNodes.size());
 		System.out.println("DEBUG: next level database set size: "+nextLevelDB.size());
+		System.out.println("DEBUG: next level: " + nextLevelNodes);
+		System.out.println("DEBUG: next level database set: "+nextLevelDB);
 		return findBestCandidate(nextLevelDB, nextLevelNodes);
 	}
 	
@@ -156,5 +162,21 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymization(), n.getAnonLevels());
 		}
 		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
+	}
+	
+	private List<DGHDatabase> removeDuplicateDatabases(List<DGHDatabase> dbl) {
+		Set<DGHDatabase> set = new HashSet<DGHDatabase>();
+		set.addAll(dbl);
+		List<DGHDatabase> db = new ArrayList<DGHDatabase>();
+		db.addAll(set);
+		return db;
+	}
+	
+	private List<DGHNode> removeDuplicateNodes(List<DGHNode> nodes) {
+		Set<DGHNode> set = new HashSet<DGHNode>();
+		set.addAll(nodes);
+		List<DGHNode> db = new ArrayList<DGHNode>();
+		db.addAll(set);
+		return db;
 	}
 }

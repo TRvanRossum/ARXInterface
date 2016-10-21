@@ -277,4 +277,20 @@ public class DGHDatabase {
 		LinkedList<? extends DGHDataElement> firstRes = database.get(attrib);
 		return firstRes.get(index).getData();
 	}
+	
+	public int hashCode() {
+		return levelOfAnonymization.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if(other instanceof DGHDatabase) {
+			return this.deepEquals((DGHDatabase) other);
+		}
+		return false;
+	}
+	
+	private boolean deepEquals(DGHDatabase other) {
+		return this.levelOfAnonymization.equals(other.levelOfAnonymization);
+	}
 }

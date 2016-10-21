@@ -26,6 +26,17 @@ public class DGHNode {
 
 	public List<DGHNode> generateNeighbours() {
 		List<DGHNode> nextNodes = new ArrayList<DGHNode>();
+		// Optimization: calculate the amount of anonymization levels NOT at the maximum level yet.
+		// If this is 0, then return an empty list.
+		int count = 0;
+		for(String key : anonLevels.keySet()) {
+			if(!anonLevels.isAtMaxLevel(key)) {
+				count++;
+			}
+		}
+		if(count == 0) {
+			return nextNodes;
+		}
 		for(String s : anonLevels.keySet()) {
 			if(!anonLevels.isAtMaxLevel(s)) {
 				AttributeAnonymityLevel clone = anonLevels.clone();

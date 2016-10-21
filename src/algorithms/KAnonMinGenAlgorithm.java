@@ -106,6 +106,8 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 		if(sufficientDB.size() > 0) {
 			return selectHighestPrecision(sufficientDB);
 		}
+		System.out.println("DEBUG: next level size: " + nextLevelNodes.size());
+		System.out.println("DEBUG: next level database set size: "+nextLevelDB.size());
 		return findBestCandidate(nextLevelDB, nextLevelNodes);
 	}
 	

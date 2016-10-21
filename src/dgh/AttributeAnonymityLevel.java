@@ -180,4 +180,9 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		}
 		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 }

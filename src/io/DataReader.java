@@ -59,6 +59,7 @@ public class DataReader {
 		lnr.close();
 		
 		String column = br.readLine();
+		column = column.replaceAll(" ", "");
 		if(!delimiterCheck(column, delimiter)) {
 			br.close();
 			throw new IOException("The first line does not contain the specified delimiters.");
@@ -68,6 +69,7 @@ public class DataReader {
 		String[][] allData = new String[rows][columnData.length];
 		for(int i = 0; i < rows; i++){
 			String row = br.readLine();
+			row = row.replaceAll(" ", "");
 			if(!delimiterCheck(row, delimiter)){
 				br.close();
 				throw new IOException("The row " + (i + 1) + " does not have the specified delimiter.");

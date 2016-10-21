@@ -219,6 +219,8 @@ public class DGHDatabase {
 	}
 	
 	public boolean isKAnonymous(int k) {
+		// Optimization technique: keep track of the rows that have been checked to be K-anonymous,
+		// and do NOT check them again.
 		boolean[] check = new boolean[this.amountOfRows];
 		for(int index = 0; index < check.length; index++) {
 			check[index] = false;

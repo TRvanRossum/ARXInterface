@@ -93,9 +93,7 @@ public class Interface implements ItemListener {
 						numberMaps = card3.createAllNumericalMappings();
 						input = new DGHInput(config, textMaps, numberMaps);
 						cb.setSelectedIndex(3);
-						// TODO change this.
 						dgh = new DGH(input);
-						dgh.generate();
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card3, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;

@@ -44,10 +44,6 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	
 	@Override
 	public DGHDatabase apply(DGH dgh) {
-		if(dgh.getStart().getNext().size() == 0) {
-			// if the DGH has not been generated yet, generate it.
-			dgh.generate();
-		}
 		if(k == 1) {
 			return db;
 		}
@@ -60,7 +56,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<DGHNode> nodes = dgh.getStart().getNext();
+		List<DGHNode> nodes = dgh.getStart().generateNeighbours();
 		List<DGHDatabase> list = new ArrayList<DGHDatabase>();
 		list.add(db);
 		return findBestCandidate(list, nodes);
@@ -96,7 +92,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 						e.printStackTrace();
 					}
 					nextLevelDB.add(newDatabase);
-					nextLevelNodes.addAll(node.getNext());
+					nextLevelNodes.addAll(node.generateNeighbours());
 					if(newDatabase.isKAnonymous(k)) {
 						sufficientDB.add(newDatabase);
 					}

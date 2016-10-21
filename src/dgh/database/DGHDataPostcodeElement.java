@@ -55,4 +55,9 @@ public class DGHDataPostcodeElement implements DGHDataElement {
 		return getData();
 	}
 
+	@Override
+	public void suppress() {
+		data = new Postcode(0000, "**");
+	}
+
 }

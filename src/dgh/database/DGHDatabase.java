@@ -187,6 +187,21 @@ public class DGHDatabase {
 		database.put(attribute, column);
 	}
 	
+	public void suppressAllExplicitColumns() throws DGHException{
+		for(String s : classes.keySet()) {
+			if(classes.get(s).equals(AttributeClass.EXPLICIT)){
+				suppressColumn(s);
+			}
+		}
+	}
+	
+	public void suppressColumn(String attribute) throws DGHException {
+		LinkedList<? extends DGHDataElement> elems = database.get(attribute);
+		for(DGHDataElement e : elems) {
+			e.suppress();
+		}
+	}
+	
 	public DGHDatabase clone() {
 		DGHDatabase db = new DGHDatabase();
 		db.types = this.types;

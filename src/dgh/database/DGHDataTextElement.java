@@ -49,4 +49,9 @@ public class DGHDataTextElement implements DGHDataElement {
 	public String toString() {
 		return data;
 	}
+
+	@Override
+	public void suppress() {
+		data = "******";
+	}
 }

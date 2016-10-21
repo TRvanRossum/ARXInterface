@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import dgh.database.DGHDatabase;
 import utils.WindowUtils;
@@ -31,7 +32,7 @@ public class ResultsFrame extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				new MetricsFrame(db);
+				JOptionPane.showMessageDialog(getParent(), "Precision of the displayed data: "+db.calculatePrecisionOfData(), "Metrics", JOptionPane.INFORMATION_MESSAGE, null);
 			}
 
 			@Override
@@ -48,7 +49,7 @@ public class ResultsFrame extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				new MetricsFrame(db);
+				JOptionPane.showMessageDialog(getParent(), "Precision of the displayed data: "+db.calculatePrecisionOfData(), "Metrics", JOptionPane.INFORMATION_MESSAGE, null);
 			}
 
 			@Override

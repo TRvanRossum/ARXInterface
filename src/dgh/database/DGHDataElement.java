@@ -8,4 +8,5 @@ public interface DGHDataElement {
 	public String getAttribute();
 	public String getData();
 	public void transform(List<? extends Mapping> maps);
+	public void suppress();
 }

@@ -104,6 +104,12 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		}
 	}
 	
+	/**
+	 * Check if this AAL equals the other specified AAL. Two AAL's are equal if they have the same key set
+	 * and the value for every key is the same in both AAL's.
+	 * @param other The other AAL.
+	 * @return true iff both AAL's are the same, false otherwise.
+	 */
 	public boolean equals(AttributeAnonymityLevel other) {
 		if(this.keySet().containsAll(other.keySet()) && other.keySet().containsAll(this.keySet())) {
 			for(String s : this.keySet()) {
@@ -116,6 +122,10 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return false;
 	}
 	
+	/**
+	 * Returns the level of the AAL. This is equal to the sum of the values in the AAL.
+	 * @return The level of the AAL.
+	 */
 	public int getLevel() {
 		int level = 0;
 		for(String s : keySet()) {
@@ -124,6 +134,9 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return level;
 	}
 	
+	/**
+	 * Clones this AAL and returns an exact copy.
+	 */
 	public AttributeAnonymityLevel clone() {
 		AttributeAnonymityLevel res = new AttributeAnonymityLevel(types, classes);
 		for(String s : this.keySet()) {
@@ -132,6 +145,12 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return res;
 	}
 	
+	/**
+	 * Returns the maximum possible level per attribute.
+	 * @param map The mapping of attributes to types.
+	 * @param _classes The mapping of attributes to classes.
+	 * @return The maximum possible level per attribute.
+	 */
 	public static AttributeAnonymityLevel getMaxLevels(Map<String, AttributeType> map, Map<String, AttributeClass> _classes) {
 		AttributeAnonymityLevel res = new AttributeAnonymityLevel(map, _classes);
 		for(String s : res.keySet()) {
@@ -146,6 +165,13 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return res;
 	}
 	
+	/**
+	 * Determines the attribute to anonymize. This can be traced by finding the attribute for which the value
+	 * v_f from the first AAL and v_s from the second AAL, the equation v_f + 1 == v_s holds.
+	 * @param first The first AAL.
+	 * @param second The second AAL.
+	 * @return
+	 */
 	public static String determineAttributeToAnonymize(AttributeAnonymityLevel first, AttributeAnonymityLevel second) {
 		for(String s : first.keySet()) {
 			if(first.get(s) + 1 == second.get(s)) {

@@ -103,6 +103,8 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 				}
 			}
 		}
+		db.clear();
+		level.clear();
 		if(sufficientDB.size() > 0) {
 			return selectHighestPrecision(sufficientDB);
 		}

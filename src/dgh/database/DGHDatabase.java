@@ -219,12 +219,19 @@ public class DGHDatabase {
 	}
 	
 	public boolean isKAnonymous(int k) {
-		for(int i = 0; i < this.amountOfRows; i++) {
+		boolean[] check = new boolean[this.amountOfRows];
+		for(int index = 0; index < check.length; index++) {
+			check[index] = false;
+		}
+		
+		for(int i = 0; (i < this.amountOfRows && !check[i]); i++) {
 			String row = this.getRow(i);
 			int rowsEqual = 0;
-			for(int j = 0; j < this.amountOfRows; j++) {
+			check[i] = true;
+			for(int j = i; j < this.amountOfRows; j++) {
 				if(row.equals(this.getRow(j))) {
 					rowsEqual++;
+					check[j] = true;
 				}
 			}
 			if(rowsEqual < k) {

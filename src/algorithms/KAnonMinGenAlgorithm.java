@@ -72,6 +72,8 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	 * @return The anonymized database with the highest precision.
 	 */
 	private DGHDatabase findBestCandidate(List<DGHDatabase> db, List<DGHNode> level) {
+		System.out.println("DEBUG: ENTERING NEW LEVEL");
+		System.out.println("Level size: " + level.size());
 		if(level.size() == 0) {
 			// If sufficient anonymization is not possible then let the user know.
 			// TODO: could use its own exception class.

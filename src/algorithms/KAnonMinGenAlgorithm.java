@@ -51,6 +51,9 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 		if(k == 1) {
 			return db;
 		}
+		if(db.isKAnonymous(k)) {
+			return db;
+		}
 		try {
 			db.suppressAllExplicitColumns();
 		} catch (DGHException e) {

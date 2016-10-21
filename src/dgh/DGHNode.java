@@ -20,7 +20,15 @@ public class DGHNode {
 		anonLevels = level;
 	}
 	
-	public boolean equals(DGHNode other) {
+	@Override
+	public boolean equals(Object other) {
+		if(other instanceof DGHNode) {
+			return this.deepEquals((DGHNode) other);
+		}
+		return false;
+	}
+	
+	private boolean deepEquals(DGHNode other) {
 		return this.anonLevels.equals(other.anonLevels);
 	}
 

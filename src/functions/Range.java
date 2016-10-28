@@ -40,4 +40,8 @@ public class Range {
 	public Range clone() {
 		return new Range(lowest, highest);
 	}
+	
+	public boolean rangeEquals(Range other) {
+		return this.lowest == other.lowest && this.highest == other.highest;
+	}
 }

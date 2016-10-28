@@ -54,4 +54,16 @@ public class DGHDataTextElement implements DGHDataElement {
 	public void suppress() {
 		data = "******";
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof DGHDataTextElement) {
+			return this.deepEquals((DGHDataTextElement) o);
+		}
+		return false;
+	}
+
+	private boolean deepEquals(DGHDataTextElement o) {
+		return this.data.equals(o.data);
+	}
 }

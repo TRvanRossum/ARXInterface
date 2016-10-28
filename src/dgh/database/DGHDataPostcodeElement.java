@@ -59,5 +59,16 @@ public class DGHDataPostcodeElement implements DGHDataElement {
 	public void suppress() {
 		data = new Postcode(0000, "**");
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof DGHDataPostcodeElement) {
+			return this.deepEquals((DGHDataPostcodeElement) o);
+		}
+		return false;
+	}
 
+	private boolean deepEquals(DGHDataPostcodeElement o) {
+		return this.data.postcodeEquals(o.data);
+	}
 }

@@ -60,5 +60,17 @@ public class DGHDataDateElement implements DGHDataElement {
 	public void suppress() {
 		data = new DateRange(LocalDate.MIN, LocalDate.MAX);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof DGHDataDateElement) {
+			return this.deepEquals((DGHDataDateElement) o);
+		}
+		return false;
+	}
+	
+	private boolean deepEquals(DGHDataDateElement o) {
+		return this.data.dateRangeEquals(o.data);
+	}
 
 }

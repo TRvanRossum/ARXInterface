@@ -53,4 +53,8 @@ public class Postcode {
 	public Postcode clone(){
 		return new Postcode(new Range(numbers.getLowest(), numbers.getHighest()), firstLetter, secondLetter);
 	}
+	
+	public boolean postcodeEquals(Postcode other){
+		return this.numbers.rangeEquals(other.numbers) && this.firstLetter == other.firstLetter && this.secondLetter == other.secondLetter;
+	}
 }

@@ -26,4 +26,8 @@ public class DateRange {
 	public DateRange clone() {
 		return new DateRange(from.plusDays(0), to.plusDays(0));
 	}
+	
+	public boolean dateRangeEquals(DateRange other) {
+		return this.from.isEqual(other.from) && this.to.isEqual(other.to);
+	}
 }

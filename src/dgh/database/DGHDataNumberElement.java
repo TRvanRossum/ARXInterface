@@ -57,4 +57,16 @@ public class DGHDataNumberElement implements DGHDataElement {
 	public void suppress() {
 		data = new Range(Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof DGHDataNumberElement) {
+			return this.deepEquals((DGHDataNumberElement) o);
+		}
+		return false;
+	}
+	
+	private boolean deepEquals(DGHDataNumberElement o) {
+		return this.data.rangeEquals(o.data);
+	}
 }

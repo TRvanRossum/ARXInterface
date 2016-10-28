@@ -226,18 +226,22 @@ public class DGHDatabase {
 			check[index] = false;
 		}
 		
-		for(int i = 0; (i < this.amountOfRows && !check[i]); i++) {
-			System.out.println(i);
-			int rowsEqual = 0;
-			check[i] = true;
-			for(int j = i; j < this.amountOfRows; j++) {
-				if(areRowsEqual(i,j)) {
-					rowsEqual++;
-					check[j] = true;
-				}
+		for(int i = 0; i < this.amountOfRows; i++) {
+			if(check[i]) {
+				continue;
 			}
-			if(rowsEqual < k) {
-				return false;
+			else {
+				int rowsEqual = 0;
+				check[i] = true;
+				for(int j = i; j < this.amountOfRows; j++) {
+					if(areRowsEqual(i,j)) {
+						rowsEqual++;
+						check[j] = true;
+					}
+				}
+				if(rowsEqual < k) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -251,6 +255,16 @@ public class DGHDatabase {
 		}
 		return true;
 	}
+	
+	/*
+	private String getRow(int index) {
+		String res = "";
+		for(String key : this.database.keySet()) {
+			res += this.database.get(key).get(index).toString() + ",";
+		}
+		res = res.substring(0, res.length() - 1);
+		return res;
+	}*/
 	
 	public double calculatePrecisionOfData() {
 		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes);

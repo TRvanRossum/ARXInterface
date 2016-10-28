@@ -227,11 +227,11 @@ public class DGHDatabase {
 		}
 		
 		for(int i = 0; (i < this.amountOfRows && !check[i]); i++) {
-			String row = this.getRow(i);
+			System.out.println(i);
 			int rowsEqual = 0;
 			check[i] = true;
 			for(int j = i; j < this.amountOfRows; j++) {
-				if(row.equals(this.getRow(j))) {
+				if(areRowsEqual(i,j)) {
 					rowsEqual++;
 					check[j] = true;
 				}
@@ -243,13 +243,13 @@ public class DGHDatabase {
 		return true;
 	}
 	
-	private String getRow(int index) {
-		String res = "";
-		for(String key : this.database.keySet()) {
-			res += this.database.get(key).get(index).toString() + ",";
+	private boolean areRowsEqual(int i, int j){
+		for(String k : this.database.keySet()) {
+			if(!this.database.get(k).get(i).equals(this.database.get(k).get(j))){
+				return false;
+			}
 		}
-		res = res.substring(0, res.length() - 1);
-		return res;
+		return true;
 	}
 	
 	public double calculatePrecisionOfData() {

@@ -308,14 +308,51 @@ public class DGHDatabase {
 		return this.levelOfAnonymization.equals(other.levelOfAnonymization);
 	}
 	
-	/*
-	 * Methods for making a database L-diverse. 
+	/**
+	 * Determine if a database is L-diverse.
+	 * @param l The parameter L.
+	 * @return true iff the database is L-diverse.
 	 */
-	
-	public boolean isLDiverse(int qStar, int l) {
-		if(this.amountOfRows % qStar != 0){
-			throw new RuntimeException("q does not divide the amount of rows equally.");
+	public boolean isLDiverse(int l) {
+		if(l == 1){
+			return true;
 		}
 		return false;
+	}
+	
+	private boolean isLDiverse(int index, int blockSize, int l){
+		return false;
+	}
+	
+	/**
+	 * Returns a string representation of the sensitive attribute in the given row.
+	 * @param index The index of the row.
+	 * @return a string representation of the sensitive attribute.
+	 */
+	private String getSensitiveVal(int index){
+		String res = "";
+		for(String key : this.database.keySet()) {
+			if(classes.get(key).equals(AttributeClass.SENSITIVE)) {
+				return this.database.get(key).get(index).toString();
+			}
+		}
+		res = res.substring(0, res.length() - 1);
+		return res;
+	}
+	
+	/**
+	 * Returns a string of all the values that are insensitive, separated by commas.
+	 * @param index The index of the row.
+	 * @return a string of all the values that are insensitive.
+	 */
+	private String getRowOfInsensitiveVals(int index){
+		String res = "";
+		for(String key : this.database.keySet()) {
+			if(classes.get(key).equals(AttributeClass.INSENSITIVE)) {
+				res += this.database.get(key).get(index).toString() + ",";
+			}
+		}
+		res = res.substring(0, res.length() - 1);
+		return res;
 	}
 }

@@ -62,7 +62,6 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 		List<DGHDatabase> sufficientDB = new ArrayList<DGHDatabase>();
 		for(DGHDatabase database : db) {
 			for(DGHNode node : level) {
-				System.out.println(node);
 				if(isValidTransition(database, node)) {
 					DGHDatabase newDatabase = database.clone();
 					String att = determineAttribute(newDatabase, node);
@@ -89,7 +88,6 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 		}
 		nextLevelDB = this.removeDuplicateDatabases(nextLevelDB);
 		nextLevelNodes = this.removeDuplicateNodes(nextLevelNodes);
-		System.out.println(nextLevelNodes);
 		return findBestCandidate(nextLevelDB, nextLevelNodes);
 	}
 	
@@ -116,7 +114,7 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 	 */
 	private String determineAttribute(DGHDatabase db, DGHNode n) {
 		if(isValidTransition(db, n)) {
-			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymizationQuasi(), n.getAnonLevels());
+			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymizationInsensitive(), n.getAnonLevels());
 		}
 		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
 	}

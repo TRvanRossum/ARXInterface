@@ -337,7 +337,6 @@ public class DGHDatabase {
 		
 		// Categorize the rows of insensitive attributes.
 		for(int i = 0; i < this.amountOfRows; i++){
-			System.out.println(this.getRowOfInsensitiveVals(i));
 			qStar.insertInteger(this.getRowOfInsensitiveVals(i), i);
 		}
 		

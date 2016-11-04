@@ -157,6 +157,25 @@ public class DGHDatabase {
 		levelOfAnonymizationQuasi.increaseLevel(attribute);
 	}
 	
+	public void anonymizeColumnInsensitive(String attribute) throws DGHException {
+		if(types.get(attribute).equals(AttributeType.TEXTUAL)) {
+			anonymizeTextColumn(attribute);
+		}
+		else if(types.get(attribute).equals(AttributeType.NUMERICAL)) {
+			anonymizeNumberColumn(attribute);
+		}
+		else if(types.get(attribute).equals(AttributeType.DATE)) {
+			anonymizeDateColumn(attribute, levelOfAnonymizationInsensitive.get(attribute));
+		}
+		else if(types.get(attribute).equals(AttributeType.POSTCODE)) {
+			anonymizePostcodeColumn(attribute, levelOfAnonymizationInsensitive.get(attribute));
+		}
+		else {
+			throw new DGHException("The given attribute does not appear in this database.");
+		}
+		levelOfAnonymizationInsensitive.increaseLevel(attribute);
+	}
+	
 	private void anonymizePostcodeColumn(String attribute, int i) {
 		LinkedList<? extends DGHDataElement> column = database.get(attribute);
 		List<PostCodeMapping> map = new LinkedList<PostCodeMapping>();

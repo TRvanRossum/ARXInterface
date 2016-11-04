@@ -15,7 +15,7 @@ public class LDiversityPanel extends JPanel implements AnonPanel {
 	
 	public LDiversityPanel() {
 		setLayout(new GridLayout(2, 1));
-		add(new JLabel("Value for q (must divide the amount of data in the set)"));
+		add(new JLabel("Value for l"));
 		JTextField field1 = new JTextField();
 		add(field1);
 	}

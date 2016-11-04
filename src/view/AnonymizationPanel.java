@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import data.DataObject;
 import data.KAnonDataObject;
+import data.LDivDataObject;
 import view.anonymization.AnonPanel;
 import view.anonymization.DifferentialPanel;
 import view.anonymization.KAnonymityPanel;
@@ -35,6 +36,7 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 	private JPanel currentlyActive;
 	
 	private KAnonymityPanel KAnonPanel = new KAnonymityPanel();
+	private LDiversityPanel LDivPanel = new LDiversityPanel();
 	
 	public AnonymizationPanel(JButton _apply){
 		setLayout(new GridLayout(3, 1));
@@ -47,7 +49,7 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(KAnonPanel, K_ANON);
-        cards.add(new LDiversityPanel(), L_DIVERSE);
+        cards.add(LDivPanel, L_DIVERSE);
         cards.add(new TClosenessPanel(), T_CLOSE);
         cards.add(new DifferentialPanel(), DIFFERENTIAL);
         currentlyActive = KAnonPanel;
@@ -74,5 +76,12 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 	
 	public int getK() {
 		return ((KAnonDataObject) KAnonPanel.getData()).getK();
+	}
+	
+	public int getL() {
+		if(LDivPanel.getData() == null) {
+			return 0;
+		}
+		return ((LDivDataObject) LDivPanel.getData()).getL();
 	}
 }

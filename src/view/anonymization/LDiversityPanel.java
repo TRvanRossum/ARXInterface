@@ -25,6 +25,9 @@ public class LDiversityPanel extends JPanel implements AnonPanel {
 
 	@Override
 	public DataObject getData() {
+		if(field1.getText().equals("")) {
+			return null;
+		}
 		return new LDivDataObject(Integer.parseInt(field1.getText()));
 	}
 }

@@ -18,6 +18,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import algorithms.KAnonAlgorithm;
 import algorithms.KAnonMinGenAlgorithm;
+import algorithms.LDivAlgorithm;
+import algorithms.LDivStandardAlgorithm;
 import dgh.AALMode;
 import dgh.DGH;
 import dgh.DGHInput;
@@ -125,6 +127,10 @@ public class Interface implements ItemListener {
         		KAnonAlgorithm alg = new KAnonMinGenAlgorithm(card4.getK(), input);
         		try{
         			DGHDatabase res = alg.apply(quasiDgh);
+        			if(card4.getL() != 0) {
+        				LDivAlgorithm alg2 = new LDivStandardAlgorithm(card4.getL());
+        				res = alg2.apply(res, insensitiveDgh);
+        			}
         			new ResultsFrame(res);
         		} catch(Exception x) {
         			JOptionPane.showMessageDialog(card4, "Sufficient anonymization was not possible. Please check\n"

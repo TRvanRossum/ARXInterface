@@ -18,6 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import algorithms.Algorithm;
 import algorithms.KAnonMinGenAlgorithm;
+import dgh.AALMode;
 import dgh.DGH;
 import dgh.DGHInput;
 import dgh.database.DGHDatabase;
@@ -42,7 +43,7 @@ public class Interface implements ItemListener {
 	private List<TextualMapping> textMaps;
 	private List<NumericalMapping> numberMaps;
 	private DGHInput input;
-	private DGH dgh;
+	private DGH quasiDgh;
 	private JComboBox<String> cb;
      
     public void addComponentToPane(Container pane) {
@@ -93,7 +94,7 @@ public class Interface implements ItemListener {
 						numberMaps = card3.createAllNumericalMappings();
 						input = new DGHInput(config, textMaps, numberMaps);
 						cb.setSelectedIndex(3);
-						dgh = new DGH(input);
+						quasiDgh = new DGH(input, AALMode.QUASI);
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card3, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;
@@ -121,7 +122,7 @@ public class Interface implements ItemListener {
         	public void actionPerformed(ActionEvent e) {
         		Algorithm alg = new KAnonMinGenAlgorithm(card4.getK(), input);
         		try{
-        			DGHDatabase res = alg.apply(dgh);
+        			DGHDatabase res = alg.apply(quasiDgh);
         			new ResultsFrame(res);
         		} catch(Exception x) {
         			JOptionPane.showMessageDialog(card4, "Sufficient anonymization was not possible. Please check\n"

@@ -91,7 +91,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 					DGHDatabase newDatabase = database.clone();
 					String att = determineAttribute(newDatabase, node);
 					try {
-						newDatabase.anonymizeColumn(att);
+						newDatabase.anonymizeColumnQuasi(att);
 					} catch (DGHException e) {
 						// Does not happen.
 						e.printStackTrace();

@@ -1,69 +1,44 @@
 package algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
+import dgh.AALMode;
 import dgh.AttributeAnonymityLevel;
 import dgh.DGH;
 import dgh.DGHException;
-import dgh.DGHInput;
 import dgh.DGHNode;
 import dgh.database.DGHDatabase;
 
-/**
- * The K-anonymity MinGen algorithm.
- * @author Tim van Rossum
- *
- */
-public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
+public class LDivStandardAlgorithm implements LDivAlgorithm {
+	
+	private int l;
 	
 	/**
-	 * The value for K.
+	 * Constructor.
+	 * @param _l The value for L.
 	 */
-	private int k;
-	
-	private long startTime;
-	/**
-	 * The configuration of data, combined with the defined textual and numerical mappings.
-	 */
-	private DGHInput input;
-	/**
-	 * A database constructed using the specified input.
-	 */
-	private DGHDatabase db;
-	
-	/**
-	 * The constructor of the class.
-	 * @param _k The value for K.
-	 * @param _input The configuration of data, combined with the defined textual and numerical mappings.
-	 */
-	public KAnonMinGenAlgorithm(int _k, DGHInput _input) {
-		k = _k;
-		input = _input;
-		db = new DGHDatabase(input);
+	public LDivStandardAlgorithm(int _l) {
+		this.l = _l;
 	}
 	
 	@Override
-	public DGHDatabase apply(DGH dgh) {
-		if(k == 1) {
-			return db;
+	public DGHDatabase apply(DGHDatabase kAnonDB, DGH dgh) {
+		if(l == 1) {
+			return kAnonDB;
 		}
-		if(db.isKAnonymous(k)) {
-			return db;
+		if(kAnonDB.isLDiverse(l)){
+			return kAnonDB;
 		}
-		try {
-			db.suppressAllExplicitColumns();
-		} catch (DGHException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(!dgh.getStart().getAnonLevels().getMode().equals(AALMode.INSENSITIVE)) {
+			throw new RuntimeException("You tried to apply an L-diversity algorithm using a DGH not set for insensitive attributes.");
 		}
 		List<DGHNode> nodes = dgh.getStart().generateNeighbours();
 		List<DGHDatabase> list = new ArrayList<DGHDatabase>();
-		list.add(db);
-		startTime = System.currentTimeMillis();
+		list.add(kAnonDB);
 		return findBestCandidate(list, nodes);
 	}
 	
@@ -91,14 +66,14 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 					DGHDatabase newDatabase = database.clone();
 					String att = determineAttribute(newDatabase, node);
 					try {
-						newDatabase.anonymizeColumnQuasi(att);
+						newDatabase.anonymizeColumnInsensitive(att);
 					} catch (DGHException e) {
 						// Does not happen.
 						e.printStackTrace();
 					}
 					nextLevelDB.add(newDatabase);
 					nextLevelNodes.addAll(node.generateNeighbours());
-					if(newDatabase.isKAnonymous(k)) {
+					if(newDatabase.isLDiverse(l)) {
 						sufficientDB.add(newDatabase);
 					}
 				}
@@ -107,31 +82,13 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 		db.clear();
 		level.clear();
 		if(sufficientDB.size() > 0) {
-			return selectHighestPrecision(sufficientDB);
+			Random r = new Random(System.currentTimeMillis());
+			int index = r.nextInt(sufficientDB.size());
+			return sufficientDB.get(index);
 		}
 		nextLevelDB = this.removeDuplicateDatabases(nextLevelDB);
 		nextLevelNodes = this.removeDuplicateNodes(nextLevelNodes);
 		return findBestCandidate(nextLevelDB, nextLevelNodes);
-	}
-	
-	/**
-	 * Selects the database with the highest precision from a given list.
-	 * @param list The given list.
-	 * @return The database in the list with the highest precision.
-	 */
-	private DGHDatabase selectHighestPrecision(List<DGHDatabase> list) {
-		// Add some randomness to the outcome.
-		Collections.shuffle(list);
-		double prec = -1.0;
-		DGHDatabase res = null;
-		for(DGHDatabase db : list) {
-			if(db.calculatePrecisionOfData() > prec) {
-				prec = db.calculatePrecisionOfData();
-				res = db;
-			}
-		}
-		System.out.println("Time taken: "+(System.currentTimeMillis() - startTime));
-		return res;
 	}
 	
 	/**
@@ -144,7 +101,7 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 	 * @return true iff the transition is valid.
 	 */
 	private boolean isValidTransition(DGHDatabase db, DGHNode n) {
-		DGHNode compare = new DGHNode(db.getLevelOfAnonymizationQuasi());
+		DGHNode compare = new DGHNode(db.getLevelOfAnonymizationInsensitive());
 		return compare.isValidTransition(n);
 	}
 	
@@ -157,7 +114,7 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 	 */
 	private String determineAttribute(DGHDatabase db, DGHNode n) {
 		if(isValidTransition(db, n)) {
-			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymizationQuasi(), n.getAnonLevels());
+			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymizationInsensitive(), n.getAnonLevels());
 		}
 		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
 	}
@@ -177,4 +134,5 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 		db.addAll(set);
 		return db;
 	}
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import dgh.AALMode;
 import dgh.AttributeAnonymityLevel;
 import dgh.DGHException;
 import dgh.DGHInput;
@@ -42,7 +43,9 @@ public class DGHDatabase {
 	
 	private int amountOfRows;
 	
-	private AttributeAnonymityLevel levelOfAnonymization;
+	private AttributeAnonymityLevel levelOfAnonymizationQuasi;
+	
+	private AttributeAnonymityLevel levelOfAnonymizationInsensitive;
 	
 	private Map<String, LinkedList<? extends DGHDataElement>> database;
 	
@@ -55,7 +58,8 @@ public class DGHDatabase {
 		postMaps = PostCodeMapBuilder.getInstance().createAllPostCodeMaps();
 		dateMaps = DateMapBuilder.getInstance().createAllDateMaps();
 		amountOfRows = input.getConfig().getData().getData().length;
-		levelOfAnonymization = new AttributeAnonymityLevel(types, classes);
+		levelOfAnonymizationQuasi = new AttributeAnonymityLevel(types, classes, AALMode.QUASI);
+		levelOfAnonymizationInsensitive = new AttributeAnonymityLevel(types, classes, AALMode.INSENSITIVE);
 		DGHDatabaseBuilder builder = new DGHDatabaseBuilder(input.getConfig().getData().getData(), input.getConfig().getData().getAttributes(), types);
 		database = builder.createDatabase();
 	}
@@ -118,12 +122,12 @@ public class DGHDatabase {
 		this.amountOfRows = amountOfRows;
 	}
 
-	public AttributeAnonymityLevel getLevelOfAnonymization() {
-		return levelOfAnonymization;
+	public AttributeAnonymityLevel getLevelOfAnonymizationQuasi() {
+		return levelOfAnonymizationQuasi;
 	}
 
-	public void setLevelOfAnonymization(AttributeAnonymityLevel levelOfAnonymization) {
-		this.levelOfAnonymization = levelOfAnonymization;
+	public AttributeAnonymityLevel getLevelOfAnonymizationInsensitive() {
+		return levelOfAnonymizationInsensitive;
 	}
 
 	public Map<String, LinkedList<? extends DGHDataElement>> getDatabase() {
@@ -134,7 +138,7 @@ public class DGHDatabase {
 		this.database = database;
 	}
 	
-	public void anonymizeColumn(String attribute) throws DGHException {
+	public void anonymizeColumnQuasi(String attribute) throws DGHException {
 		if(types.get(attribute).equals(AttributeType.TEXTUAL)) {
 			anonymizeTextColumn(attribute);
 		}
@@ -142,15 +146,34 @@ public class DGHDatabase {
 			anonymizeNumberColumn(attribute);
 		}
 		else if(types.get(attribute).equals(AttributeType.DATE)) {
-			anonymizeDateColumn(attribute, levelOfAnonymization.get(attribute));
+			anonymizeDateColumn(attribute, levelOfAnonymizationQuasi.get(attribute));
 		}
 		else if(types.get(attribute).equals(AttributeType.POSTCODE)) {
-			anonymizePostcodeColumn(attribute, levelOfAnonymization.get(attribute));
+			anonymizePostcodeColumn(attribute, levelOfAnonymizationQuasi.get(attribute));
 		}
 		else {
 			throw new DGHException("The given attribute does not appear in this database.");
 		}
-		levelOfAnonymization.increaseLevel(attribute);
+		levelOfAnonymizationQuasi.increaseLevel(attribute);
+	}
+	
+	public void anonymizeColumnInsensitive(String attribute) throws DGHException {
+		if(types.get(attribute).equals(AttributeType.TEXTUAL)) {
+			anonymizeTextColumn(attribute);
+		}
+		else if(types.get(attribute).equals(AttributeType.NUMERICAL)) {
+			anonymizeNumberColumn(attribute);
+		}
+		else if(types.get(attribute).equals(AttributeType.DATE)) {
+			anonymizeDateColumn(attribute, levelOfAnonymizationInsensitive.get(attribute));
+		}
+		else if(types.get(attribute).equals(AttributeType.POSTCODE)) {
+			anonymizePostcodeColumn(attribute, levelOfAnonymizationInsensitive.get(attribute));
+		}
+		else {
+			throw new DGHException("The given attribute does not appear in this database.");
+		}
+		levelOfAnonymizationInsensitive.increaseLevel(attribute);
 	}
 	
 	private void anonymizePostcodeColumn(String attribute, int i) {
@@ -214,7 +237,8 @@ public class DGHDatabase {
 		db.postMaps = this.postMaps;
 		db.dateMaps = this.dateMaps;
 		db.amountOfRows = this.amountOfRows;
-		db.levelOfAnonymization = this.levelOfAnonymization.clone();
+		db.levelOfAnonymizationQuasi = this.levelOfAnonymizationQuasi.clone();
+		db.levelOfAnonymizationInsensitive = this.levelOfAnonymizationInsensitive.clone();
 		DGHDatabaseCloner cloner = new DGHDatabaseCloner(database);
 		db.database = cloner.createCopy();
 		return db;
@@ -258,23 +282,13 @@ public class DGHDatabase {
 		return true;
 	}
 	
-	/*
-	private String getRow(int index) {
-		String res = "";
-		for(String key : this.database.keySet()) {
-			res += this.database.get(key).get(index).toString() + ",";
-		}
-		res = res.substring(0, res.length() - 1);
-		return res;
-	}*/
-	
 	public double calculatePrecisionOfData() {
-		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes);
+		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes, AALMode.QUASI);
 		double sum = 0.0;
-		for(String s : levelOfAnonymization.keySet()) {
-			sum += ((double) levelOfAnonymization.get(s)/(double) max.get(s));
+		for(String s : levelOfAnonymizationQuasi.keySet()) {
+			sum += ((double) levelOfAnonymizationQuasi.get(s)/(double) max.get(s));
 		}
-		sum = sum / (double) levelOfAnonymization.keySet().size();
+		sum = sum / (double) levelOfAnonymizationQuasi.keySet().size();
 		return 1.0 - sum;
 	}
 	
@@ -295,7 +309,7 @@ public class DGHDatabase {
 	}
 	
 	public int hashCode() {
-		return levelOfAnonymization.hashCode();
+		return levelOfAnonymizationQuasi.hashCode() + levelOfAnonymizationInsensitive.hashCode();
 	}
 	
 	@Override
@@ -307,7 +321,7 @@ public class DGHDatabase {
 	}
 	
 	private boolean deepEquals(DGHDatabase other) {
-		return this.levelOfAnonymization.equals(other.levelOfAnonymization);
+		return this.levelOfAnonymizationQuasi.equals(other.levelOfAnonymizationQuasi) && this.levelOfAnonymizationInsensitive.equals(other.levelOfAnonymizationInsensitive);
 	}
 	
 	/**

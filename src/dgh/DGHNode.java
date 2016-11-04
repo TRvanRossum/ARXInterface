@@ -12,8 +12,8 @@ public class DGHNode {
 	private AttributeAnonymityLevel anonLevels;
 	private List<DGHNode> next = new ArrayList<DGHNode>();
 	
-	public DGHNode(Map<String, AttributeType> types, Map<String, AttributeClass> classes) {
-		anonLevels = new AttributeAnonymityLevel(types, classes);
+	public DGHNode(Map<String, AttributeType> types, Map<String, AttributeClass> classes, AALMode mode) {
+		anonLevels = new AttributeAnonymityLevel(types, classes, mode);
 	}
 	
 	public DGHNode(AttributeAnonymityLevel level) {

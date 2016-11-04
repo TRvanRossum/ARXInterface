@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import data.DataObject;
+import data.LDivDataObject;
 
 public class LDiversityPanel extends JPanel implements AnonPanel {
 	/**
@@ -13,16 +14,20 @@ public class LDiversityPanel extends JPanel implements AnonPanel {
 	 */
 	private static final long serialVersionUID = 8348411091480767181L;
 	
+	private JTextField field1;
+	
 	public LDiversityPanel() {
 		setLayout(new GridLayout(2, 1));
 		add(new JLabel("Value for l"));
-		JTextField field1 = new JTextField();
+		field1 = new JTextField();
 		add(field1);
 	}
 
 	@Override
 	public DataObject getData() {
-		// TODO Auto-generated method stub
-		return null;
+		if(field1.getText().equals("")) {
+			return null;
+		}
+		return new LDivDataObject(Integer.parseInt(field1.getText()));
 	}
 }

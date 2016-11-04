@@ -26,6 +26,11 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	private Map<String, AttributeClass> classes;
 	
 	/**
+	 * The mode of the AAL. This can be either set to quasi-identifiers or to insensitive attributes
+	 */
+	private AALMode mode;
+	
+	/**
 	 * The modified key set. This only contains attributes classed as
 	 * quasi-identifiers.
 	 */
@@ -35,12 +40,13 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	 * Constructor.
 	 * @param _types The map that defines the type per attribute.
 	 */
-	public AttributeAnonymityLevel(Map<String, AttributeType> _types, Map<String, AttributeClass> _classes) {
+	public AttributeAnonymityLevel(Map<String, AttributeType> _types, Map<String, AttributeClass> _classes, AALMode _mode) {
 		types = _types;
 		classes = _classes;
+		mode = _mode;
 		keySet = new HashSet<String>();
 		for(String s : classes.keySet()) {
-			if(classes.get(s).equals(AttributeClass.QUASI)) {
+			if((classes.get(s).equals(AttributeClass.QUASI) && mode.equals(AALMode.QUASI)) || (classes.get(s).equals(AttributeClass.INSENSITIVE) && mode.equals(AALMode.INSENSITIVE))) {
 				keySet.add(s);
 			}
 		}
@@ -69,6 +75,10 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 			return 0;
 		}
 		return super.get(key);
+	}
+	
+	public AALMode getMode(){
+		return mode;
 	}
 	
 	/**
@@ -138,7 +148,7 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	 * Clones this AAL and returns an exact copy.
 	 */
 	public AttributeAnonymityLevel clone() {
-		AttributeAnonymityLevel res = new AttributeAnonymityLevel(types, classes);
+		AttributeAnonymityLevel res = new AttributeAnonymityLevel(types, classes, mode);
 		for(String s : this.keySet()) {
 			res.put(s, this.get(s));
 		}
@@ -151,8 +161,8 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	 * @param _classes The mapping of attributes to classes.
 	 * @return The maximum possible level per attribute.
 	 */
-	public static AttributeAnonymityLevel getMaxLevels(Map<String, AttributeType> map, Map<String, AttributeClass> _classes) {
-		AttributeAnonymityLevel res = new AttributeAnonymityLevel(map, _classes);
+	public static AttributeAnonymityLevel getMaxLevels(Map<String, AttributeType> map, Map<String, AttributeClass> _classes, AALMode _mode) {
+		AttributeAnonymityLevel res = new AttributeAnonymityLevel(map, _classes, _mode);
 		for(String s : res.keySet()) {
 			while(!res.isAtMaxLevel(s)) {
 				try {
@@ -173,6 +183,9 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 	 * @return
 	 */
 	public static String determineAttributeToAnonymize(AttributeAnonymityLevel first, AttributeAnonymityLevel second) {
+		if(!first.mode.equals(second.mode)){
+			throw new RuntimeException("The AAL's are not in the same mode.");
+		}
 		for(String s : first.keySet()) {
 			if(first.get(s) + 1 == second.get(s)) {
 				return s;

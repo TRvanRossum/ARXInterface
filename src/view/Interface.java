@@ -44,6 +44,7 @@ public class Interface implements ItemListener {
 	private List<NumericalMapping> numberMaps;
 	private DGHInput input;
 	private DGH quasiDgh;
+	private DGH insensitiveDgh;
 	private JComboBox<String> cb;
      
     public void addComponentToPane(Container pane) {
@@ -95,6 +96,7 @@ public class Interface implements ItemListener {
 						input = new DGHInput(config, textMaps, numberMaps);
 						cb.setSelectedIndex(3);
 						quasiDgh = new DGH(input, AALMode.QUASI);
+						insensitiveDgh = new DGH(input, AALMode.INSENSITIVE);
 					} catch (MapBuildException e1) {
 						JOptionPane.showMessageDialog(card3, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						return;

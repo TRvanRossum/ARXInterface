@@ -307,4 +307,15 @@ public class DGHDatabase {
 	private boolean deepEquals(DGHDatabase other) {
 		return this.levelOfAnonymization.equals(other.levelOfAnonymization);
 	}
+	
+	/*
+	 * Methods for making a database L-diverse. 
+	 */
+	
+	public boolean isLDiverse(int qStar, int l) {
+		if(this.amountOfRows % qStar != 0){
+			throw new RuntimeException("q does not divide the amount of rows equally.");
+		}
+		return false;
+	}
 }

@@ -24,6 +24,8 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 	 * The value for K.
 	 */
 	private int k;
+	
+	private long startTime;
 	/**
 	 * The configuration of data, combined with the defined textual and numerical mappings.
 	 */
@@ -61,6 +63,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 		List<DGHNode> nodes = dgh.getStart().generateNeighbours();
 		List<DGHDatabase> list = new ArrayList<DGHDatabase>();
 		list.add(db);
+		startTime = System.currentTimeMillis();
 		return findBestCandidate(list, nodes);
 	}
 	
@@ -127,6 +130,7 @@ public class KAnonMinGenAlgorithm implements Algorithm {
 				res = db;
 			}
 		}
+		System.out.println("Time taken: "+(System.currentTimeMillis() - startTime));
 		return res;
 	}
 	

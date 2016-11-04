@@ -45,6 +45,8 @@ public class DGHDatabase {
 	
 	private AttributeAnonymityLevel levelOfAnonymizationQuasi;
 	
+	private AttributeAnonymityLevel levelOfAnonymizationInsensitive;
+	
 	private Map<String, LinkedList<? extends DGHDataElement>> database;
 	
 	public DGHDatabase(DGHInput input) {
@@ -57,6 +59,7 @@ public class DGHDatabase {
 		dateMaps = DateMapBuilder.getInstance().createAllDateMaps();
 		amountOfRows = input.getConfig().getData().getData().length;
 		levelOfAnonymizationQuasi = new AttributeAnonymityLevel(types, classes, AALMode.QUASI);
+		levelOfAnonymizationInsensitive = new AttributeAnonymityLevel(types, classes, AALMode.INSENSITIVE);
 		DGHDatabaseBuilder builder = new DGHDatabaseBuilder(input.getConfig().getData().getData(), input.getConfig().getData().getAttributes(), types);
 		database = builder.createDatabase();
 	}
@@ -216,6 +219,7 @@ public class DGHDatabase {
 		db.dateMaps = this.dateMaps;
 		db.amountOfRows = this.amountOfRows;
 		db.levelOfAnonymizationQuasi = this.levelOfAnonymizationQuasi.clone();
+		db.levelOfAnonymizationInsensitive = this.levelOfAnonymizationInsensitive.clone();
 		DGHDatabaseCloner cloner = new DGHDatabaseCloner(database);
 		db.database = cloner.createCopy();
 		return db;
@@ -259,16 +263,6 @@ public class DGHDatabase {
 		return true;
 	}
 	
-	/*
-	private String getRow(int index) {
-		String res = "";
-		for(String key : this.database.keySet()) {
-			res += this.database.get(key).get(index).toString() + ",";
-		}
-		res = res.substring(0, res.length() - 1);
-		return res;
-	}*/
-	
 	public double calculatePrecisionOfData() {
 		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes, AALMode.QUASI);
 		double sum = 0.0;
@@ -296,7 +290,7 @@ public class DGHDatabase {
 	}
 	
 	public int hashCode() {
-		return levelOfAnonymizationQuasi.hashCode();
+		return levelOfAnonymizationQuasi.hashCode() + levelOfAnonymizationInsensitive.hashCode();
 	}
 	
 	@Override
@@ -308,7 +302,7 @@ public class DGHDatabase {
 	}
 	
 	private boolean deepEquals(DGHDatabase other) {
-		return this.levelOfAnonymizationQuasi.equals(other.levelOfAnonymizationQuasi);
+		return this.levelOfAnonymizationQuasi.equals(other.levelOfAnonymizationQuasi) && this.levelOfAnonymizationInsensitive.equals(other.levelOfAnonymizationInsensitive);
 	}
 	
 	/**

@@ -65,7 +65,7 @@ public class NumericalMappingPanel extends JPanel {
 		
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
-				if(c.getTypes().get(s).equals(AttributeType.NUMERICAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
+				if(c.getTypes().get(s).equals(AttributeType.NUMERICAL) && (c.getClassification().get(s).equals(AttributeClass.QUASI) || c.getClassification().get(s).equals(AttributeClass.INSENSITIVE))) {
 					model.addRow(new String[]{s, ""});
 					allNumAtts.add(s);
 				}

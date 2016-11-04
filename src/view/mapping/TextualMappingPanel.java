@@ -63,7 +63,7 @@ public class TextualMappingPanel extends JPanel {
 		};
 		if(c.getTypes() != null){
 			for(String s : c.getTypes().keySet()) {
-				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL) && c.getClassification().get(s).equals(AttributeClass.QUASI)) {
+				if(c.getTypes().get(s).equals(AttributeType.TEXTUAL) && (c.getClassification().get(s).equals(AttributeClass.QUASI) || c.getClassification().get(s).equals(AttributeClass.INSENSITIVE))) {
 					model.addRow(new String[]{s, "", ""});
 					allTextAtts.add(s);
 				}

@@ -122,12 +122,12 @@ public class DGHDatabase {
 		this.amountOfRows = amountOfRows;
 	}
 
-	public AttributeAnonymityLevel getLevelOfAnonymization() {
+	public AttributeAnonymityLevel getLevelOfAnonymizationQuasi() {
 		return levelOfAnonymizationQuasi;
 	}
 
-	public void setLevelOfAnonymization(AttributeAnonymityLevel levelOfAnonymization) {
-		this.levelOfAnonymizationQuasi = levelOfAnonymization;
+	public AttributeAnonymityLevel getLevelOfAnonymizationInsensitive() {
+		return levelOfAnonymizationInsensitive;
 	}
 
 	public Map<String, LinkedList<? extends DGHDataElement>> getDatabase() {
@@ -337,6 +337,7 @@ public class DGHDatabase {
 		
 		// Categorize the rows of insensitive attributes.
 		for(int i = 0; i < this.amountOfRows; i++){
+			System.out.println(this.getRowOfInsensitiveVals(i));
 			qStar.insertInteger(this.getRowOfInsensitiveVals(i), i);
 		}
 		

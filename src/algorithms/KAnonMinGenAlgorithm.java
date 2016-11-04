@@ -144,7 +144,7 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 	 * @return true iff the transition is valid.
 	 */
 	private boolean isValidTransition(DGHDatabase db, DGHNode n) {
-		DGHNode compare = new DGHNode(db.getLevelOfAnonymization());
+		DGHNode compare = new DGHNode(db.getLevelOfAnonymizationQuasi());
 		return compare.isValidTransition(n);
 	}
 	
@@ -157,7 +157,7 @@ public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 	 */
 	private String determineAttribute(DGHDatabase db, DGHNode n) {
 		if(isValidTransition(db, n)) {
-			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymization(), n.getAnonLevels());
+			return AttributeAnonymityLevel.determineAttributeToAnonymize(db.getLevelOfAnonymizationQuasi(), n.getAnonLevels());
 		}
 		throw new RuntimeException("The second AAL is not a logical sequel to the first one.");
 	}

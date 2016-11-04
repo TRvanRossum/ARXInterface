@@ -77,6 +77,10 @@ public class AttributeAnonymityLevel extends HashMap<String, Integer> {
 		return super.get(key);
 	}
 	
+	public AALMode getMode(){
+		return mode;
+	}
+	
 	/**
 	 * Checks if a specified attribute is at its maximum possible anonymity level (1 for textual
 	 * and numerical data, 3 otherwise).

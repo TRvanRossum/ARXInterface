@@ -1,8 +1,10 @@
 package dgh.database;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import dgh.AttributeAnonymityLevel;
 import dgh.DGHException;
@@ -317,11 +319,26 @@ public class DGHDatabase {
 		if(l == 1){
 			return true;
 		}
-		return false;
-	}
-	
-	private boolean isLDiverse(int index, int blockSize, int l){
-		return false;
+		QStarBlock qStar = new QStarBlock();
+		
+		// Categorize the rows of insensitive attributes.
+		for(int i = 0; i < this.amountOfRows; i++){
+			qStar.insertInteger(this.getRowOfInsensitiveVals(i), i);
+		}
+		
+		for(String s : qStar.keySet()) {
+			Set<String> set = new HashSet<String>();
+			List<Integer> list = qStar.get(s);
+			for(int index : list) {
+				set.add(this.getSensitiveVal(index));
+			}
+			// Return false if the amount of different sensitive attributes for a specific row of insensitive attributes is
+			// less than L.
+			if(set.size() < l){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**

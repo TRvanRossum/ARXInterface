@@ -1,10 +1,5 @@
 package dgh;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class DGH {
 	private DGHNode startNode;
 	private DGHInput input;
@@ -17,60 +12,8 @@ public class DGH {
 	public DGHNode getStart() {
 		return startNode;
 	}
-	
-	public void generate() {
-		List<DGHNode> nextLevel = startNode.generateNeighbours();
-		startNode.setNext(nextLevel);
-		generate(nextLevel);
-	}
-	
-	public void generate(List<DGHNode> curLevel) {
-		System.out.println(curLevel);
-		if(curLevel.size() == 0) {
-			return;
-		}
-		DGHSet set = new DGHSet();
-		for(DGHNode node : curLevel) {
-			Set<DGHNode> subset = new HashSet<DGHNode>();
-			subset.addAll(node.generateNeighbours());
-			set.addAll(subset);
-		}
-		System.out.println(set);
-		System.out.println(checkDuplicates(set));
-		for(DGHNode node : curLevel) {
-			for(DGHNode nextNode : set) {
-				if(node.isValidTransition(nextNode)){
-					node.addNext(nextNode);
-				}
-			}
-		}
-		List<DGHNode> nextLevelNodes = new ArrayList<DGHNode>();
-		nextLevelNodes.addAll(set);
-		generate(nextLevelNodes);
-	}
 
 	public DGHInput getInput() {
 		return input;
-	}
-	
-	/**
-	 * Checks for duplicates in a set. This is a debug method. Seemingly, at least the HashSet allows for storage of duplicates.
-	 * @param s The set in question.
-	 * @return true if there are duplicates in the set, false otherwise.
-	 */
-	private boolean checkDuplicates(Set<DGHNode> s) {
-		for(DGHNode n : s) {
-			int i = 0;
-			for(DGHNode n2 : s) {
-				if(n.equals(n2)) {
-					i++;
-				}
-			}
-			System.out.println(i);
-			if(i > 1){
-				return true;
-			}
-		}
-		return false;
 	}
 }

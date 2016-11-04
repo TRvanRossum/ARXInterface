@@ -18,7 +18,7 @@ import dgh.database.DGHDatabase;
  * @author Tim van Rossum
  *
  */
-public class KAnonMinGenAlgorithm implements Algorithm {
+public class KAnonMinGenAlgorithm implements KAnonAlgorithm {
 	
 	/**
 	 * The value for K.

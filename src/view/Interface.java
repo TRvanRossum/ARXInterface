@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import algorithms.Algorithm;
+import algorithms.KAnonAlgorithm;
 import algorithms.KAnonMinGenAlgorithm;
 import dgh.AALMode;
 import dgh.DGH;
@@ -120,7 +120,7 @@ public class Interface implements ItemListener {
         
         algorithmApplyButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Algorithm alg = new KAnonMinGenAlgorithm(card4.getK(), input);
+        		KAnonAlgorithm alg = new KAnonMinGenAlgorithm(card4.getK(), input);
         		try{
         			DGHDatabase res = alg.apply(quasiDgh);
         			new ResultsFrame(res);

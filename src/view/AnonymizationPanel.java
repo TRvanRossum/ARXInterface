@@ -84,4 +84,11 @@ public class AnonymizationPanel extends JPanel implements ItemListener, ActionLi
 		}
 		return ((LDivDataObject) LDivPanel.getData()).getL();
 	}
+	
+	public boolean getReg() {
+		if(LDivPanel.getData() == null) {
+			return false;
+		}
+		return ((LDivDataObject) LDivPanel.getData()).getRegular();
+	}
 }

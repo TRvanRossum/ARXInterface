@@ -1,6 +1,7 @@
 package view.anonymization;
 import java.awt.GridLayout;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,11 +17,15 @@ public class LDiversityPanel extends JPanel implements AnonPanel {
 	
 	private JTextField field1;
 	
+	private JComboBox<String> box = new JComboBox<String>(new String[]{"Standard", "Entropy"});
+	
 	public LDiversityPanel() {
-		setLayout(new GridLayout(2, 1));
+		setLayout(new GridLayout(2, 2));
 		add(new JLabel("Value for l"));
+		add(new JLabel("Method of diversity"));
 		field1 = new JTextField();
 		add(field1);
+		add(box);
 	}
 
 	@Override
@@ -28,6 +33,9 @@ public class LDiversityPanel extends JPanel implements AnonPanel {
 		if(field1.getText().equals("")) {
 			return null;
 		}
-		return new LDivDataObject(Integer.parseInt(field1.getText()));
+		if(box.getSelectedIndex() == 0){
+			return new LDivDataObject(Integer.parseInt(field1.getText()), true);
+		}
+		return new LDivDataObject(Integer.parseInt(field1.getText()), false);
 	}
 }

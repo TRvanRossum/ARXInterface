@@ -19,6 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import algorithms.KAnonAlgorithm;
 import algorithms.KAnonMinGenAlgorithm;
 import algorithms.LDivAlgorithm;
+import algorithms.LDivEntropyAlgorithm;
 import algorithms.LDivStandardAlgorithm;
 import dgh.AALMode;
 import dgh.DGH;
@@ -128,7 +129,13 @@ public class Interface implements ItemListener {
         		try{
         			DGHDatabase res = alg.apply(quasiDgh);
         			if(card4.getL() != 0) {
-        				LDivAlgorithm alg2 = new LDivStandardAlgorithm(card4.getL());
+        				LDivAlgorithm alg2;
+        				if(card4.getReg()){
+        					alg2 = new LDivStandardAlgorithm(card4.getL());
+        				}
+        				else {
+        					alg2 = new LDivEntropyAlgorithm(card4.getL());
+        				}
         				res = alg2.apply(res, insensitiveDgh);
         			}
         			new ResultsFrame(res);

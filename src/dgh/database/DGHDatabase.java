@@ -1,5 +1,6 @@
 package dgh.database;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -352,6 +353,43 @@ public class DGHDatabase {
 				return false;
 			}
 		}
+		return true;
+	}
+	
+	/**
+	 * Determine if a database is Entropy-L-diverse.
+	 * @param l The parameter L.
+	 * @return true iff the database is L-diverse.
+	 */
+	public boolean isEntropyLDiverse(int l) {
+		QStarBlock qStar = new QStarBlock();
+		
+		double logL = Math.log(l)/Math.log(2);
+		
+		// Categorize the rows of insensitive attributes.
+		for(int i = 0; i < this.amountOfRows; i++){
+			qStar.insertInteger(this.getRowOfInsensitiveVals(i), i);
+		}
+		
+		for(String s : qStar.keySet()) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			double amt = 0;
+			for(int i : qStar.get(s)) {
+				if(map.get(this.getSensitiveVal(i)) == null) {
+					map.put(this.getSensitiveVal(i), 0);
+				}
+				map.put(this.getSensitiveVal(i), map.get(this.getSensitiveVal(i)));
+				amt = amt + 1.0;
+			}
+			double sum = 0.0;
+			for(String string : map.keySet()) {
+				sum += -(Math.log(((double)map.get(string))/sum)/Math.log(2));
+			}
+			if(sum < logL){
+				return false;
+			}
+		}
+		
 		return true;
 	}
 	

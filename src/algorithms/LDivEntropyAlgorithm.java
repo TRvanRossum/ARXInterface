@@ -13,7 +13,7 @@ import dgh.DGHException;
 import dgh.DGHNode;
 import dgh.database.DGHDatabase;
 
-public class LDivStandardAlgorithm implements LDivAlgorithm {
+public class LDivEntropyAlgorithm implements LDivAlgorithm {
 	
 	private int l;
 	
@@ -21,7 +21,7 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 	 * Constructor.
 	 * @param _l The value for L.
 	 */
-	public LDivStandardAlgorithm(int _l) {
+	public LDivEntropyAlgorithm(int _l) {
 		this.l = _l;
 	}
 	
@@ -30,7 +30,7 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 		if(l == 1) {
 			return kAnonDB;
 		}
-		if(kAnonDB.isLDiverse(l)){
+		if(kAnonDB.isEntropyLDiverse(l)){
 			return kAnonDB;
 		}
 		if(!dgh.getStart().getAnonLevels().getMode().equals(AALMode.INSENSITIVE)) {
@@ -73,7 +73,7 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 					}
 					nextLevelDB.add(newDatabase);
 					nextLevelNodes.addAll(node.generateNeighbours());
-					if(newDatabase.isLDiverse(l)) {
+					if(newDatabase.isEntropyLDiverse(l)) {
 						sufficientDB.add(newDatabase);
 					}
 				}
@@ -134,5 +134,4 @@ public class LDivStandardAlgorithm implements LDivAlgorithm {
 		db.addAll(set);
 		return db;
 	}
-
 }

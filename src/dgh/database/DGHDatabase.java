@@ -394,6 +394,15 @@ public class DGHDatabase {
 	}
 	
 	/**
+	 * Determine if a database is T-close.
+	 * @param t The parameter t.
+	 * @return true iff the database is T-close, false otherwise.
+	 */
+	public boolean isTClose(double t) {
+		return false;
+	}
+	
+	/**
 	 * Returns a string representation of the sensitive attribute in the given row.
 	 * @param index The index of the row.
 	 * @return a string representation of the sensitive attribute.

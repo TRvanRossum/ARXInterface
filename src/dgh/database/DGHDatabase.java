@@ -364,7 +364,7 @@ public class DGHDatabase {
 	public boolean isEntropyLDiverse(int l) {
 		QStarBlock qStar = new QStarBlock();
 		
-		double logL = Math.log(l)/Math.log(2);
+		double logL = Math.log(l);
 		
 		// Categorize the rows of insensitive attributes.
 		for(int i = 0; i < this.amountOfRows; i++){
@@ -383,7 +383,7 @@ public class DGHDatabase {
 			}
 			double sum = 0.0;
 			for(String string : map.keySet()) {
-				sum += -(Math.log(((double)map.get(string))/amt)/Math.log(2));
+				sum += -Math.log(((double)map.get(string))/amt);
 			}
 			if(sum < logL){
 				return false;

@@ -383,7 +383,7 @@ public class DGHDatabase {
 			}
 			double sum = 0.0;
 			for(String string : map.keySet()) {
-				sum += -(Math.log(((double)map.get(string))/sum)/Math.log(2));
+				sum += -(Math.log(((double)map.get(string))/amt)/Math.log(2));
 			}
 			if(sum < logL){
 				return false;

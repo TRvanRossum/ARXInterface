@@ -372,18 +372,18 @@ public class DGHDatabase {
 		}
 		
 		for(String s : qStar.keySet()) {
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			HashMap<String, Double> map = new HashMap<String, Double>();
 			double amt = 0;
 			for(int i : qStar.get(s)) {
 				if(map.get(this.getSensitiveVal(i)) == null) {
-					map.put(this.getSensitiveVal(i), 0);
+					map.put(this.getSensitiveVal(i), 0.0);
 				}
-				map.put(this.getSensitiveVal(i), map.get(this.getSensitiveVal(i)));
+				map.put(this.getSensitiveVal(i), map.get(this.getSensitiveVal(i)) + 1.0);
 				amt = amt + 1.0;
 			}
 			double sum = 0.0;
 			for(String string : map.keySet()) {
-				sum += -Math.log(((double)map.get(string))/amt);
+				sum += -Math.log(map.get(string)/amt);
 			}
 			if(sum < logL){
 				return false;

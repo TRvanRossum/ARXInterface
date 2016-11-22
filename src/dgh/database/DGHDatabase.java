@@ -1,5 +1,6 @@
 package dgh.database;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -417,7 +418,59 @@ public class DGHDatabase {
 	 * @return true iff the database is T-close, false otherwise.
 	 */
 	public boolean isTClose(double t) {
-		return false;
+		// Group all equivalence classes.
+		QStarBlock qStar = new QStarBlock();
+		
+		for(int i = 0; i < this.amountOfRows; i++){
+			qStar.insertInteger(this.getRowOfInsensitiveVals(i), i);
+		}
+		
+		List<Double> list = new ArrayList<Double>(this.amountOfRows);
+		for(int i = 0; i < this.amountOfRows; i++) {
+			list.add(i, 1.0/((double) this.amountOfRows));
+		}
+		
+		Map<String, List<Double>> equivClasses = new HashMap<String, List<Double>>();
+		for(String s : qStar.keySet()) {
+			double frac = 1.0/((double) this.amountOfRows);
+			List<Double> l = new ArrayList<Double>(this.amountOfRows);
+			for(int i = 0; i < this.amountOfRows; i++) {
+				if(qStar.get(s).contains(i)) {
+					l.add(i, (1.0/((double) qStar.get(s).size())) - frac);
+				}
+				else {
+					l.add(i, -frac);
+				}
+			}
+			equivClasses.put(s, l);
+		}
+		
+		for(String s : equivClasses.keySet()) {
+			if(determineDistance(equivClasses.get(s)) < t) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private double determineDistance(List<Double> l) {
+		if(this.amountOfRows == 1){
+			return 0;
+		}
+		
+		double finalFrac = 1.0/((double) (this.amountOfRows - 1));
+		double sum = 0.0;
+		
+		for(int i = 0; i < l.size(); i++) {
+			double subsum = 0.0;
+			for(int j = i; j < l.size(); j++) {
+				subsum += l.get(j);
+			}
+			sum += Math.abs(subsum);
+		}
+		
+		return finalFrac*sum;
 	}
 	
 	/**

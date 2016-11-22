@@ -413,6 +413,47 @@ public class DGHDatabase {
 	}
 	
 	/**
+	 * Calculate the T-closeness of a database.
+	 * @return the minimum value t for which it holds that the database is t-close.
+	 */
+	public double calculateTCloseness() {
+		// Group all equivalence classes.
+		QStarBlock qStar = new QStarBlock();
+		
+		for(int i = 0; i < this.amountOfRows; i++){
+			qStar.insertInteger(this.getRowOfInsensitiveVals(i), i);
+		}
+		
+		List<Double> list = new ArrayList<Double>(this.amountOfRows);
+		for(int i = 0; i < this.amountOfRows; i++) {
+			list.add(i, 1.0/((double) this.amountOfRows));
+		}
+		
+		Map<String, List<Double>> equivClasses = new HashMap<String, List<Double>>();
+		for(String s : qStar.keySet()) {
+			double frac = 1.0/((double) this.amountOfRows);
+			List<Double> l = new ArrayList<Double>(this.amountOfRows);
+			for(int i = 0; i < this.amountOfRows; i++) {
+				if(qStar.get(s).contains(i)) {
+					l.add(i, (1.0/((double) qStar.get(s).size())) - frac);
+				}
+				else {
+					l.add(i, -frac);
+				}
+			}
+			equivClasses.put(s, l);
+		}
+		
+		double t = Double.MAX_VALUE;
+		
+		for(String s : equivClasses.keySet()) {
+			t = Math.min(t, determineDistance(equivClasses.get(s)));
+		}
+		
+		return t;
+	}
+	
+	/**
 	 * Determine if a database is T-close.
 	 * @param t The parameter t.
 	 * @return true iff the database is T-close, false otherwise.

@@ -246,9 +246,27 @@ public class DGHDatabase {
 	}
 	
 	public boolean isKAnonymous(int k) {
+		HashMap<String, Integer> m = new HashMap<String, Integer>();
+		
+		for(int i = 0; i < this.amountOfRows; i++) {
+			String insens = this.getRowOfQuasiVals(i);
+			if(m.get(insens) == null){
+				m.put(insens, 0);
+			}
+			m.put(insens, m.get(insens) + 1);
+		}
+		
+		for(String s : m.keySet()) {
+			if(m.get(s) < k) {
+				return false;
+			}
+		}
+		
+		return true;
+		
 		// Optimization technique: keep track of the rows that have been checked to be K-anonymous,
 		// and do NOT check them again.
-		boolean[] check = new boolean[this.amountOfRows];
+		/*boolean[] check = new boolean[this.amountOfRows];
 		for(int index = 0; index < check.length; index++) {
 			check[index] = false;
 		}
@@ -271,17 +289,17 @@ public class DGHDatabase {
 				}
 			}
 		}
-		return true;
+		return true;*/
 	}
 	
-	private boolean areRowsEqual(int i, int j){
+	/*private boolean areRowsEqual(int i, int j){
 		for(String k : this.database.keySet()) {
 			if(!this.database.get(k).get(i).equals(this.database.get(k).get(j))){
 				return false;
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	public double calculatePrecisionOfData() {
 		AttributeAnonymityLevel max = AttributeAnonymityLevel.getMaxLevels(types, classes, AALMode.QUASI);
@@ -427,6 +445,22 @@ public class DGHDatabase {
 		String res = "";
 		for(String key : this.database.keySet()) {
 			if(classes.get(key).equals(AttributeClass.INSENSITIVE)) {
+				res += this.database.get(key).get(index).toString() + ",";
+			}
+		}
+		res = res.substring(0, res.length() - 1);
+		return res;
+	}
+	
+	/**
+	 * Returns a string of all the values that are quasi-identifiers, separated by commas.
+	 * @param index The index of the row.
+	 * @return a string of all the values that are quasi-identifiers.
+	 */
+	private String getRowOfQuasiVals(int index){
+		String res = "";
+		for(String key : this.database.keySet()) {
+			if(classes.get(key).equals(AttributeClass.QUASI)) {
 				res += this.database.get(key).get(index).toString() + ",";
 			}
 		}

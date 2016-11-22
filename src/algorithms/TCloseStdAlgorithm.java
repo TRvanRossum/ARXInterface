@@ -56,7 +56,7 @@ public class TCloseStdAlgorithm implements TCloseAlgorithm {
 		if(level.size() == 0) {
 			// If sufficient anonymization is not possible then let the user know.
 			// TODO: could use its own exception class.
-			throw new RuntimeException("Sufficient diversity was not possible.");
+			throw new RuntimeException("Sufficient closeness was not possible.");
 		}
 		List<DGHDatabase> nextLevelDB = new ArrayList<DGHDatabase>();
 		List<DGHNode> nextLevelNodes = new ArrayList<DGHNode>();
